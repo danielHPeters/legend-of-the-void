@@ -13,9 +13,10 @@ import { DamageType } from '../enum/DamageType';
 export default class Turret extends Entity {
   name: string
   description: string
-  health: number
   attack: number
   damageType: DamageType
+  fireInteval: number
+  currentFrame: number
   sprite
 
   /**
@@ -25,18 +26,16 @@ export default class Turret extends Entity {
    * @param {number} y Starting position on y axis
    * @param {number} width Turret width
    * @param {number} height Turret height
-   * @param {number} health Turret health
    * @param {number} attack Turret attack
    * @param {Settings} settings Game settings.
    */
-  constructor (x: number, y: number, width: number, height: number, health: number, attack: number, settings: Settings) {
+  constructor (x: number, y: number, width: number, height: number, attack: number, settings: Settings) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
-    this.health = health
     this.attack = attack
     this.damageType = DamageType.FIRE
   }
 
-  fire () {
+  fire (): void {
 
   }
 }
