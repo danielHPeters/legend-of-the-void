@@ -1,3 +1,3 @@
 export enum ContextId {
-  BACKGROUND, MAIN, SHIP
+  BACKGROUND, CREEPS, PLAYER
 }

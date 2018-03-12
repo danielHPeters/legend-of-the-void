@@ -2,6 +2,8 @@ import Entity from "../lib/entity/Entity";
 import Vector2 from "../lib/math/Vector2";
 import Dimension from "../lib/geometry/Dimension";
 import Settings from "../config/Settings";
+import IRenderable from "../lib/interfaces/IRenderable";
+import { ContextId } from "../enum/ContextId";
 
 /**
  * The base a player needs to defend.
@@ -9,8 +11,9 @@ import Settings from "../config/Settings";
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Base extends Entity {
+export default class Base extends Entity implements IRenderable {
   private health: number
+  public contextId: ContextId
 
   /**
    * Constructor.
@@ -25,5 +28,23 @@ export default class Base extends Entity {
   constructor (x: number, y: number, width: number, height: number, health: number, settings: Settings) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.health = health
+    this.contextId = ContextId.PLAYER
+  }
+
+  /**
+   *  Render the base.
+   *
+   * @param ctx Rendering context
+   */
+  public render (ctx: CanvasRenderingContext2D): void {
+
+  }
+
+  /**
+   * Clear the frame  
+   * @param ctx Rendering context
+   */
+  public clear (ctx: CanvasRenderingContext2D): void {
+    
   }
 }

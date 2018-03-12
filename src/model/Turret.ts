@@ -3,6 +3,9 @@ import Vector2 from '../lib/math/Vector2';
 import Dimension from '../lib/geometry/Dimension';
 import Settings from '../config/Settings';
 import { DamageType } from '../enum/DamageType';
+import IRenderable from '../lib/interfaces/IRenderable';
+import IMovable from '../lib/interfaces/IMovable';
+import { ContextId } from '../enum/ContextId';
 
 /**
  * Turret class.
@@ -10,7 +13,7 @@ import { DamageType } from '../enum/DamageType';
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Turret extends Entity {
+export default class Turret extends Entity implements IRenderable, IMovable {
   name: string
   description: string
   attack: number
@@ -18,6 +21,7 @@ export default class Turret extends Entity {
   fireInteval: number
   currentFrame: number
   sprite
+  contextId: ContextId
 
   /**
    * Constructor.
@@ -33,9 +37,30 @@ export default class Turret extends Entity {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.attack = attack
     this.damageType = DamageType.FIRE
+    this.contextId = ContextId.PLAYER
   }
 
-  fire (): void {
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} ctx 
+   */
+  public render (ctx: CanvasRenderingContext2D) {
+
+  }
+
+  /**
+   * 
+   * @param {CanvasRenderingContext2D} ctx 
+   */
+  public clear (ctx: CanvasRenderingContext2D) {
+    
+  }
+
+  /**
+   * 
+   * @param {number} dt 
+   */
+  public move (dt: number) {
 
   }
 }
