@@ -1,8 +1,8 @@
 import QuadTree from './QuadTree'
-import ICollisionManager from '../../interfaces/ICollisionManager'
+import ICollisionManager from '../interfaces/ICollisionManager'
 
 /**
- * Collision manager class.
+ * Collision Manager.
  *
  * @author Daniel Peters
  * @version 1.0
@@ -11,6 +11,7 @@ export default class CollisionManager implements ICollisionManager {
   quadTree: QuadTree
 
   /**
+   * Constructor.
    *
    * @param {QuadTree} quadTree
    */
@@ -19,7 +20,7 @@ export default class CollisionManager implements ICollisionManager {
   }
 
   /**
-   * Detect collisions.
+   * Collision detection algorithm.
    */
   detectCollision (): void {
     let objects = []
@@ -29,12 +30,15 @@ export default class CollisionManager implements ICollisionManager {
       this.quadTree.findObjects(obj, objects[i])
 
       for (let j = 0; j < obj.length; j++) {
-        // DETECT COLLISION ALGORITHM
         if (objects[i].isCollideAbleWith(obj[j]) &&
-          objects[i].left < objects[j].right && objects[i].right > objects[j].left &&
-          objects[i].top < objects[j].bottom && objects[i].bottom > objects[j].top) {
+          (Math.floor(objects[i].position.x) < Math.floor(obj[j].position.x) + obj[j].dimension.width &&
+            Math.floor(objects[i].position.x) + objects[i].dimension.width > Math.floor(obj[j].position.x) &&
+            Math.floor(objects[i].position.y) < Math.floor(obj[j].position.y) + obj[j].dimension.height &&
+            Math.floor(objects[i].position.y) + objects[i].dimension.height > Math.floor(obj[j].position.y))
+        && objects[i].alive && obj[j].alive) {
+          console.log(objects[i])
           objects[i].colliding = true
-          objects[j].colliding = true
+          obj[j].colliding = true
         }
       }
     }

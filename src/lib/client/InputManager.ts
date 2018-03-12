@@ -1,17 +1,6 @@
 import Observable from '../observer/Observable'
 import Settings from '../../config/Settings'
 
-export enum Actions {
-  UP = 'UP',
-  DOWN = 'DOWN',
-  LEFT = 'LEFT',
-  RIGHT = 'RIGHT',
-  SHOOT = 'SHOOT',
-  RESTART = 'RESTART',
-  ROTATE_LEFT = 'R-LEFT',
-  ROTATE_RIGHT = 'R-RIGHT'
-}
-
 /**
  * Input manager class.
  *
@@ -27,7 +16,7 @@ export default class InputManager extends Observable {
    */
   constructor (settings: Settings) {
     super()
-    this.inputMap = settings.keyBoard
+    this.inputMap = settings.keyboard
     this.init()
     this.initializeTouchHandler()
     this.touches = {

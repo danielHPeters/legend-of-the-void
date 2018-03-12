@@ -1,15 +1,19 @@
-import Dimension from '../../geometry/Dimension'
-import Vector2 from '../../geometry/Vector2'
+import Vector2 from '../math/Vector2'
+import ICollideAble, { EntityType } from '../interfaces/ICollideAble'
 
 /**
- * HitBox used for collision detection.
+ * Hitbox used for defining collision boundaries.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class HitBox {
+export default class HitBox implements ICollideAble {
+  type: EntityType
+  collidesWith
+  colliding: boolean
   position: Vector2
-  dimension: Dimension
+  width: number
+  height: number
 
   /**
    * Initializes position and dimension.
@@ -20,6 +24,20 @@ export default class HitBox {
    */
   constructor (x, y, width, height) {
     this.position = new Vector2(x, y)
-    this.dimension = new Dimension(width, height)
+    this.width = width
+    this.height = height
+    this.colliding = false
+    this.collidesWith = []
+    this.type = EntityType.BOX
+    this.collidesWith.push(EntityType.PLAYER)
+  }
+
+  /**
+   *
+   * @param {ICollideAble} other
+   * @returns {boolean}
+   */
+  isCollideAbleWith (other: ICollideAble): boolean {
+    return this.collidesWith.includes(other.type.toString())
   }
 }

@@ -1,12 +1,12 @@
-import IGameLoop from './interfaces/IGameLoop'
-import IGame from './interfaces/IGame'
-
 /**
  * Legend of the void game loop class.
  *
  * @author Daniel Peters
  * @version 1.0
  */
+import IGameLoop from './lib/interfaces/IGameLoop'
+import IGame from './lib/interfaces/IGame'
+
 export default class LegendLoop implements IGameLoop {
   public game: IGame
   public lastTime: number
@@ -64,7 +64,7 @@ export default class LegendLoop implements IGameLoop {
       if (!this.game.state.paused) {
         if (this.lastTime !== null) {
           const diff = time - this.lastTime
-          this.game.update(diff / 1000)
+          this.game.state.update(diff / 1000)
         }
         this.lastTime = time
         this.game.render()

@@ -9,6 +9,7 @@ import Dimension from '../geometry/Dimension'
  * @version 1.0
  */
 export default class Entity {
+  id: string
   dimension: Dimension
   settings: Settings
   position: Vector2

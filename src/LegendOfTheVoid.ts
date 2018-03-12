@@ -1,6 +1,8 @@
-import IGame from './interfaces/IGame'
-import IGameState from './interfaces/IGameState'
-import ICollisionManager from './interfaces/ICollisionManager'
+import IGameState from './lib/interfaces/IGameState'
+import IGame from './lib/interfaces/IGame'
+import ICollisionManager from './lib/interfaces/ICollisionManager'
+import InputManager from './lib/client/InputManager'
+import AssetManager from './lib/client/AssetManager'
 
 /**
  * Main game Class.
@@ -9,23 +11,38 @@ import ICollisionManager from './interfaces/ICollisionManager'
  * @version 1.0
  */
 export default class LegendOfTheVoid implements IGame {
+  inputManager: InputManager
+  assetManager: AssetManager
   state: IGameState
   context: CanvasRenderingContext2D
   collisionManager: ICollisionManager
 
+  /**
+   * Constructor.
+   *
+   * @param {IGameState} state
+   * @param {CanvasRenderingContext2D} context
+   */
   constructor (state: IGameState, context: CanvasRenderingContext2D) {
     this.state = state
     this.context = context
-
   }
 
-  init (): void {
+  /**
+   * Initialize the game.
+   */
+  public init (): void {
   }
 
-  update (dt: number): void {
+  /**
+   * Render current state.
+   */
+  public render (): void {
   }
 
-  render (): void {
+  /**
+   *
+   */
+  public clear (): void {
   }
-
 }

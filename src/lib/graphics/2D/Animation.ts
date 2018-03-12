@@ -36,7 +36,7 @@ export default class Animation {
   /**
    * Update animation frames.
    */
-  update (): void {
+  public update (): void {
     if (this._counter === (this._speed - 1)) {
       this._currentFrame = (this._currentFrame + 1) % this._sequence.length
     }
@@ -51,7 +51,7 @@ export default class Animation {
    * @param {number} width display width
    * @param {number} height display height
    */
-  draw (ctx, x: number, y: number, width: number, height: number): void {
+  public render (ctx, x: number, y: number, width: number, height: number): void {
     let row = Math.floor(this._sequence[this._currentFrame] / this._spriteSheet.framesPerRow)
     let col = Math.floor(this._sequence[this._currentFrame] % this._spriteSheet.framesPerRow)
     ctx.drawImage(
@@ -67,42 +67,82 @@ export default class Animation {
     )
   }
 
+  /**
+   *
+   * @returns {SpriteSheet}
+   */
   get spriteSheet (): SpriteSheet {
     return this._spriteSheet
   }
 
+  /**
+   *
+   * @param {SpriteSheet} value
+   */
   set spriteSheet (value: SpriteSheet) {
     this._spriteSheet = value
   }
 
+  /**
+   *
+   * @returns {number}
+   */
   get speed (): number {
     return this._speed
   }
 
+  /**
+   *
+   * @param {number} value
+   */
   set speed (value: number) {
     this._speed = value
   }
 
+  /**
+   *
+   * @returns {number[]}
+   */
   get sequence (): number[] {
     return this._sequence
   }
 
+  /**
+   *
+   * @param {number[]} value
+   */
   set sequence (value: number[]) {
     this._sequence = value
   }
 
+  /**
+   *
+   * @returns {number}
+   */
   get currentFrame (): number {
     return this._currentFrame
   }
 
+  /**
+   *
+   * @param {number} value
+   */
   set currentFrame (value: number) {
     this._currentFrame = value
   }
 
+  /**
+   *
+   * @returns {number}
+   */
   get counter (): number {
     return this._counter
   }
 
+  /**
+   *
+   * @param {number} value
+   */
   set counter (value: number) {
     this._counter = value
   }

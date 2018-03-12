@@ -1,9 +1,11 @@
-import IGameState from './interfaces/IGameState'
+import IGameState from './lib/interfaces/IGameState'
 import QuadTree from './lib/collision/QuadTree'
-import Entity from './model/Entity'
-import ICollideAble from './interfaces/ICollideAble'
-import InputManager from './client/InputManager'
-import GameSettings from './config/GameSettings'
+import Entity from './lib/entity/Entity'
+import ICollideAble from './lib/interfaces/ICollideAble'
+import Settings from './config/Settings'
+import InputManager from './lib/client/InputManager'
+import IRenderable from './lib/interfaces/IRenderable'
+import IMovable from './lib/interfaces/IMovable'
 
 /**
  * Legend of the void game state class.
@@ -17,17 +19,28 @@ export default class LegendState implements IGameState {
   public quadTree: QuadTree
   public entities: Entity[]
   public collideables: ICollideAble[]
+  public movables: IMovable[]
+  public renderables: IRenderable[]
 
   /**
    * Constructor.
    *
-   * @param {GameSettings} settings
+   * @param {Settings} settings
    * @param {InputManager} inputManager
    */
-  constructor (settings: GameSettings, inputManager: InputManager) {
+  constructor (settings: Settings, inputManager: InputManager) {
     this.running = false
     this.paused = false
     this.entities = []
     this.collideables = []
+  }
+
+  public update (dt: number): void {
+  }
+
+  public reset (): void {
+  }
+
+  public scorePoints (): void {
   }
 }

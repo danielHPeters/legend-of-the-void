@@ -1,16 +1,17 @@
-import Dimension from '../geometry/Dimension'
-import { Actions } from '../client/InputManager'
-
+import Dimension from '../lib/geometry/Dimension'
+import { Actions } from '../enum/Actions'
+import Player from '../model/Player'
 /**
  * Pong game settings.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class GameSettings {
+export default class Settings {
   gameSize: Dimension
   canvas: HTMLCanvasElement
   keyboard
+  player
 
   /**
    * Constructor.
@@ -21,11 +22,11 @@ export default class GameSettings {
     this.gameSize = new Dimension(canvas.width, canvas.height)
     this.canvas = canvas
     this.keyboard = {
-      'w': Actions.P1_UP,
-      's': Actions.P1_DOWN,
-      'ArrowUp': Actions.P2_UP,
-      'ArrowDown': Actions.P2_DOWN,
-      'space': Actions.PAUSE,
+      'w': Actions.UP,
+      's': Actions.DOWN,
+      'ArrowUp': Actions.LEFT,
+      'ArrowDown': Actions.RIGHT,
+      'space': Actions.SHOOT,
       'r': Actions.RESTART
     }
   }

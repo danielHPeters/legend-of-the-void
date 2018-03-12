@@ -1,8 +1,8 @@
 import Settings from '../../config/Settings'
-import { Actions } from './InputManager'
 import AssetManager from './AssetManager'
 import EventHandler from '../event/EventHandler'
 import AudioManager from './AudioManager'
+import { Actions } from '../../enum/Actions'
 
 /**
  * Simple settings menu.
@@ -72,7 +72,7 @@ export default class SettingsMenu {
     keyboardDiv.appendChild(title)
     keyboardDiv.appendChild(form)
     this.element.appendChild(keyboardDiv)
-    Object.keys(this.settings.keyBoard).forEach(setting => this.addEntry(setting, form))
+    Object.keys(this.settings.keyboard).forEach(setting => this.addEntry(setting, form))
     form.appendChild(submit)
     form.addEventListener('submit', event => {
       event.preventDefault()
@@ -225,11 +225,11 @@ export default class SettingsMenu {
     let label = document.createElement('label')
     let input = document.createElement('input')
     row.classList.add('row')
-    label.setAttribute('for', this.settings.keyBoard[setting])
-    label.appendChild(document.createTextNode(this.settings.keyBoard[setting] + ':'))
-    input.setAttribute('id', this.settings.keyBoard[setting])
+    label.setAttribute('for', this.settings.keyboard[setting])
+    label.appendChild(document.createTextNode(this.settings.keyboard[setting] + ':'))
+    input.setAttribute('id', this.settings.keyboard[setting])
     input.setAttribute('type', 'text')
-    input.setAttribute('name', this.settings.keyBoard[setting])
+    input.setAttribute('name', this.settings.keyboard[setting])
     input.setAttribute('value', setting)
     row.appendChild(label)
     row.appendChild(input)

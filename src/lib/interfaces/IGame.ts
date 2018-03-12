@@ -1,5 +1,6 @@
 import IGameState from './IGameState'
-import ICollisionManager from './ICollisionManager'
+import InputManager from '../client/InputManager'
+import AssetManager from '../client/AssetManager'
 
 /**
  * Game interface.
@@ -8,12 +9,9 @@ import ICollisionManager from './ICollisionManager'
  * @version 1.0
  */
 export default interface IGame {
-  /**
-   *
-   */
   state: IGameState
-
-  collisionManager: ICollisionManager
+  inputManager: InputManager
+  assetManager: AssetManager
 
   /**
    *
@@ -22,9 +20,8 @@ export default interface IGame {
 
   /**
    *
-   * @param {number} dt
    */
-  update (dt: number): void
+  clear (): void
 
   /**
    *

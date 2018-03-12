@@ -35,7 +35,7 @@ export default class Rectangle {
    * @param {number} width
    * @param {number} height
    */
-  set (left: number, top: number, width?: number, height?: number): void {
+  public set (left: number, top: number, width?: number, height?: number): void {
     this.left = left
     this.top = top
     this.width = width || this.width
@@ -49,7 +49,7 @@ export default class Rectangle {
    * @param other
    * @returns {boolean}
    */
-  within (other): boolean {
+  public within (other): boolean {
     return (other.left <= this.left &&
       other.right >= this.right &&
       other.top <= this.top &&
@@ -61,7 +61,7 @@ export default class Rectangle {
    * @param other
    * @returns {boolean}
    */
-  overlaps (other): boolean {
+  public overlaps (other): boolean {
     return (this.left < other.right &&
       other.left < this.right &&
       this.top < other.bottom &&
