@@ -1,5 +1,5 @@
-import IGameState from "../interfaces/IGameState";
-import Turret from "../../model/Turret";
+import IGameState from "../lib/interfaces/IGameState";
+import Turret from "../model/Turret";
 
 /** 
  * Build menu for building Towers etc.
