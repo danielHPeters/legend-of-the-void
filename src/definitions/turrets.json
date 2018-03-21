@@ -1,0 +1,17 @@
+[
+  {
+    "type": "laser",
+    "description": "A laser Turret",
+    "assetId": "turret-laser",
+    "damage": 15,
+    "rate": 50,
+    "range": 60,
+    "upgrades": [
+      {
+        "damage": 20,
+        "rate": 47,
+        "range": 65
+      }
+    ]
+  }
+]

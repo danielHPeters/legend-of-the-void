@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Void Leecher",
+    "speed": 10,
+    "attack": 5,
+    "health": 15,
+    "level": 1,
+    "assetId": "creep-void-leecher"
+  }
+]

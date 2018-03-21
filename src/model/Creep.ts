@@ -5,6 +5,7 @@ import Dimension from "../lib/geometry/Dimension";
 import IRenderable from "../lib/interfaces/IRenderable";
 import IMovable from "../lib/interfaces/IMovable";
 import { ContextId } from "../enum/ContextId";
+import { AssetId } from '../enum/AssetId'
 
 /** 
  * Enemy creep class.
@@ -13,13 +14,17 @@ import { ContextId } from "../enum/ContextId";
  * @version 1.0
 */
 export default class Creep extends Entity implements IRenderable, IMovable {
+  name: string
   speed: number
+  attack: number
+  health: number
+  level: number
   sprite
-  damage: number
+  assetId: AssetId
   contextId: ContextId
   
   /**
-   * Consctructor.
+   * Constructor.
    * 
    * @param x 
    * @param y 
