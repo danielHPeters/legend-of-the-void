@@ -40,7 +40,7 @@ export default class LegendOfTheVoid implements IGame {
    * Render current state.
    */
   public render (): void {
-    this.state.renderables.forEach(renderable => renderable.render((this.contexts.get(renderable.contextId)))
+    this.state.renderables.forEach(renderable => renderable.render(this.contexts.get(renderable.contextId)))
   }
 
   /**
