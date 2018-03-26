@@ -7,12 +7,12 @@ import Observer from './Observer'
  * @version 1.0
  */
 export default class Observable {
-  private _observers: Observer[]
-  private _state: any
+  protected observers: Observer[]
+  protected state: any
 
   constructor () {
-    this._observers = []
-    this._state = {}
+    this.observers = []
+    this.state = {}
   }
 
   /**
@@ -21,58 +21,22 @@ export default class Observable {
    * @param {Observer} observer Object implementing the Observer interface
    */
   register (observer: Observer): void {
-    this._observers.push(observer)
+    this.observers.push(observer)
   }
-
+d
   /**
    * Remove an observer from this observables observers list.
    *
    * @param {Observer} observer Object implementing the Observer interface
    */
   unRegister (observer: Observer): void {
-    this._observers = this._observers.filter(obs => {
-      return obs !== observer
-    })
+    this.observers = this.observers.filter(obs => {return obs !== observer})
   }
 
   /**
    * Notify all observers.
    */
   notify (): void {
-    this._observers.forEach(observer => {
-      observer.update(this._state)
-    })
-  }
-
-  /**
-   *
-   * @returns {Observer[]}
-   */
-  get observers (): Observer[] {
-    return this._observers
-  }
-
-  /**
-   *
-   * @param {Observer[]} observers
-   */
-  set observers (observers: Observer[]) {
-    this._observers = observers
-  }
-
-  /**
-   *
-   * @returns {any}
-   */
-  get state (): any {
-    return this._state
-  }
-
-  /**
-   *
-   * @param {any} state
-   */
-  set state (state: any) {
-    this._state = state
+    this.observers.forEach(observer => observer.update(this.state))
   }
 }

@@ -1,5 +1,5 @@
-import IGameState from "../lib/interfaces/IGameState";
-import Turret from "../model/Turret";
+import IGameState from '../lib/interfaces/IGameState'
+import Turret from '../model/Turret'
 
 /** 
  * Build menu for building Towers etc.
@@ -15,9 +15,9 @@ export default class BuildMenu {
   /**
    * Constructor.
    *
-   * @param elementId 
-   * @param state 
-   * @param turretList 
+   * @param {string} elementId 
+   * @param {IGameState} state 
+   * @param {Turret[]} turretList 
    */
   constructor (elementId: string, state: IGameState, turretList: Turret[]) {
     this.element = document.getElementById(elementId)
@@ -34,6 +34,6 @@ export default class BuildMenu {
       turretBox.classList.add('build-box')
       turretBox.appendChild(turret.sprite)
       this.element.appendChild(turretBox)
-    });
+    })
   }
 }

@@ -52,12 +52,7 @@ export default class AssetManager {
    * @param {{}} opts
    */
   queueDownload (id: AssetId, path: string, type: AssetType, opts = null): void {
-    this.queue.push({
-      id: id,
-      path: path,
-      type: type,
-      opts: opts
-    })
+    this.queue.push({ id: id, path: path, type: type, opts: opts })
   }
 
   /**

@@ -1,10 +1,10 @@
 import Entity from '../lib/entity/Entity'
-import Vector2 from '../lib/math/Vector2';
-import Dimension from '../lib/geometry/Dimension';
-import Settings from '../config/Settings';
-import IRenderable from '../lib/interfaces/IRenderable';
-import IMovable from '../lib/interfaces/IMovable';
-import { ContextId } from '../enum/ContextId';
+import Vector2 from '../lib/math/Vector2'
+import Dimension from '../lib/geometry/Dimension'
+import Settings from '../config/Settings'
+import IRenderable from '../lib/interfaces/IRenderable'
+import IMovable from '../lib/interfaces/IMovable'
+import { ContextId } from '../enum/ContextId'
 import { TurretType } from '../enum/TurretType'
 import { AssetId } from '../enum/AssetId'
 
@@ -35,11 +35,15 @@ export default class Turret extends Entity implements IRenderable, IMovable {
    * @param {Settings} settings Game settings.
    * @param {TurretType} type
    */
-  constructor (x: number, y: number, width: number, height: number, damage: number, settings: Settings, type: TurretType) {
+  constructor (x?: number, y?: number, width?: number, height?: number, damage?: number, settings?: Settings, type?: TurretType) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.type = type
     this.damage = damage
     this.contextId = ContextId.PLAYER
+  }
+
+  public init (): void {
+    
   }
 
   /**

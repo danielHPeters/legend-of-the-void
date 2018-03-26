@@ -6,6 +6,8 @@ import Settings from './config/Settings'
 import InputManager from './lib/client/InputManager'
 import IRenderable from './lib/interfaces/IRenderable'
 import IMovable from './lib/interfaces/IMovable'
+import Tile from './model/Tile'
+import Observable from './lib/observer/Observable';
 
 /**
  * Legend of the void game state class.
@@ -13,7 +15,7 @@ import IMovable from './lib/interfaces/IMovable'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class LegendState implements IGameState {
+export default class LegendState extends Observable implements IGameState {
   public running: boolean
   public paused: boolean
   public quadTree: QuadTree
@@ -21,6 +23,7 @@ export default class LegendState implements IGameState {
   public collideables: ICollideAble[]
   public movables: IMovable[]
   public renderables: IRenderable[]
+  public map: Tile[]
 
   /**
    * Constructor.
@@ -29,18 +32,28 @@ export default class LegendState implements IGameState {
    * @param {InputManager} inputManager
    */
   constructor (settings: Settings, inputManager: InputManager) {
+    super()
     this.running = false
     this.paused = false
     this.entities = []
     this.collideables = []
+    this.state = {
+      kills: 0,
+      cash: 0
+    }
   }
 
   public update (dt: number): void {
+    this.movables.forEach(movable => movable.move(dt))
   }
 
   public reset (): void {
+    this.entities.forEach(entity => entity.init())
   }
 
-  public scorePoints (): void {
+  public scorePoints (points: number): void {
+    this.state.cash += points
+    this.state.kills++
+    this.notify()
   }
 }

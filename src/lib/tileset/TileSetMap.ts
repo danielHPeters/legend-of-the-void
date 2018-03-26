@@ -11,25 +11,25 @@ export default class TileSetMap {
   image: HTMLImageElement
   width: number
   height: number
-  context
-  mapLayers
+  context: CanvasRenderingContext2D
+  mapLayers: number[][]
   tileSize: number
   tilesPerRow: number
   tilesPerColumn: number
   imageTilesPerRow: number
-  hitBoxes: Array<HitBox>
+  hitBoxes: HitBox[]
 
   /**
    *
    * @param image
-   * @param mapLayers
-   * @param context
+   * @param {number[][]} mapLayers
+   * @param {CanvasRenderingContext2D} context
    * @param {number} tileSize
    * @param {number} tilesPerRow
    * @param {number} tilesPerColumn
    * @param {number} imageTilesPerRow
    */
-  constructor (image, mapLayers, context, tileSize: number, tilesPerRow: number, tilesPerColumn: number, imageTilesPerRow: number) {
+  constructor (image, mapLayers: number[][], context: CanvasRenderingContext2D, tileSize: number, tilesPerRow: number, tilesPerColumn: number, imageTilesPerRow: number) {
     this.tileSetImage = image
     this.width = tilesPerRow * tileSize
     this.height = tilesPerColumn * tileSize
@@ -40,42 +40,45 @@ export default class TileSetMap {
     this.tilesPerColumn = tilesPerColumn
     this.imageTilesPerRow = imageTilesPerRow
     this.hitBoxes = []
-    console.log(this.width)
-    console.log(this.height)
   }
 
   /**
-   *
+   * Pre renders the world map as an image using the layer definition arrays.
+   * This saves processeing power which is especially imprtant on low end clients.
    */
-  generate (): void {
+  public generate (): void {
+    // Create a temporary canvas rendering context.
     let ctx = document.createElement('canvas').getContext('2d')
     ctx.canvas.width = this.width
     ctx.canvas.height = this.height
 
     this.mapLayers.forEach(layer => this.generateLayer(ctx, layer))
 
-    // store the generate map as this tileSetImage texture
+    // Store the generate map as this tileSetImage texture.
     this.image = new Image()
     this.image.src = ctx.canvas.toDataURL('image/png')
 
-    // clear context
+    // Clear context.
     ctx = null
   }
 
   /**
+   * Generate a single map layer with the layer array definition.
+   * Currently also adds hitboxes.
+   * TODO: Decouple Hitbox generation.
    *
-   * @param ctx
-   * @param layer
+   * @param {CanvasRenderingContext2D} ctx Rendering context.
+   * @param {number[]} layer Layer definition array.
    */
-  generateLayer (ctx, layer): void {
+  private generateLayer (ctx: CanvasRenderingContext2D, layer: number[]): void {
     for (let row = 0; row < this.tilesPerColumn; row++) {
       for (let col = 0; col < this.tilesPerRow; col++) {
-        let tile = layer[row][col]
+        const tile = layer[row][col]
         if (tile !== 0 && this.mapLayers.indexOf(layer) === this.mapLayers.length - 1) {
           this.hitBoxes.push(new HitBox((col * this.tileSize), (row * this.tileSize), this.tileSize, this.tileSize))
         }
-        let tileRow = (tile / this.imageTilesPerRow) | 0
-        let tileCol = (tile % this.imageTilesPerRow) | 0
+        const tileRow = (tile / this.imageTilesPerRow) | 0
+        const tileCol = (tile % this.imageTilesPerRow) | 0
         ctx.drawImage(
           this.tileSetImage,
           (tileCol * this.tileSize),
@@ -92,11 +95,12 @@ export default class TileSetMap {
   }
 
   /**
-   * draw the map adjusted to camera
-   * @param xView
-   * @param yView
+   * Draw the map adjusted to camera.
+   *
+   * @param {number} xView Camera X
+   * @param {number} yView Camera Y
    */
-  draw (xView, yView): void {
+  public draw (xView: number, yView: number): void {
     this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height)
   }
 }

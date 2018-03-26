@@ -23,5 +23,5 @@ export default interface IGameState {
 
   reset (): void
 
-  scorePoints (): void
+  scorePoints (point: number): void
 }

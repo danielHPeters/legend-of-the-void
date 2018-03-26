@@ -20,7 +20,11 @@ export default class Matrix {
     this.columns = mArray[0].length
   }
 
-  set (array: number[][]): void {
+  /**
+   * 
+   * @param array 
+   */
+  public set (array: number[][]): void {
     const length = array[0].length
     let valid = true
     for (let i = 1; i < array.length; i++) {
@@ -43,7 +47,7 @@ export default class Matrix {
    *
    * @param {Matrix} matrix
    */
-  add (matrix: Matrix): void {
+  public add (matrix: Matrix): void {
     if (this.equals(matrix)) {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.columns; j++) {
@@ -59,7 +63,7 @@ export default class Matrix {
    *
    * @param {Matrix} matrix
    */
-  subtract (matrix: Matrix): void {
+  public subtract (matrix: Matrix): void {
     if (this.equals(matrix)) {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.columns; j++) {
@@ -75,7 +79,7 @@ export default class Matrix {
    * @param {Matrix} matrix Another matrix
    * @returns {Matrix} Resulting matrix
    */
-  multiply (matrix: Matrix): Matrix {
+  public multiply (matrix: Matrix): Matrix {
     let newArray = []
     if (this.columns === matrix.rows) {
       for (let i = 0; i < this.rows; i++) {
@@ -99,7 +103,7 @@ export default class Matrix {
    *
    * @param {number} scalar Scalar by which the matrix is multiplied by
    */
-  multScalar (scalar: number): void {
+  public multScalar (scalar: number): void {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
         this.mArray[i][j] *= scalar
@@ -110,7 +114,7 @@ export default class Matrix {
   /**
    * Transposes this matrix.
    */
-  transpose (): void {
+  public transpose (): void {
     let array = []
     for (let i = 0; i < this.columns; i++) {
       array[i] = []
@@ -124,7 +128,7 @@ export default class Matrix {
     this.mArray = array
   }
 
-  rotate (direction: number): void {
+  public rotate (direction: number): void {
     this.transpose()
     if (direction > 0) {
       this.mArray.forEach(row => row.reverse())
@@ -139,7 +143,7 @@ export default class Matrix {
    * @param {Matrix} other Other Matrix
    * @returns {boolean} Returns true if the lengths match
    */
-  equals (other: Matrix): boolean {
+  public equals (other: Matrix): boolean {
     return other.rows === this.rows && other.columns === this.columns
   }
 
@@ -148,7 +152,7 @@ export default class Matrix {
    *
    * @returns {Matrix} A copy of this matrix
    */
-  clone (): Matrix {
+  public clone (): Matrix {
     let array = []
     this.mArray.forEach(arr => array.push(arr.slice(0)))
     return new Matrix(Array.from(array))

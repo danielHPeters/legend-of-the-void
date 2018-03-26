@@ -1,6 +1,7 @@
 import Vector2 from '../math/Vector2'
 import Settings from '../../config/Settings'
 import Dimension from '../geometry/Dimension'
+import IJSONSerializable from '../interfaces/IJSONSerializable'
 
 /**
  * Base entity class.
@@ -8,7 +9,7 @@ import Dimension from '../geometry/Dimension'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Entity {
+export default class Entity implements IJSONSerializable {
   id: string
   dimension: Dimension
   settings: Settings
@@ -21,13 +22,38 @@ export default class Entity {
    * @param {Dimension} dimension Initial dimension
    * @param {Settings} settings
    */
-  constructor (position: Vector2, dimension: Dimension, settings: Settings) {
+  constructor (position?: Vector2, dimension?: Dimension, settings?: Settings) {
     this.position = position
     this.dimension = dimension
     this.settings = settings
   }
 
-  init (): void {
-    // throw new Error('Implement in subclass.')
+  public init (): void {
+    throw new Error('Implement in subclass.')
+  }
+
+  /**
+   * Create a JSON string from this object.
+   * 
+   * @returns {string} The JSoN string
+   */
+  public toJSON (): string {
+    return JSON.stringify(this)
+  }
+
+  /**
+   * Load data into this object from JSON.
+   *
+   * @param json JSON string
+   */
+  public fromJSON (json: string): void {
+    const obj = JSON.parse(json)
+    
+    // Map parsed object to the attributes of this entity.
+    Object.keys(obj).forEach(key => {
+      if ( this.hasOwnProperty( key ) ) {
+        this[key] = obj[key]
+      }
+    })
   }
 }

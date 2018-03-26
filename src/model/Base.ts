@@ -1,9 +1,9 @@
-import Entity from "../lib/entity/Entity";
-import Vector2 from "../lib/math/Vector2";
-import Dimension from "../lib/geometry/Dimension";
-import Settings from "../config/Settings";
-import IRenderable from "../lib/interfaces/IRenderable";
-import { ContextId } from "../enum/ContextId";
+import Entity from '../lib/entity/Entity'
+import Vector2 from '../lib/math/Vector2'
+import Dimension from '../lib/geometry/Dimension'
+import Settings from '../config/Settings'
+import IRenderable from '../lib/interfaces/IRenderable'
+import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
 /**
@@ -29,11 +29,15 @@ export default class Base extends Entity implements IRenderable {
    * @param {number} health 
    * @param {Settings} settings 
    */
-  constructor (x: number, y: number, width: number, height: number, health: number, name: string, settings: Settings) {
+  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, settings?: Settings) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.name = name
     this.health = health
     this.contextId = ContextId.PLAYER
+  }
+
+  public init (): void {
+    
   }
 
   /**

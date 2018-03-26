@@ -1,7 +1,8 @@
-import Entity from "../lib/entity/Entity";
-import Settings from "../config/Settings";
-import Vector2 from "../lib/math/Vector2";
-import Dimension from "../lib/geometry/Dimension";
+import Entity from '../lib/entity/Entity'
+import Settings from '../config/Settings'
+import Vector2 from '../lib/math/Vector2'
+import Dimension from '../lib/geometry/Dimension'
+import Turret from './Turret';
 
 /** 
  * 2D Tower defense tile class.
@@ -12,6 +13,8 @@ import Dimension from "../lib/geometry/Dimension";
 export default class Tile extends Entity {
   blocked: boolean
   buildable: boolean
+  turret: Turret
+
   /**
    * Conscrutor.
    *
@@ -23,5 +26,9 @@ export default class Tile extends Entity {
    */
   constructor (x: number, y: number, width: number, height: number, settings: Settings) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
+  }
+
+  public init (): void {
+    
   }
 }

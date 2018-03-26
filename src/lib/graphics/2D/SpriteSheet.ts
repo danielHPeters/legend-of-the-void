@@ -5,10 +5,10 @@
  * @version 1.0
  */
 export default class SpriteSheet {
-  private _image
-  private _frameWidth
-  private _frameHeight
-  private _framesPerRow
+  public image: HTMLImageElement
+  public frameWidth: number
+  public frameHeight: number
+  public framesPerRow: number
 
   /**
    * Constructor. Sets frame dimensions and calculates number of frames.
@@ -18,76 +18,9 @@ export default class SpriteSheet {
    * @param frameHeight
    */
   constructor (image: HTMLImageElement, frameWidth, frameHeight) {
-    this._image = image
-    this._frameWidth = frameWidth
-    this._frameHeight = frameHeight
-    this._framesPerRow = Math.floor(this._image.width / this._frameWidth)
-  }
-
-  /**
-   *
-   * @returns {Image}
-   */
-  get image (): HTMLImageElement {
-    return this._image
-  }
-
-  /**
-   *
-   * @param {Image} image
-   */
-  set image (image: HTMLImageElement) {
-    if (!(image instanceof Image)) {
-      throw new Error('Param tileSetImage must be of type Image!')
-    }
-    this._image = image
-  }
-
-  /**
-   *
-   * @returns {number}
-   */
-  get frameWidth (): number {
-    return this._frameWidth
-  }
-
-  /**
-   *
-   * @param {number} frameWidth
-   */
-  set frameWidth (frameWidth: number) {
-    this._frameWidth = frameWidth
-  }
-
-  /**
-   *
-   * @returns {number}
-   */
-  get frameHeight (): number {
-    return this._frameHeight
-  }
-
-  /**
-   *
-   * @param {number} frameHeight
-   */
-  set frameHeight (frameHeight: number) {
-    this._frameHeight = frameHeight
-  }
-
-  /**
-   *
-   * @returns {number}
-   */
-  get framesPerRow (): number {
-    return this._framesPerRow
-  }
-
-  /**
-   *
-   * @param {number} framesPerRow
-   */
-  set framesPerRow (framesPerRow: number) {
-    this._framesPerRow = framesPerRow
+    this.image = image
+    this.frameWidth = frameWidth
+    this.frameHeight = frameHeight
+    this.framesPerRow = Math.floor(image.width / frameWidth)
   }
 }

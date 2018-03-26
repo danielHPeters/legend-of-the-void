@@ -1,10 +1,10 @@
-import Settings from "../config/Settings";
-import Entity from "../lib/entity/Entity";
-import Vector2 from "../lib/math/Vector2";
-import Dimension from "../lib/geometry/Dimension";
-import IRenderable from "../lib/interfaces/IRenderable";
-import IMovable from "../lib/interfaces/IMovable";
-import { ContextId } from "../enum/ContextId";
+import Settings from '../config/Settings'
+import Entity from '../lib/entity/Entity'
+import Vector2 from '../lib/math/Vector2'
+import Dimension from '../lib/geometry/Dimension'
+import IRenderable from '../lib/interfaces/IRenderable'
+import IMovable from '../lib/interfaces/IMovable'
+import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
 /** 
@@ -19,6 +19,7 @@ export default class Creep extends Entity implements IRenderable, IMovable {
   attack: number
   health: number
   level: number
+  cash: number
   sprite
   assetId: AssetId
   contextId: ContextId
@@ -26,15 +27,23 @@ export default class Creep extends Entity implements IRenderable, IMovable {
   /**
    * Constructor.
    * 
-   * @param x 
-   * @param y 
-   * @param width 
-   * @param height 
-   * @param settings 
+   * @param {number} x 
+   * @param {number} y 
+   * @param {number} width 
+   * @param {number} height 
+   * @param {number} level
+   * @param {number} cash
+   * @param {Settings} settings 
    */
-  constructor (x: number, y: number, width: number, height: number, settings: Settings) {
+  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, settings?: Settings) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.contextId = ContextId.CREEPS
+    this.level = level
+    this.cash = cash
+  }
+
+  public init (): void {
+    
   }
 
   /**

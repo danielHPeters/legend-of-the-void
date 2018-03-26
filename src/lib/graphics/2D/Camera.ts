@@ -47,7 +47,6 @@ export default class Camera {
 
     // rectangle that represents the world's boundary (room's boundary)
     this.worldRect = new Rectangle(0, 0, worldWidth, worldHeight)
-
   }
 
   /**
