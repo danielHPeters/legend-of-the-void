@@ -17,11 +17,11 @@ import { AssetId } from '../enum/AssetId'
 export default class Turret extends Entity implements IRenderable, IMovable {
   type: TurretType
   description: string
-  spriteId: AssetId
+  assetId: AssetId
   damage: number
   rate: number
   range: number
-  sprite
+  asset
   contextId: ContextId
 
   /**
@@ -34,12 +34,14 @@ export default class Turret extends Entity implements IRenderable, IMovable {
    * @param {number} damage Turret attack
    * @param {Settings} settings Game settings.
    * @param {TurretType} type
+   * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, damage?: number, settings?: Settings, type?: TurretType) {
+  constructor (x?: number, y?: number, width?: number, height?: number, damage?: number, settings?: Settings, type?: TurretType, assetId: AssetId = AssetId.TURRET_LASER) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.type = type
     this.damage = damage
     this.contextId = ContextId.PLAYER
+    this.assetId = assetId
   }
 
   public init (): void {

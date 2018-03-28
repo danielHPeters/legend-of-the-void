@@ -2,9 +2,12 @@
  * Interface for entities who be rendered.
  */
 import { ContextId } from '../../enum/ContextId'
+import { AssetId } from '../../enum/AssetId'
 
 export default interface IRenderable {
   contextId: ContextId
+  assetId: AssetId
+  asset
 
   /**
    * Render the entity.

@@ -3,7 +3,11 @@ import IGame from './lib/interfaces/IGame'
 import ICollisionManager from './lib/interfaces/ICollisionManager'
 import InputManager from './lib/client/InputManager'
 import AssetManager from './lib/client/AssetManager'
-import { ContextId } from './enum/ContextId';
+import { ContextId } from './enum/ContextId'
+import Settings from './config/Settings'
+import LegendState from './LegendState'
+import AudioManager from './lib/client/AudioManager'
+import CollisionManager from './lib/collision/CollisionManager'
 
 /**
  * Main game Class.
@@ -12,20 +16,25 @@ import { ContextId } from './enum/ContextId';
  * @version 1.0
  */
 export default class LegendOfTheVoid implements IGame {
+  audioManager: AudioManager
   inputManager: InputManager
   assetManager: AssetManager
+  collisionManager: ICollisionManager
   state: IGameState
   contexts: Map<ContextId, CanvasRenderingContext2D>
-  collisionManager: ICollisionManager
 
   /**
    * Constructor.
    *
-   * @param {IGameState} state
-   * @param {Map<ContextId, CanvasRenderingContext2D>} context
+   * @param {Map<ContextId, CanvasRenderingContext2D>} contexts
+   * @param {Settings} settings
    */
-  constructor (state: IGameState, contexts: Map<ContextId, CanvasRenderingContext2D>) {
-    this.state = state
+  constructor (contexts: Map<ContextId, CanvasRenderingContext2D>, settings: Settings) {
+    this.audioManager = new AudioManager()
+    this.inputManager = new InputManager(settings)
+    this.assetManager = new AssetManager(this.audioManager)
+    this.collisionManager = new CollisionManager(this.state.quadTree)
+    this.state = new LegendState(settings, this.inputManager)
     this.contexts = contexts
   }
 
@@ -33,7 +42,10 @@ export default class LegendOfTheVoid implements IGame {
    * Initialize the game.
    */
   public init (): void {
-    this.state.reset()
+    this.assetManager.downloadAll(() => {
+      this.state.renderables.forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
+      this.state.reset()
+    })
   }
 
   /**

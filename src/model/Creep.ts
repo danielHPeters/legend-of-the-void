@@ -20,26 +20,28 @@ export default class Creep extends Entity implements IRenderable, IMovable {
   health: number
   level: number
   cash: number
-  sprite
+  asset
   assetId: AssetId
   contextId: ContextId
-  
+
   /**
    * Constructor.
-   * 
-   * @param {number} x 
-   * @param {number} y 
-   * @param {number} width 
-   * @param {number} height 
+   *
+   * @param {number} x
+   * @param {number} y
+   * @param {number} width
+   * @param {number} height
    * @param {number} level
    * @param {number} cash
-   * @param {Settings} settings 
+   * @param {Settings} settings
+   * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, settings?: Settings) {
+  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, settings?: Settings, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.contextId = ContextId.CREEPS
     this.level = level
     this.cash = cash
+    this.assetId = assetId
   }
 
   public init (): void {

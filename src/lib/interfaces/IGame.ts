@@ -1,6 +1,8 @@
 import IGameState from './IGameState'
 import InputManager from '../client/InputManager'
 import AssetManager from '../client/AssetManager'
+import AudioManager from '../client/AudioManager'
+import CollisionManager from '../collision/CollisionManager'
 
 /**
  * Game interface.
@@ -9,9 +11,11 @@ import AssetManager from '../client/AssetManager'
  * @version 1.0
  */
 export default interface IGame {
-  state: IGameState
+  audioManager: AudioManager
   inputManager: InputManager
   assetManager: AssetManager
+  collisionManager: CollisionManager
+  state: IGameState
 
   /**
    *

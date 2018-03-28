@@ -16,9 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   contexts.set(ContextId.BACKGROUND, bgCanvas.getContext('2d'))
   bgCanvas.width = window.innerWidth
   bgCanvas.height = window.innerHeight
-  const context = bgCanvas.getContext('2d')
   const settings = new GameSettings(bgCanvas)
-  const inputManager = new InputManager(settings)
-  const state = new LegendState(settings, inputManager)
-  const game = new LegendOfTheVoid(state, contexts)
+  const game = new LegendOfTheVoid(contexts, settings)
 })

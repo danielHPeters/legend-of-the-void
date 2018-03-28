@@ -15,25 +15,28 @@ import { AssetId } from '../enum/AssetId'
 export default class Base extends Entity implements IRenderable {
   public name: string
   public health: number
-  public sprite
-  public assetID: AssetId
+  public asset
+  public assetId: AssetId
   public contextId: ContextId
 
   /**
    * Constructor.
    *
-   * @param {number} x 
-   * @param {number} y 
-   * @param {number} width 
-   * @param {number} height 
-   * @param {number} health 
-   * @param {Settings} settings 
+   * @param {number} x
+   * @param {number} y
+   * @param {number} width
+   * @param {number} height
+   * @param {number} health
+   * @param {string} name
+   * @param {Settings} settings
+   * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, settings?: Settings) {
+  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, settings?: Settings, assetId: AssetId = AssetId.BASE_VOID) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.name = name
     this.health = health
     this.contextId = ContextId.PLAYER
+    this.assetId = assetId
   }
 
   public init (): void {

@@ -5,7 +5,7 @@ import { AssetId } from '../../enum/AssetId'
 import AudioManager from './AudioManager'
 
 export enum AssetType {
-  SPRITE = 'SPRITE', SPRITE_SHEET = 'SPRITE_SHEET', AUDIO = 'AUDIO', AUDIO_AMB = 'LOOP'
+  SPRITE = 'sprite', SPRITE_SHEET = 'sprite-sheet', AUDIO = 'audio', AUDIO_AMB = 'audio-amb'
 }
 
 /**
@@ -16,6 +16,7 @@ export enum AssetType {
  */
 export default class AssetManager {
   private cache
+  private assetsDir: string
   private queue
   private downloadCount: number
   private audioManager: AudioManager
@@ -26,11 +27,8 @@ export default class AssetManager {
    * @param {AudioManager} audioManager
    */
   constructor (audioManager: AudioManager) {
-    this.cache = {
-      sprites: {},
-      spriteSheets: {},
-      audio: {}
-    }
+    this.cache = []
+    this.assetsDir = 'assets/'
     this.downloadCount = 0
     this.queue = []
     this.audioManager = audioManager
@@ -51,8 +49,8 @@ export default class AssetManager {
    * @param {AssetType} type
    * @param {{}} opts
    */
-  queueDownload (id: AssetId, path: string, type: AssetType, opts = null): void {
-    this.queue.push({ id: id, path: path, type: type, opts: opts })
+  queueDownload (id: AssetId, type: AssetType, opts = null): void {
+    this.queue.push({ id: id, path: this.assetsDir + type + '/' + id, type: type, opts: opts })
   }
 
   /**
@@ -132,30 +130,15 @@ export default class AssetManager {
    * Create an audio buffer source node from cached buffer.
    * Send it to the destination of the audio context and play it.
    *
-   * @param {AssetId} id file id
+   * @param {AssetId} id File id
    * @param {AssetType} type
    */
-  getSound (id: AssetId, type: AssetType): Sound {
-    let ambient = type === AssetType.AUDIO_AMB
-    return this.audioManager.createSound(this.cache.audio[id], ambient)
-  }
-
-  /**
-   *
-   * @param {AssetId} id
-   * @returns {any}
-   */
-  getSprite (id: AssetId): any {
-    return this.cache.sprites[id]
-  }
-
-  /**
-   * Get sprite sheet by name.
-   *
-   * @param {AssetId} id
-   * @returns {SpriteSheet}
-   */
-  getSpriteSheet (id: AssetId): SpriteSheet {
-    return this.cache.spriteSheets[id]
+  get (id: AssetId, type: AssetType = AssetType.SPRITE): Sound {
+    if (type === AssetType.AUDIO || type === AssetType.AUDIO_AMB) {
+      let ambient = type === AssetType.AUDIO_AMB
+      return this.audioManager.createSound(this.cache[id], ambient)
+    } else {
+      return this.cache[id]
+    }
   }
 }
