@@ -8,6 +8,8 @@ import Settings from './config/Settings'
 import LegendState from './LegendState'
 import AudioManager from './lib/client/AudioManager'
 import CollisionManager from './lib/collision/CollisionManager'
+import * as mapData from './../public/definitions/maps.json'
+import Tile from './model/Tile'
 
 /**
  * Main game Class.
@@ -22,6 +24,7 @@ export default class LegendOfTheVoid implements IGame {
   collisionManager: ICollisionManager
   state: IGameState
   contexts: Map<ContextId, CanvasRenderingContext2D>
+  settings: Settings
 
   /**
    * Constructor.
@@ -33,15 +36,46 @@ export default class LegendOfTheVoid implements IGame {
     this.audioManager = new AudioManager()
     this.inputManager = new InputManager(settings)
     this.assetManager = new AssetManager(this.audioManager)
-    this.collisionManager = new CollisionManager(this.state.quadTree)
     this.state = new LegendState(settings, this.inputManager)
+    this.collisionManager = new CollisionManager(this.state.quadTree)
     this.contexts = contexts
+    this.settings = settings
   }
 
   /**
    * Initialize the game.
    */
-  public init (): void {
+  init (): void {
+    console.log(mapData)
+    let y = 0
+    mapData[0].tiles.forEach(row => {
+      let width = 30
+      let height = 30
+      let x = 0
+      row.forEach(col => {
+        const tile = new Tile(x, y, width, height, this.settings)
+        switch (col) {
+          case 0:
+            tile.blocked = true
+            tile.color = '#000000'
+            break
+          case 1:
+            tile.buildable = true
+            tile.color = '#ff00ff'
+            break
+          case 3:
+            tile.color = '#00ff00'
+            break
+          case 4:
+            tile.color = '#ff0000'
+            break
+        }
+        this.state.entities.push(tile)
+        this.state.renderables.push(tile)
+        x += width
+      })
+      y += height
+    })
     this.assetManager.downloadAll(() => {
       this.state.renderables.forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
       this.state.reset()
@@ -51,14 +85,14 @@ export default class LegendOfTheVoid implements IGame {
   /**
    * Render current state.
    */
-  public render (): void {
+  render (): void {
     this.state.renderables.forEach(renderable => renderable.render(this.contexts.get(renderable.contextId)))
   }
 
   /**
    *
    */
-  public clear (): void {
+  clear (): void {
     this.state.renderables.forEach(renderable => renderable.clear(this.contexts.get(renderable.contextId)))
   }
 }

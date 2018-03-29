@@ -8,7 +8,7 @@ import { AssetId } from '../enum/AssetId'
 
 /**
  * The base a player needs to defend.
- * 
+ *
  * @author Daniel Peters
  * @version 1.0
  */
@@ -40,7 +40,7 @@ export default class Base extends Entity implements IRenderable {
   }
 
   public init (): void {
-    
+
   }
 
   /**
@@ -49,14 +49,14 @@ export default class Base extends Entity implements IRenderable {
    * @param ctx Rendering context
    */
   public render (ctx: CanvasRenderingContext2D): void {
-
+    ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
-   * Clear the frame  
+   * Clear the frame
    * @param ctx Rendering context
    */
   public clear (ctx: CanvasRenderingContext2D): void {
-    
+    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 }

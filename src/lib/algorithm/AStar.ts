@@ -14,7 +14,7 @@ export default class AStar {
       if (current === goal) {
         return AStar.reconstructPath(cameFrom, current)
       }
-      openSet.remove(current)
+      // openSet.remove(current)
       closedSet.push(current)
     }
   }

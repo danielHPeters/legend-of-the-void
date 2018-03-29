@@ -45,9 +45,8 @@ export default class AssetManager {
   /**
    *
    * @param {AssetId} id
-   * @param {string} path
    * @param {AssetType} type
-   * @param {{}} opts
+   * @param {any} opts
    */
   queueDownload (id: AssetId, type: AssetType, opts = null): void {
     this.queue.push({ id: id, path: this.assetsDir + type + '/' + id, type: type, opts: opts })

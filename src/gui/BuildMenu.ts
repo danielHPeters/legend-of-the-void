@@ -32,7 +32,7 @@ export default class BuildMenu {
     this.turretList.forEach(turret => {
       const turretBox = document.createElement('div')
       turretBox.classList.add('build-box')
-      turretBox.appendChild(turret.sprite)
+      turretBox.appendChild(turret.asset)
       this.element.appendChild(turretBox)
     })
   }

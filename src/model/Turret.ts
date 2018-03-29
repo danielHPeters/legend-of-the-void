@@ -53,7 +53,7 @@ export default class Turret extends Entity implements IRenderable, IMovable {
    * @param {CanvasRenderingContext2D} ctx 
    */
   public render (ctx: CanvasRenderingContext2D) {
-
+    ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
@@ -61,7 +61,7 @@ export default class Turret extends Entity implements IRenderable, IMovable {
    * @param {CanvasRenderingContext2D} ctx 
    */
   public clear (ctx: CanvasRenderingContext2D) {
-    
+    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**

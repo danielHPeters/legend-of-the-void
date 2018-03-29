@@ -7,7 +7,8 @@ import InputManager from './lib/client/InputManager'
 import IRenderable from './lib/interfaces/IRenderable'
 import IMovable from './lib/interfaces/IMovable'
 import Tile from './model/Tile'
-import Observable from './lib/observer/Observable';
+import Observable from './lib/observer/Observable'
+import HitBox from './lib/collision/HitBox'
 
 /**
  * Legend of the void game state class.
@@ -36,7 +37,10 @@ export default class LegendState extends Observable implements IGameState {
     this.running = false
     this.paused = false
     this.entities = []
+    this.quadTree = new QuadTree(new HitBox(0, 0, settings.gameSize.width, settings.gameSize.height))
     this.collideables = []
+    this.movables = []
+    this.renderables = []
     this.state = {
       kills: 0,
       cash: 0
