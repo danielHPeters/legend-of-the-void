@@ -9,7 +9,9 @@ import LegendState from './LegendState'
 import AudioManager from './lib/client/AudioManager'
 import CollisionManager from './lib/collision/CollisionManager'
 import * as mapData from './../public/definitions/maps.json'
+import * as turretData from './../public/definitions/turrets.json'
 import Tile from './model/Tile'
+import Turret from './model/Turret'
 
 /**
  * Main game Class.
@@ -42,10 +44,7 @@ export default class LegendOfTheVoid implements IGame {
     this.settings = settings
   }
 
-  /**
-   * Initialize the game.
-   */
-  init (): void {
+  initMap (): void {
     console.log(mapData)
     let y = 0
     mapData[0].tiles.forEach(row => {
@@ -76,6 +75,19 @@ export default class LegendOfTheVoid implements IGame {
       })
       y += height
     })
+  }
+
+  /**
+   * Initialize the game.
+   */
+  init (): void {
+   this.initMap()
+   turretData.forEach(tr => {
+     const turret = new Turret()
+     turret.fromJSON(tr)
+     this.state.entities.push(turret)
+     this.state.renderables.push(turret)
+   })
     this.assetManager.downloadAll(() => {
       this.state.renderables.forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
       this.state.reset()
