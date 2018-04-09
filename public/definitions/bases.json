@@ -1,7 +1,7 @@
 [
   {
     "name": "The Void",
-    "health": 4000,
+    "health": 1000,
     "assetId": "base-void"
   }
 ]
