@@ -1,9 +1,7 @@
-import LegendOfTheVoid from './LegendOfTheVoid'
+import LegendOfTheVoid from './application/LegendOfTheVoid'
 import GameSettings from './config/Settings'
-import LegendState from './LegendState'
-import InputManager from './lib/client/InputManager'
 import { ContextId } from './enum/ContextId'
-import LegendLoop from './LegendLoop'
+import LegendLoop from './application/LegendLoop'
 
 /**
  * Entry script for legend of the void.
