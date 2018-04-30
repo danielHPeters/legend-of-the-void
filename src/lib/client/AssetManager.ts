@@ -49,7 +49,7 @@ export default class AssetManager {
    * @param {any} opts
    */
   queueDownload (id: AssetId, type: AssetType, opts = null): void {
-    this.queue.push({ id: id, path: this.assetsDir + type + '/' + id, type: type, opts: opts })
+    this.queue.push({ id: id, path: this.assetsDir + type + '/' + id + '.png', type: type, opts: opts })
   }
 
   /**
@@ -65,7 +65,7 @@ export default class AssetManager {
       responseType: 'arraybuffer'
     }, response => {
       this.audioManager.decodeAudio(response, item.id, buffer => {
-        this.cache.audio[item.id] = buffer
+        this.cache[item.id] = buffer
         this.downloadCount += 1
         if (this.done()) {
           callback()
@@ -88,7 +88,7 @@ export default class AssetManager {
       }
     })
     sprite.src = item.path
-    this.cache.sprites[item.id] = sprite
+    this.cache[item.id] = sprite
   }
 
   /**
@@ -100,7 +100,7 @@ export default class AssetManager {
   loadSpriteSheet (item, callback): void {
     let spriteSheet = new Image()
     spriteSheet.addEventListener('load', () => {
-      this.cache.spriteSheets[item.id] = new SpriteSheet(spriteSheet, item.opts.frameWidth || 0, item.opts.frameHeight || 0)
+      this.cache[item.id] = new SpriteSheet(spriteSheet, item.opts.frameWidth || 0, item.opts.frameHeight || 0)
       this.downloadCount += 1
       if (this.done()) {
         callback()
@@ -132,11 +132,12 @@ export default class AssetManager {
    * @param {AssetId} id File id
    * @param {AssetType} type
    */
-  get (id: AssetId, type: AssetType = AssetType.SPRITE): Sound {
+  get (id: AssetId, type: AssetType = AssetType.SPRITE): any {
     if (type === AssetType.AUDIO || type === AssetType.AUDIO_AMB) {
       let ambient = type === AssetType.AUDIO_AMB
       return this.audioManager.createSound(this.cache[id], ambient)
     } else {
+      console.log(this.cache[id])
       return this.cache[id]
     }
   }

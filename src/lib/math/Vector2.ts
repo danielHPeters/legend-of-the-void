@@ -7,8 +7,8 @@ import IVector from '../interfaces/IVector'
  * @version 1.0
  */
 export default class Vector2 implements IVector {
-  private x: number
-  private y: number
+  public x: number
+  public y: number
 
   /**
    * Default constructor. Sets x and y values.

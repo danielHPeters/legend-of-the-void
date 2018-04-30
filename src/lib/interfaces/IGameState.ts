@@ -3,6 +3,7 @@ import ICollideAble from './ICollideAble'
 import Entity from '../entity/Entity'
 import IRenderable from './IRenderable'
 import IMovable from './IMovable'
+import Tile from '../../model/Tile'
 
 /**
  * Game state interface.
@@ -18,6 +19,7 @@ export default interface IGameState {
   movables: IMovable[]
   renderables: IRenderable[]
   collideables: ICollideAble[]
+  map: Tile[]
 
   update (dt: number): void
 

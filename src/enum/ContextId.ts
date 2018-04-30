@@ -1,3 +1,3 @@
 export enum ContextId {
-  BACKGROUND, CREEPS, PLAYER
+  BACKGROUND = 'background', CREEPS ='creeps' , PLAYER = 'player'
 }

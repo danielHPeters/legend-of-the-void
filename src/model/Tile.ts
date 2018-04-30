@@ -35,6 +35,7 @@ export default class Tile extends Entity implements IRenderable {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.color = '#ffffff'
     this.contextId = ContextId.BACKGROUND
+    this.assetId = AssetId.NONE
   }
 
   init (): void {

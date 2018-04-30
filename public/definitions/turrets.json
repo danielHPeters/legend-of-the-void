@@ -3,6 +3,7 @@
     "type": "laser",
     "description": "A laser Turret",
     "assetId": "turret-laser",
+    "contextId": "player",
     "damage": 15,
     "rate": 50,
     "range": 60,

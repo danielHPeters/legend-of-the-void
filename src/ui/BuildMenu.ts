@@ -1,5 +1,6 @@
 import IGameState from '../lib/interfaces/IGameState'
 import Turret from '../model/Turret'
+import AssetManager from '../lib/client/AssetManager'
 
 /** 
  * Build menu for building Towers etc.
@@ -11,18 +12,19 @@ export default class BuildMenu {
   element: HTMLElement
   state: IGameState
   turretList: Turret[]
+  assetManager: AssetManager
 
   /**
    * Constructor.
    *
-   * @param {string} elementId 
-   * @param {IGameState} state 
-   * @param {Turret[]} turretList 
+   * @param {string} elementId
+   * @param {Turret[]} turretList
+   * @param assetManager
    */
-  constructor (elementId: string, state: IGameState, turretList: Turret[]) {
+  constructor (elementId: string, turretList, assetManager: AssetManager) {
     this.element = document.getElementById(elementId)
-    this.state = state
     this.turretList = turretList
+    this.assetManager = assetManager
   }
 
   /**
@@ -32,7 +34,7 @@ export default class BuildMenu {
     this.turretList.forEach(turret => {
       const turretBox = document.createElement('div')
       turretBox.classList.add('build-box')
-      turretBox.appendChild(turret.asset)
+      turretBox.appendChild(this.assetManager.get(turret.assetId))
       turretBox.addEventListener('click', () => {})
       this.element.appendChild(turretBox)
     })
