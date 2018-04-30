@@ -1,4 +1,4 @@
-import ListNode from './ListNode'
+import SinglyNode from './SinglyNode'
 import IList from '../interfaces/IList'
 import IQueue from '../interfaces/IQueue'
 
@@ -8,118 +8,116 @@ import IQueue from '../interfaces/IQueue'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class SinglyList implements IList, IQueue {
-  private _elementsCount: number
-  private _head: ListNode
-  private _errorMessages
+export default class SinglyList<T> implements IList<T>, IQueue<T> {
+  public size: number
+  private head: SinglyNode<T>
+  private errorMessages
 
   constructor () {
-    this._elementsCount = 0
-    this._head = null
-    this._errorMessages = {
+    this.size = 0
+    this.head = null
+    this.errorMessages = {
       indexOutOfBounds: 'Failure: non-existent index.',
       notImplemented: 'This feature is not yet implemented.'
     }
   }
 
-  size (): number {
-    return this.elementsCount
-  }
+  add (object: T): void {
+    let node = new SinglyNode(object)
+    let currentNode = this.head
 
-  isEmpty (): boolean {
-    return this._elementsCount === 0
-  }
-
-  contains (object: any): boolean {
-    throw new Error(this._errorMessages.notImplemented)
-  }
-
-  remove (object: any): void {
-    throw new Error(this._errorMessages.notImplemented)
-  }
-
-  add (object: any): void {
-    let node = new ListNode(object)
-    let currentNode = this._head
-
-    if (this._elementsCount === 0) {
-      this._head = node
+    if (this.size === 0) {
+      this.head = node
     } else {
       while (currentNode.next) {
         currentNode = currentNode.next
       }
       currentNode.next = node
     }
-    this._elementsCount++
+    this.size += 1
   }
 
-  addAll (objects: any[]): void {
+  addAll (objects: T[]): void {
     objects.forEach(object => this.add(object))
   }
 
   clear (): void {
     this.head = null
+    this.size = 0
   }
 
-  set (index: number, value: any): void {
-    throw new Error(this._errorMessages.notImplemented)
-  }
-
-  get (index: number): ListNode {
-    let current = this._head
-
-    if (this._elementsCount === 0 || index < 0 || index > this._elementsCount - 1) {
-      throw new Error(this._errorMessages.indexOutOfBounds)
-    }
-
-    for (let i = 0; i < index; i++) {
+  toArray (): T[] {
+    const array = []
+    let current = this.head
+    while (current) {
+      array.push(current.data)
       current = current.next
     }
-    return current
+    return array
+  }
+
+  contains (object: any): boolean {
+    throw new Error(this.errorMessages.notImplemented)
+  }
+
+  get (index: number): T {
+    let current = this.head
+
+    if (this.size === 0 || index < 0 || index >= this.size) {
+      throw new Error(this.errorMessages.indexOutOfBounds)
+    }
+
+    let i = 0
+    while (i < index) {
+      current = current.next
+      i += 1
+    }
+    return current.data
+  }
+
+  isEmpty (): boolean {
+    return this.size === 0
+  }
+
+  peek (): T {
+    return this.head.data
+  }
+
+  poll (): T {
+    let node = this.head
+    this.head = this.head.next
+    this.size -= 1
+    return node.data
+  }
+
+  remove (object: T): void {
+    throw new Error(this.errorMessages.notImplemented)
   }
 
   removeAt (index: number): void {
-    if (index < 0 || index > this._elementsCount - 1) {
-      throw new Error(this._errorMessages.indexOutOfBounds)
+    if (this.size == 0 || index < 0 || index >= this.size) {
+      throw new Error(this.errorMessages.indexOutOfBounds)
     }
+
+    // Special case when index is first item
     if (index === 0) {
-      this._head = this._head.next
+      this.head = this.head.next
     } else {
-      let current = this._head
+      let current = this.head
+      let i = 0
       // Go to node before index
-      for (let i = 0; i < index - 1; i++) {
+      while (i < index -1) {
         current = current.next
+        i += 1
       }
       // Delete node by removing reference
       current.next = current.next.next
     }
 
-    this._elementsCount--
+    this.size -= 1
   }
 
-  poll (): any {
-    let node = this.head
-    this.head = this.head.next
-    return node
-  }
-
-  peek (): any {
-    return this.head
-  }
-
-  get elementsCount (): number {
-    return this._elementsCount
-  }
-
-  set elementsCount (value: number) {
-    this._elementsCount = value
-  }
-
-  get head (): ListNode {
-    return this._head
-  }
-
-  set head (value: ListNode) {
-    this._head = value
+  set (index: number, value: T): void {
+    throw new Error(this.errorMessages.notImplemented)
   }
 }

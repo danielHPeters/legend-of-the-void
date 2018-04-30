@@ -33,6 +33,7 @@ export default class BuildMenu {
       const turretBox = document.createElement('div')
       turretBox.classList.add('build-box')
       turretBox.appendChild(turret.asset)
+      turretBox.addEventListener('click', () => {})
       this.element.appendChild(turretBox)
     })
   }

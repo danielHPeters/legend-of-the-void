@@ -6,10 +6,10 @@ import ICollection from './ICollection'
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface IList extends ICollection {
-  set (index: number, value: any): void
+export default interface IList<T> extends ICollection<T> {
+  set (index: number, value: T): void
 
-  get (index: number): any
+  get (index: number): T
 
   removeAt (index: number): void
 }

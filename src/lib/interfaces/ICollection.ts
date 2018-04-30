@@ -4,46 +4,58 @@
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface ICollection {
+export default interface ICollection<T> {
   /**
+   * Get the size of this collection.
    *
    * @returns {number}
    */
-  size (): number
+  size: number
 
   /**
+   * Check if collection is empty.
    *
    * @returns {boolean}
    */
   isEmpty (): boolean
 
   /**
+   * Check if this collection contains this object.
    *
    * @param object
    * @returns {boolean}
    */
-  contains (object: any): boolean
+  contains (object: T): boolean
 
   /**
+   * Add an object.
    *
    * @param object
    */
-  add (object: any): void
+  add (object: T): void
 
   /**
+   * Remove an object by its reference.
    *
    * @param object
    */
-  remove (object: any): void
+  remove (object: T): void
 
   /**
+   * Add objects from an array.
    *
-   * @param {any[]} objects
+   * @param objects
    */
-  addAll (objects: any[]): void
+  addAll (objects: T[]): void
 
   /**
-   *
+   * Clear the list.
    */
   clear (): void
+
+  /**
+   * Returns an array with all elements of this collection and in the correct order.
+   * @returns Array of type <T>
+   */
+  toArray(): T[]
 }

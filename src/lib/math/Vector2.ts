@@ -1,12 +1,14 @@
+import IVector from '../interfaces/IVector'
+
 /**
  * 2D vector implementation.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Vector2 {
-  private _x: number
-  private _y: number
+export default class Vector2 implements IVector {
+  private x: number
+  private y: number
 
   /**
    * Default constructor. Sets x and y values.
@@ -65,40 +67,6 @@ export default class Vector2 {
       throw new Error('cannot divide vector by scalar with value "0"')
     }
     return new Vector2(vector.x / scalar, vector.y / scalar)
-  }
-
-  /**
-   * Set x value of this vector.
-   *
-   * @param {number} x new x value
-   */
-  set x (x: number) {
-    this._x = x
-  }
-
-  /**
-   * Set y value of this vector.
-   *
-   * @param {number} y new y value
-   */
-  set y (y: number) {
-    this._y = y
-  }
-
-  /**
-   * Getter for x value
-   * @returns {number} x value
-   */
-  get x (): number {
-    return this._x
-  }
-
-  /**
-   * Getter for y value
-   * @returns {number} y value
-   */
-  get y (): number {
-    return this._y
   }
 
   /**
@@ -219,9 +187,9 @@ export default class Vector2 {
   /**
    * Limit the vector to a maximum elementsCount.
    *
-   * @param max maximum elementsCount
+   * @param {number} max maximum elementsCount
    */
-  limit (max): void {
+  limit (max: number): void {
     if (Math.floor(this.mag()) > max) {
       this.normalize()
       this.multiply(max)

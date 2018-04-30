@@ -4,22 +4,12 @@
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface IQueue {
-  /**
-   *
-   * @returns {any}
-   */
-  poll (): any
+export default interface IQueue<T> {
+  size: number
 
-  /**
-   *
-   * @returns {any}
-   */
-  peek (): any
+  poll (): T
 
-  /**
-   *
-   * @param object
-   */
-  add (object: any): void
+  peek (): T
+
+  add (object: T): void
 }
