@@ -2,8 +2,8 @@
   {
     "name": "Void Leecher",
     "speed": 10,
-    "attack": 5,
-    "health": 15,
+    "attack": 10,
+    "health": 80,
     "level": 1,
     "assetId": "creep"
   }
