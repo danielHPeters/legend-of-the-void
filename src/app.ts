@@ -30,9 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   playerCanvas.width = canvasSize
   playerCanvas.height = canvasSize
 
-  bgCanvas.addEventListener('click', ev => {
-  })
-
   const settings = new GameSettings(bgCanvas)
   const game = new LegendOfTheVoid(contexts, settings)
   const loop = new LegendLoop(game)

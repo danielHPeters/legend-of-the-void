@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/webaudioapi": "0.0.27",
+    "awesome-typescript-loader": "^5.0.0",
     "gulp": "^3.9.1",
     "ts-loader": "^4.2.0",
     "tslint": "^5.9.1",
@@ -26,6 +27,7 @@
     "typescript": "^2.8.1",
     "uglifyjs-webpack-plugin": "latest",
     "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14"
+    "webpack-cli": "^2.0.14",
+    "webpack-dev-middleware": "^3.1.3"
   }
 }

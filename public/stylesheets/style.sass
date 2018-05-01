@@ -1,6 +1,6 @@
 body
   padding: 50px
-  font: 28px "Lucida Grande", Helvetica, Arial, sans-serif
+  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif
 
 a
   color: #00B7FF
@@ -22,10 +22,10 @@ canvas
 #background
   z-index: -2
 
-#main
+#creeps
   z-index: -1
 
-#ship
+#player
   z-index: 0
 
 .settings
@@ -35,25 +35,6 @@ canvas
   color: #FF7F00
   font-family: Helvetica, sans-serif
   cursor: pointer
-#buildMenu
-  position: absolute
-  width: 400px
-  height: 660px
-  top: 0px
-  left: 800px
-  color: #FF7F00
-  background-color: beige
-  font-family: Helvetica, sans-serif
-  span
-    cursor: default
-.shoot-button
-  position: absolute
-  left: 1100px
-  top: 620px
-.move-button
-  position: absolute
-  left: 60px
-  top: 620px
 
 #settings-menu
   width: 600px
@@ -63,28 +44,6 @@ canvas
   color: #fff
   display: none
   z-index: 10
-label
-  display: inline-block
-  width: 230px
-#game-over
-  position: absolute
-  top: 200px
-  left: 420px
-  width: 400px
-  color: #FF7F00
-  font-family: Helvetica, sans-serif
-  font-size: 60px
-  cursor: default
-  display: none
-  span
-    font-size: 40px
-    cursor: pointer
-    position: relative
-    left: 100px
-  span:hover
-    color: #FFD700
-
-
 
 /* Style the tab */
 div.tab
@@ -131,3 +90,48 @@ div.tab button.active
     opacity: 0
   to
     opacity: 1
+
+#buildMenu
+  position: absolute
+  width: 400px
+  height: 660px
+  top: 0
+  left: 800px
+  color: #FF7F00
+  background-color: beige
+  font-family: Helvetica, sans-serif
+  span
+    cursor: default
+
+.tooltip
+  position: relative
+  display: inline-block
+
+.tooltip .tooltiptext
+  visibility: hidden
+  width: 200px
+  background-color: #555
+  color: #fff
+  text-align: center
+  border-radius: 6px
+  padding: 5px 0
+  position: absolute
+  z-index: 1
+  bottom: 45%
+  left: 50%
+  margin-left: -100px
+  opacity: 0
+  transition: opacity 0.3s
+
+.tooltip .tooltiptext::after
+  content: ''
+  position: absolute
+  top: 100%
+  left: 50%
+  margin-left: -5px
+  border: 5px solid transparent
+  border-top-color: #555
+
+.tooltip:hover .tooltiptext
+  visibility: visible
+  opacity: 1

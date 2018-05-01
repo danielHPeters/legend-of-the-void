@@ -33,9 +33,14 @@ export default class BuildMenu {
   init (): void {
     this.turretList.forEach(turret => {
       const turretBox = document.createElement('div')
+      const image = this.assetManager.get(turret.assetId)
+      const toolTipText = document.createElement('span')
+      toolTipText.classList.add('tooltiptext')
+      toolTipText.textContent = turret.description
       turretBox.classList.add('build-box')
-      turretBox.appendChild(this.assetManager.get(turret.assetId))
-      turretBox.addEventListener('click', () => {})
+      turretBox.classList.add('tooltip')
+      turretBox.appendChild(image)
+      turretBox.appendChild(toolTipText)
       this.element.appendChild(turretBox)
     })
   }

@@ -4,6 +4,10 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const sassMiddleware = require('node-sass-middleware')
+const webPack = require('webpack')
+const config = require('./webpack.config')
+const webpackMiddleWare = require('webpack-dev-middleware')
+const compiler = webPack(config)
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -24,6 +28,10 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
 }))
+app.use(webpackMiddleWare(compiler, {
+  publicPath: config.output.publicPath
+}))
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)

@@ -36,7 +36,8 @@ export default class Turret extends Entity implements IRenderable, IMovable {
    * @param {TurretType} type
    * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, damage?: number, settings?: Settings, type?: TurretType, assetId: AssetId = AssetId.TURRET_LASER) {
+  constructor (x?: number, y?: number, width?: number, height?: number,
+               damage?: number, settings?: Settings, type?: TurretType, assetId: AssetId = AssetId.TURRET_LASER) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.type = type
     this.damage = damage

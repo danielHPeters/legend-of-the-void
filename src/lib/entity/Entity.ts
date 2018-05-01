@@ -47,7 +47,6 @@ export default class Entity implements IJSONSerializable {
    * @param json JSON string
    */
   public fromJSON (json: any): void {
-    
     // Map parsed object to the attributes of this entity.
     Object.keys(json).forEach(key => {
       if ( this.hasOwnProperty( key ) ) {

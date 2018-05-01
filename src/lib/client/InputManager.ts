@@ -52,10 +52,6 @@ export default class InputManager extends Observable {
     el.addEventListener('touchstart', handleTouchStart, false)
     el.addEventListener('touchmove', handleTouchMove, false)
     el.addEventListener('touchend', handleTouchEnd, false)
-    el.addEventListener('contextmenu', event => {
-      event.preventDefault()
-      return false
-    })
 
     let start = []
     let move = []

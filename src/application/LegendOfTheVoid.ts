@@ -88,10 +88,10 @@ export default class LegendOfTheVoid implements IGame {
    * Initialize the game.
    */
   init (): void {
-    this.assetManager.queueDownload(AssetId.TURRET_LASER, AssetType.SPRITE )
-   this.initMap()
+    this.assetManager.queueDownload(AssetId.TURRET_LASER, AssetType.SPRITE)
+    this.initMap()
     this.assetManager.downloadAll(() => {
-      console.log(this.state.renderables)
+      //console.log(this.state.renderables)
       this.state.renderables
         .filter(element => {return element.assetId !== AssetId.NONE })
         .forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
@@ -100,7 +100,7 @@ export default class LegendOfTheVoid implements IGame {
     })
   }
 
-  addTurret(type: string, position: Vector2) {
+  addTurret (type: string, position: Vector2) {
     let turrets = (<any>turretData)
     let turr = new Turret()
     turr.fromJSON(turrets.filter(turret => {return turret.type === type})[0])

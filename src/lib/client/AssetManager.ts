@@ -1,5 +1,4 @@
 import SpriteSheet from '../graphics/2D/SpriteSheet'
-import Sound from '../audio/Sound'
 import Ajax from '../ajax/Ajax'
 import { AssetId } from '../../enum/AssetId'
 import AudioManager from './AudioManager'
@@ -46,7 +45,7 @@ export default class AssetManager {
    *
    * @param {AssetId} id
    * @param {AssetType} type
-   * @param {any} opts
+   * @param opts
    */
   queueDownload (id: AssetId, type: AssetType, opts = null): void {
     this.queue.push({ id: id, path: this.assetsDir + type + '/' + id + '.png', type: type, opts: opts })
@@ -137,7 +136,6 @@ export default class AssetManager {
       let ambient = type === AssetType.AUDIO_AMB
       return this.audioManager.createSound(this.cache[id], ambient)
     } else {
-      console.log(this.cache[id])
       return this.cache[id]
     }
   }
