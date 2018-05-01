@@ -1,32 +1,18 @@
+@import 'canvases'
+@import 'build-menu'
+@import 'settings-menu'
+
+*,
+*::before,
+*::after
+  box-sizing: border-box
+
 body
   padding: 50px
-  font: 20px "Lucida Grande", Helvetica, Arial, sans-serif
+  font: 20px 'Lucida Grande', Helvetica, Arial, sans-serif
 
 a
   color: #00B7FF
-.center
-  margin: auto
-  width: 1200px
-  height: 720px
-  padding: 10px
-  iframe
-    width: 100%
-    height: 100%
-
-canvas
-  position: absolute
-  top: 0
-  left: 0
-  background: transparent
-
-#background
-  z-index: -2
-
-#creeps
-  z-index: -1
-
-#player
-  z-index: 0
 
 .settings
   position: absolute
@@ -35,103 +21,3 @@ canvas
   color: #FF7F00
   font-family: Helvetica, sans-serif
   cursor: pointer
-
-#settings-menu
-  width: 600px
-  padding: 10px
-  position: absolute
-  background-color: #FF7F00
-  color: #fff
-  display: none
-  z-index: 10
-
-/* Style the tab */
-div.tab
-  overflow: hidden
-  border: 1px solid #ccc
-  background-color: #f1f1f1
-
-/* Style the buttons inside the tab */
-div.tab button
-  background-color: inherit
-  float: left
-  border: none
-  outline: none
-  cursor: pointer
-  padding: 14px 16px
-  transition: 0.3s
-  font-size: 17px
-
-/* Change background color of buttons on hover */
-div.tab button:hover
-  background-color: #ddd
-
-/* Create an active/current tabLink class */
-div.tab button.active
-  background-color: #ccc
-
-/* Style the tab content */
-.tabContent
-  height: 350px
-  display: none
-  padding: 6px 12px
-  -webkit-animation: fadeEffect 1s
-  animation: fadeEffect 1s
-
-/* Fade in tabs */
-@-webkit-keyframes fadeEffect
-  from
-    opacity: 0
-  to
-    opacity: 1
-
-@keyframes fadeEffect
-  from
-    opacity: 0
-  to
-    opacity: 1
-
-#buildMenu
-  position: absolute
-  width: 400px
-  height: 660px
-  top: 0
-  left: 800px
-  color: #FF7F00
-  background-color: beige
-  font-family: Helvetica, sans-serif
-  span
-    cursor: default
-
-.tooltip
-  position: relative
-  display: inline-block
-
-.tooltip .tooltiptext
-  visibility: hidden
-  width: 200px
-  background-color: #555
-  color: #fff
-  text-align: center
-  border-radius: 6px
-  padding: 5px 0
-  position: absolute
-  z-index: 1
-  bottom: 45%
-  left: 50%
-  margin-left: -100px
-  opacity: 0
-  transition: opacity 0.3s
-
-.tooltip .tooltiptext::after
-  content: ''
-  position: absolute
-  top: 100%
-  left: 50%
-  margin-left: -5px
-  border: 5px solid transparent
-  border-top-color: #555
-
-.tooltip:hover .tooltiptext
-  visibility: visible
-  opacity: 1

@@ -1,18 +1,22 @@
 import IGameState from '../lib/interfaces/IGameState'
 import Turret from '../model/Turret'
 import AssetManager from '../lib/client/AssetManager'
+import Tile from '../model/Tile'
 
-/** 
+/**
  * Build menu for building Towers etc.
- * 
+ *
  * @author Daniel Peters
  * @version 1.0
-*/
+ */
 export default class BuildMenu {
   element: HTMLElement
   state: IGameState
   turretList: Turret[]
   assetManager: AssetManager
+  open: boolean
+  tile: Tile
+  callback
 
   /**
    * Constructor.
@@ -20,11 +24,15 @@ export default class BuildMenu {
    * @param {string} elementId
    * @param {Turret[]} turretList
    * @param assetManager
+   * @param addTurretCallback
    */
-  constructor (elementId: string, turretList, assetManager: AssetManager) {
-    this.element = document.getElementById(elementId)
+  constructor (elementId: string, turretList, assetManager: AssetManager, addTurretCallback) {
+    this.element = document.createElement('div')
     this.turretList = turretList
     this.assetManager = assetManager
+    this.element.id = elementId
+    this.open = false
+    this.callback = addTurretCallback
   }
 
   /**
@@ -41,7 +49,63 @@ export default class BuildMenu {
       turretBox.classList.add('tooltip')
       turretBox.appendChild(image)
       turretBox.appendChild(toolTipText)
+      turretBox.addEventListener('click', () => {
+        if (this.tile) {
+          let turr = new Turret()
+          turr.fromJSON(turret)
+          turr.position = this.tile.position
+          turr.dimension = this.tile.dimension
+          this.callback(turr)
+        }
+      })
       this.element.appendChild(turretBox)
     })
+    document.body.appendChild(this.element)
+  }
+
+  getPosition (e) {
+    let posx = 0
+    let posy = 0
+
+    if (!e) {
+      e = window.event
+    }
+
+    if (e.pageX || e.pageY) {
+      posx = e.pageX
+      posy = e.pageY
+    } else if (e.clientX || e.clientY) {
+      posx = e.clientX + document.body.scrollLeft +
+        document.documentElement.scrollLeft
+      posy = e.clientY + document.body.scrollTop +
+        document.documentElement.scrollTop
+    }
+
+    return {
+      x: posx,
+      y: posy
+    }
+  }
+
+  positionMenu (menuPosition) {
+    let menuPositionX = menuPosition.x + 'px'
+    let menuPositionY = menuPosition.y + 'px'
+
+    this.element.style.left = menuPositionX
+    this.element.style.top = menuPositionY
+  }
+
+  show (tile: Tile) {
+    if (!this.open) {
+      this.open = true
+      this.element.style.display = 'block'
+      this.tile = tile
+    }
+  }
+
+  hide() {
+    this.open = false
+    this.element.style.display = 'none'
+    this.tile = null
   }
 }

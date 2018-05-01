@@ -2,7 +2,6 @@ import LegendOfTheVoid from './application/LegendOfTheVoid'
 import GameSettings from './config/Settings'
 import { ContextId } from './enum/ContextId'
 import LegendLoop from './application/LegendLoop'
-import Vector2 from './lib/math/Vector2'
 
 /**
  * Entry script for legend of the void.
@@ -35,5 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
   const loop = new LegendLoop(game)
 
   loop.start()
-  game.addTurret("laser", new Vector2(2, 2))
 })

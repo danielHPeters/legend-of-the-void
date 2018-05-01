@@ -11,9 +11,6 @@ import CollisionManager from '../lib/collision/CollisionManager'
 import * as mapData from '../../public/definitions/maps.json'
 import * as turretData from '../../public/definitions/turrets.json'
 import Tile from '../model/Tile'
-import Turret from '../model/Turret'
-import Dimension from '../lib/geometry/Dimension'
-import Vector2 from '../lib/math/Vector2'
 import { AssetId } from '../enum/AssetId'
 import BuildMenu from '../ui/BuildMenu'
 
@@ -48,11 +45,14 @@ export default class LegendOfTheVoid implements IGame {
     this.collisionManager = new CollisionManager(this.state.quadTree)
     this.contexts = contexts
     this.settings = settings
-    this.buildMenu = new BuildMenu('buildMenu', turretData, this.assetManager)
+    this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {
+      turret.asset = this.assetManager.get(turret.assetId)
+      this.state.entities.push(turret)
+      this.state.renderables.push(turret)
+    })
   }
 
   initMap (): void {
-    console.log(mapData)
     let y = 0
     mapData[0].tiles.forEach(row => {
       let width = this.TILE_SIZE
@@ -78,10 +78,26 @@ export default class LegendOfTheVoid implements IGame {
         }
         this.state.entities.push(tile)
         this.state.renderables.push(tile)
+        this.state.map.push(tile)
         x += width
       })
       y += height
     })
+  }
+
+  initBuildMenu() {
+    document.addEventListener('contextmenu', ev => {
+      ev.preventDefault()
+      let position = this.buildMenu.getPosition(ev)
+      let tile = this.state.map.filter(tile => tile.within(position.x, position.y))[0]
+      if(tile.buildable) {
+        this.buildMenu.show(tile)
+        this.buildMenu.positionMenu(position)
+      } else {
+        this.buildMenu.hide()
+      }
+    })
+    document.addEventListener('click', () => this.buildMenu.hide())
   }
 
   /**
@@ -90,25 +106,14 @@ export default class LegendOfTheVoid implements IGame {
   init (): void {
     this.assetManager.queueDownload(AssetId.TURRET_LASER, AssetType.SPRITE)
     this.initMap()
+    this.initBuildMenu()
     this.assetManager.downloadAll(() => {
-      //console.log(this.state.renderables)
       this.state.renderables
         .filter(element => {return element.assetId !== AssetId.NONE })
         .forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
       this.state.reset()
       this.buildMenu.init()
     })
-  }
-
-  addTurret (type: string, position: Vector2) {
-    let turrets = (<any>turretData)
-    let turr = new Turret()
-    turr.fromJSON(turrets.filter(turret => {return turret.type === type})[0])
-    turr.position = position
-    turr.dimension = new Dimension(this.TILE_SIZE, this.TILE_SIZE)
-    turr.asset = this.assetManager.get(turr.assetId)
-    this.state.entities.push(turr)
-    this.state.renderables.push(turr)
   }
 
   /**

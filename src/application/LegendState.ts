@@ -41,6 +41,7 @@ export default class LegendState extends Observable implements IGameState {
     this.collideables = []
     this.movables = []
     this.renderables = []
+    this.map = []
     this.state = {
       kills: 0,
       cash: 0

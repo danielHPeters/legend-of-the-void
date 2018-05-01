@@ -32,9 +32,16 @@ export default class Entity implements IJSONSerializable {
     throw new Error('Implement in subclass.')
   }
 
+  public within (x: number, y: number): boolean {
+    return x >= this.position.x
+      && x <= this.position.x + this.dimension.width
+      && y >= this.position.y
+      && y <= this.position.y + this.dimension.height
+  }
+
   /**
    * Create a JSON string from this object.
-   * 
+   *
    * @returns {string} The JSoN string
    */
   public toJSON (): string {
@@ -49,7 +56,7 @@ export default class Entity implements IJSONSerializable {
   public fromJSON (json: any): void {
     // Map parsed object to the attributes of this entity.
     Object.keys(json).forEach(key => {
-      if ( this.hasOwnProperty( key ) ) {
+      if (this.hasOwnProperty(key)) {
         this[key] = json[key]
       }
     })
