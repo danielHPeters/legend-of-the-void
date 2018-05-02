@@ -1,4 +1,4 @@
-import ICollection from './ICollection'
+import Collection from './Collection'
 
 /**
  * List interface.
@@ -6,7 +6,7 @@ import ICollection from './ICollection'
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface IList<T> extends ICollection<T> {
+export default interface List<T> extends Collection<T> {
   set (index: number, value: T): void
 
   get (index: number): T

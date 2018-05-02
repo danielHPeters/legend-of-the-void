@@ -1,13 +1,13 @@
-import IGameState from '../lib/interfaces/IGameState'
-import IGame from '../lib/interfaces/IGame'
-import ICollisionManager from '../lib/interfaces/ICollisionManager'
-import InputManager from '../lib/client/InputManager'
-import AssetManager, { AssetType } from '../lib/client/AssetManager'
+import GameState from '../lib/application/GameState'
+import Game from '../lib/application/Game'
+import CollisionManager from '../lib/collision/CollisionManager'
+import InputManager from '../lib/input/InputManager'
+import AssetManager, { AssetType } from '../lib/application/AssetManager'
 import { ContextId } from '../enum/ContextId'
 import Settings from '../config/Settings'
 import LegendState from './LegendState'
-import AudioManager from '../lib/client/AudioManager'
-import CollisionManager from '../lib/collision/CollisionManager'
+import AudioManager from '../lib/audio/AudioManager'
+import SimpleCollisionManager from '../lib/collision/SimpleCollisionManager'
 import * as mapData from '../../public/definitions/maps.json'
 import * as turretData from '../../public/definitions/turrets.json'
 import Tile from '../model/Tile'
@@ -20,12 +20,12 @@ import BuildMenu from '../ui/BuildMenu'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class LegendOfTheVoid implements IGame {
+export default class LegendOfTheVoid implements Game {
   audioManager: AudioManager
   inputManager: InputManager
   assetManager: AssetManager
-  collisionManager: ICollisionManager
-  state: IGameState
+  collisionManager: CollisionManager
+  state: GameState
   contexts: Map<ContextId, CanvasRenderingContext2D>
   settings: Settings
   buildMenu: BuildMenu
@@ -42,7 +42,7 @@ export default class LegendOfTheVoid implements IGame {
     this.inputManager = new InputManager(settings)
     this.assetManager = new AssetManager(this.audioManager)
     this.state = new LegendState(settings, this.inputManager)
-    this.collisionManager = new CollisionManager(this.state.quadTree)
+    this.collisionManager = new SimpleCollisionManager(this.state.quadTree)
     this.contexts = contexts
     this.settings = settings
     this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {

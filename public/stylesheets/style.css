@@ -19,7 +19,9 @@ canvas {
   color: #FF7F00;
   background-color: beige;
   font-family: Helvetica, sans-serif;
-  z-index: 10; }
+  z-index: 10;
+  clear: both;
+  padding: 5px; }
 
 .active {
   display: block; }

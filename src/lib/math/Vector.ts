@@ -4,20 +4,20 @@
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface IVector {
+export default interface Vector {
   /**
    * Add vector to this vector.
    *
-   * @param {IVector} vector other vector
+   * @param {Vector} vector other vector
    */
-  addVector (vector: IVector): void
+  addVector (vector: Vector): void
 
   /**
    * Subtract a vector from this vector.
    *
-   * @param {IVector} vector other vector
+   * @param {Vector} vector other vector
    */
-  subtractVector (vector: IVector): void
+  subtractVector (vector: Vector): void
 
   /**
    * Multiply this vector by scalar.
@@ -44,9 +44,9 @@ export default interface IVector {
   /**
    * Negate the x and y values of this vector and return the result as a new Vector2 object.
    *
-   * @returns {IVector}
+   * @returns {Vector}
    */
-  negative (): IVector
+  negative (): Vector
 
   /**
    * Normalize the vector.
@@ -63,18 +63,18 @@ export default interface IVector {
   /**
    * Get the distance of this vector to another vector.
    *
-   * @param {IVector} vector other vector
+   * @param {Vector} vector other vector
    * @returns {number} calculated distance
    */
-  distanceTo (vector: IVector): number
+  distanceTo (vector: Vector): number
 
   /**
    * Get the dot product between this vector and another vector.
    *
-   * @param {IVector} vector
+   * @param {Vector} vector
    * @returns {number} the dot product of this vector and the one passed as param.
    */
-  dot (vector: IVector): number
+  dot (vector: Vector): number
 
   floor (): void
 }

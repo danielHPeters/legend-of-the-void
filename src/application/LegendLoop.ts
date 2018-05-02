@@ -4,20 +4,20 @@
  * @author Daniel Peters
  * @version 1.0
  */
-import IGameLoop from '../lib/interfaces/IGameLoop'
-import IGame from '../lib/interfaces/IGame'
+import GameLoop from '../lib/application/GameLoop'
+import Game from '../lib/application/Game'
 
-export default class LegendLoop implements IGameLoop {
-  public game: IGame
+export default class LegendLoop implements GameLoop {
+  public game: Game
   public lastTime: number
   public frameId: number
 
   /**
    * Constructor.
    *
-   * @param {IGame} game Game instance
+   * @param {Game} game Game instance
    */
-  constructor (game: IGame) {
+  constructor (game: Game) {
     this.game = game
     this.lastTime = null
   }

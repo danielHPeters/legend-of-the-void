@@ -1,10 +1,10 @@
 /**
- * Interface for collections.
+ * Interface for collection.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface ICollection<T> {
+export default interface Collection<T> {
   /**
    * Get the size of this collection.
    *

@@ -1,4 +1,4 @@
-import IVector from '../interfaces/IVector'
+import Vector from './Vector'
 
 /**
  * 2D vector implementation.
@@ -6,7 +6,7 @@ import IVector from '../interfaces/IVector'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Vector2 implements IVector {
+export default class Vector2 implements Vector {
   public x: number
   public y: number
 

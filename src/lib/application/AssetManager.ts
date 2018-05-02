@@ -1,7 +1,7 @@
 import SpriteSheet from '../graphics/2D/SpriteSheet'
-import Ajax from '../ajax/Ajax'
+import Ajax from '../network/Ajax'
 import { AssetId } from '../../enum/AssetId'
-import AudioManager from './AudioManager'
+import AudioManager from '../audio/AudioManager'
 
 export enum AssetType {
   SPRITE = 'sprite', SPRITE_SHEET = 'sprite-sheet', AUDIO = 'audio', AUDIO_AMB = 'audio-amb'

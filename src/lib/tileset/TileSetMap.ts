@@ -46,7 +46,7 @@ export default class TileSetMap {
    * Pre renders the world map as an image using the layer definition arrays.
    * This saves processeing power which is especially imprtant on low end clients.
    */
-  public generate (): void {
+  generate (): void {
     // Create a temporary canvas rendering context.
     let ctx = document.createElement('canvas').getContext('2d')
     ctx.canvas.width = this.width
@@ -60,6 +60,16 @@ export default class TileSetMap {
 
     // Clear context.
     ctx = null
+  }
+
+  /**
+   * Draw the map adjusted to camera.
+   *
+   * @param {number} xView Camera X
+   * @param {number} yView Camera Y
+   */
+  draw (xView: number, yView: number): void {
+    this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height)
   }
 
   /**
@@ -92,15 +102,5 @@ export default class TileSetMap {
         )
       }
     }
-  }
-
-  /**
-   * Draw the map adjusted to camera.
-   *
-   * @param {number} xView Camera X
-   * @param {number} yView Camera Y
-   */
-  public draw (xView: number, yView: number): void {
-    this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height)
   }
 }

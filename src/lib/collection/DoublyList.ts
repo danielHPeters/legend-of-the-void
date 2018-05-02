@@ -1,5 +1,5 @@
-import IList from '../interfaces/IList'
-import IQueue from '../interfaces/IQueue'
+import List from './List'
+import Queue from './Queue'
 import DoublyNode from './DoublyNode'
 
 /**
@@ -8,7 +8,7 @@ import DoublyNode from './DoublyNode'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class DoublyList<T> implements IList<T>, IQueue<T> {
+export default class DoublyList<T> implements List<T>, Queue<T> {
   public size: number
   private head: DoublyNode<T>
   private tail: DoublyNode<T>

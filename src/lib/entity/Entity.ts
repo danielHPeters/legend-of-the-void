@@ -1,7 +1,7 @@
 import Vector2 from '../math/Vector2'
 import Settings from '../../config/Settings'
 import Dimension from '../geometry/Dimension'
-import IJSONSerializable from '../interfaces/IJSONSerializable'
+import JsonSerializable from '../util/JsonSerializable'
 
 /**
  * Base entity class.
@@ -9,7 +9,7 @@ import IJSONSerializable from '../interfaces/IJSONSerializable'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Entity implements IJSONSerializable {
+export default class Entity implements JsonSerializable {
   id: string
   dimension: Dimension
   settings: Settings

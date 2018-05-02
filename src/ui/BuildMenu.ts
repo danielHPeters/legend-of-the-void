@@ -1,6 +1,6 @@
-import IGameState from '../lib/interfaces/IGameState'
+import GameState from '../lib/application/GameState'
 import Turret from '../model/Turret'
-import AssetManager from '../lib/client/AssetManager'
+import AssetManager from '../lib/application/AssetManager'
 import Tile from '../model/Tile'
 
 /**
@@ -11,7 +11,7 @@ import Tile from '../model/Tile'
  */
 export default class BuildMenu {
   element: HTMLElement
-  state: IGameState
+  state: GameState
   turretList: Turret[]
   assetManager: AssetManager
   open: boolean
@@ -39,6 +39,9 @@ export default class BuildMenu {
    * Initialize the menu.
    */
   init (): void {
+    const title = document.createElement('h4')
+    title.textContent = 'Build Turret'
+    this.element.appendChild(title)
     this.turretList.forEach(turret => {
       const turretBox = document.createElement('div')
       const image = this.assetManager.get(turret.assetId)

@@ -1,6 +1,6 @@
 import SinglyNode from './SinglyNode'
-import IList from '../interfaces/IList'
-import IQueue from '../interfaces/IQueue'
+import List from './List'
+import Queue from './Queue'
 
 /**
  * Singly list implementation.
@@ -8,7 +8,7 @@ import IQueue from '../interfaces/IQueue'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class SinglyList<T> implements IList<T>, IQueue<T> {
+export default class SinglyList<T> implements List<T>, Queue<T> {
   public size: number
   private head: SinglyNode<T>
   private errorMessages

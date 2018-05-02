@@ -2,19 +2,19 @@ import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Settings from '../config/Settings'
-import IRenderable from '../lib/interfaces/IRenderable'
-import IMovable from '../lib/interfaces/IMovable'
+import Renderable from '../lib/entity/Renderable'
+import Changeable from '../lib/entity/Changeable'
 import { ContextId } from '../enum/ContextId'
 import { TurretType } from '../enum/TurretType'
 import { AssetId } from '../enum/AssetId'
 
 /**
  * Turret class.
- * 
+ *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Turret extends Entity implements IRenderable, IMovable {
+export default class Turret extends Entity implements Renderable, Changeable {
   type: TurretType
   description: string
   assetId: AssetId
@@ -45,38 +45,38 @@ export default class Turret extends Entity implements IRenderable, IMovable {
     this.assetId = assetId
   }
 
-  public init (): void {
-    
+  init (): void {
+    // Currently no init/reset method intended
   }
 
   /**
-   * 
-   * @param {CanvasRenderingContext2D} ctx 
+   *
+   * @param {CanvasRenderingContext2D} ctx
    */
-  public render (ctx: CanvasRenderingContext2D) {
+  render (ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
-   * 
-   * @param {CanvasRenderingContext2D} ctx 
+   *
+   * @param {CanvasRenderingContext2D} ctx
    */
-  public clear (ctx: CanvasRenderingContext2D) {
+  clear (ctx: CanvasRenderingContext2D) {
     ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
-   * 
-   * @param {number} dt 
+   *
+   * @param {number} dt
    */
-  public move (dt: number) {
-
+  change (dt: number) {
+    // TODO: implement state update mechanism
   }
 
   /**
    *
    */
-  private shoot (): void {
-
+  shoot (): void {
+    // TODO: implement shooting
   }
 }

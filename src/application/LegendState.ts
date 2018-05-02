@@ -1,11 +1,11 @@
-import IGameState from '../lib/interfaces/IGameState'
+import GameState from '../lib/application/GameState'
 import QuadTree from '../lib/collision/QuadTree'
 import Entity from '../lib/entity/Entity'
-import ICollideAble from '../lib/interfaces/ICollideAble'
+import Collidable from '../lib/collision/Collidable'
 import Settings from '../config/Settings'
-import InputManager from '../lib/client/InputManager'
-import IRenderable from '../lib/interfaces/IRenderable'
-import IMovable from '../lib/interfaces/IMovable'
+import InputManager from '../lib/input/InputManager'
+import Renderable from '../lib/entity/Renderable'
+import Changeable from '../lib/entity/Changeable'
 import Tile from '../model/Tile'
 import Observable from '../lib/observer/Observable'
 import HitBox from '../lib/collision/HitBox'
@@ -16,14 +16,14 @@ import HitBox from '../lib/collision/HitBox'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class LegendState extends Observable implements IGameState {
+export default class LegendState extends Observable implements GameState {
   public running: boolean
   public paused: boolean
   public quadTree: QuadTree
   public entities: Entity[]
-  public collideables: ICollideAble[]
-  public movables: IMovable[]
-  public renderables: IRenderable[]
+  public collideables: Collidable[]
+  public movables: Changeable[]
+  public renderables: Renderable[]
   public map: Tile[]
 
   /**
@@ -49,7 +49,7 @@ export default class LegendState extends Observable implements IGameState {
   }
 
   public update (dt: number): void {
-    this.movables.forEach(movable => movable.move(dt))
+    this.movables.forEach(movable => movable.change(dt))
   }
 
   public reset (): void {

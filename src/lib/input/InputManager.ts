@@ -47,7 +47,7 @@ export default class InputManager extends Observable {
    */
   initializeTouchHandler (): void {
     // Register the event listeners
-    let button = document.getElementById('move')
+    let button = document.getElementById('change')
     let el = button ? button : window
     el.addEventListener('touchstart', handleTouchStart, false)
     el.addEventListener('touchmove', handleTouchMove, false)

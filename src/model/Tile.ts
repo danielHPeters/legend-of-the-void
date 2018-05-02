@@ -3,7 +3,7 @@ import Settings from '../config/Settings'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Turret from './Turret'
-import IRenderable from '../lib/interfaces/IRenderable'
+import Renderable from '../lib/entity/Renderable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
@@ -13,7 +13,7 @@ import { AssetId } from '../enum/AssetId'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Tile extends Entity implements IRenderable {
+export default class Tile extends Entity implements Renderable {
   contextId: ContextId
   assetId: AssetId
   asset

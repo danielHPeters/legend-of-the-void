@@ -2,27 +2,27 @@ import Settings from '../config/Settings'
 import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
-import IRenderable from '../lib/interfaces/IRenderable'
-import IMovable from '../lib/interfaces/IMovable'
+import Renderable from '../lib/entity/Renderable'
+import Changeable from '../lib/entity/Changeable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
-/** 
+/**
  * Enemy creep class.
- * 
+ *
  * @author Daniel Peters
  * @version 1.0
-*/
-export default class Creep extends Entity implements IRenderable, IMovable {
+ */
+export default class Creep extends Entity implements Renderable, Changeable {
+  contextId: ContextId
+  assetId: AssetId
+  asset
   name: string
   speed: number
   attack: number
   health: number
   level: number
   cash: number
-  asset
-  assetId: AssetId
-  contextId: ContextId
 
   /**
    * Constructor.
@@ -44,31 +44,31 @@ export default class Creep extends Entity implements IRenderable, IMovable {
     this.assetId = assetId
   }
 
-  public init (): void {
-    
+  init (): void {
+
   }
 
   /**
-   * 
-   * @param {CanvasRenderingContext2D} ctx 
+   *
+   * @param {CanvasRenderingContext2D} ctx
    */
-  public render (ctx: CanvasRenderingContext2D) {
+  render (ctx: CanvasRenderingContext2D) {
     ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
-   * 
-   * @param {CanvasRenderingContext2D} ctx 
+   *
+   * @param {CanvasRenderingContext2D} ctx
    */
-  public clear (ctx: CanvasRenderingContext2D) {
+  clear (ctx: CanvasRenderingContext2D) {
     ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
   /**
-   * 
-   * @param {number} dt 
+   *
+   * @param {number} dt
    */
-  public move (dt: number) {
+  change (dt: number) {
 
   }
 }

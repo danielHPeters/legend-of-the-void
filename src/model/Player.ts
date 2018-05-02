@@ -1,4 +1,4 @@
-import Observer from "../lib/observer/Observer";
+import Observer from '../lib/observer/Observer'
 
 /**
  * Player class.

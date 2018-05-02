@@ -1,6 +1,6 @@
 import Vector2 from '../../math/Vector2'
 import Rectangle from '../../geometry/Rectangle'
-import IDrawable from '../../interfaces/IDrawable'
+import Drawable from '../../entity/Drawable'
 
 export enum AXIS {
   NONE = 'none',
@@ -21,7 +21,7 @@ export default class Camera {
   viewWidth: number
   viewHeight: number
   axis: AXIS
-  following: IDrawable
+  following: Drawable
   deadZone: Vector2
   viewportRect: Rectangle
   worldRect: Rectangle
@@ -36,7 +36,7 @@ export default class Camera {
     this.viewWidth = viewWidth
     this.viewHeight = viewHeight
 
-    // allow camera to move in vertical and horizontal axis
+    // allow camera to change in vertical and horizontal axis
     this.axis = AXIS.BOTH
 
     // object that should be followed
@@ -56,7 +56,7 @@ export default class Camera {
    * @param xDeadZone
    * @param yDeadZone
    */
-  follow (following: IDrawable, xDeadZone, yDeadZone): void {
+  follow (following: Drawable, xDeadZone, yDeadZone): void {
     this.following = following
     this.deadZone.set(xDeadZone, yDeadZone)
   }

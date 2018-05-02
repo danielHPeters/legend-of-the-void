@@ -1,5 +1,5 @@
 /**
- * Simple postfix calculator.
+ * Simple postfix calculator. Solves postfix expressions using a simple array implementation.
  *
  * @author Daniel Peters
  * @version 1.0

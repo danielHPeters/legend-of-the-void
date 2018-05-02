@@ -2,7 +2,7 @@ import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Settings from '../config/Settings'
-import IRenderable from '../lib/interfaces/IRenderable'
+import Renderable from '../lib/entity/Renderable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
@@ -12,12 +12,12 @@ import { AssetId } from '../enum/AssetId'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Base extends Entity implements IRenderable {
-  public name: string
-  public health: number
-  public asset
-  public assetId: AssetId
-  public contextId: ContextId
+export default class Base extends Entity implements Renderable {
+  contextId: ContextId
+  assetId: AssetId
+  asset
+  name: string
+  health: number
 
   /**
    * Constructor.
@@ -39,7 +39,7 @@ export default class Base extends Entity implements IRenderable {
     this.assetId = assetId
   }
 
-  public init (): void {
+  init (): void {
 
   }
 
@@ -48,7 +48,7 @@ export default class Base extends Entity implements IRenderable {
    *
    * @param ctx Rendering context
    */
-  public render (ctx: CanvasRenderingContext2D): void {
+  render (ctx: CanvasRenderingContext2D): void {
     ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 
@@ -56,7 +56,7 @@ export default class Base extends Entity implements IRenderable {
    * Clear the frame
    * @param ctx Rendering context
    */
-  public clear (ctx: CanvasRenderingContext2D): void {
+  clear (ctx: CanvasRenderingContext2D): void {
     ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 }

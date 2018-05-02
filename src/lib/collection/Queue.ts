@@ -4,7 +4,7 @@
  * @author Daniel Peters
  * @version 1.0
  */
-export default interface IQueue<T> {
+export default interface Queue<T> {
   size: number
 
   poll (): T

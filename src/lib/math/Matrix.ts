@@ -1,10 +1,12 @@
+import Cloneable from '../util/Cloneable'
+
 /**
- * Matrix class.
+ * Matrix class used for representing multidimensional matrices.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Matrix {
+export default class Matrix implements Cloneable {
   rows: number
   columns: number
   mArray: number[][]
@@ -12,33 +14,40 @@ export default class Matrix {
   /**
    * Default constructor.
    *
-   * @param {number[][]} mArray Matrix array
+   * @param {number[][]} array Matrix array
    */
-  constructor (mArray: number[][]) {
-    this.mArray = mArray
-    this.rows = mArray.length
-    this.columns = mArray[0].length
+  constructor (array: number[][]) {
+    if (!this.arrayIsValidMatrix(array)) {
+      throw new Error('The passed matrix array is malformed: ' + array)
+    }
+    this.mArray = array
+    this.rows = array.length
+    this.columns = array[0].length
   }
 
   /**
-   * 
-   * @param array 
+   * Check if all arrays contained in the two dimensional array are of the same length.
+   * All arrays should be same length as the first array.
+   *
+   * @param {number[][]} array
    */
-  public set (array: number[][]): void {
+  arrayIsValidMatrix (array: number[][]): boolean {
     const length = array[0].length
-    let valid = true
-    for (let i = 1; i < array.length; i++) {
-      if (array[i].length !== length) {
-        valid = false
-      }
-    }
-    if (valid) {
-      this.rows = array.length
-      this.columns = array[0].length
-      this.mArray = array
-    } else {
+    return array.filter(element => element.length !== length).length === 0
+  }
+
+  /**
+   * Set the matrix from an array.
+   * @param {number[][]} array
+   */
+  set (array: number[][]): void {
+    if (!this.arrayIsValidMatrix(array)) {
       throw new Error('The passed matrix array is malformed: ' + array)
     }
+    this.rows = array.length
+    this.columns = array[0].length
+    this.mArray = array
+
   }
 
   /**
@@ -47,7 +56,7 @@ export default class Matrix {
    *
    * @param {Matrix} matrix
    */
-  public add (matrix: Matrix): void {
+  add (matrix: Matrix): void {
     if (this.equals(matrix)) {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.columns; j++) {
@@ -63,7 +72,7 @@ export default class Matrix {
    *
    * @param {Matrix} matrix
    */
-  public subtract (matrix: Matrix): void {
+  subtract (matrix: Matrix): void {
     if (this.equals(matrix)) {
       for (let i = 0; i < this.rows; i++) {
         for (let j = 0; j < this.columns; j++) {
@@ -79,7 +88,7 @@ export default class Matrix {
    * @param {Matrix} matrix Another matrix
    * @returns {Matrix} Resulting matrix
    */
-  public multiply (matrix: Matrix): Matrix {
+  multiply (matrix: Matrix): Matrix {
     let newArray = []
     if (this.columns === matrix.rows) {
       for (let i = 0; i < this.rows; i++) {
@@ -103,7 +112,7 @@ export default class Matrix {
    *
    * @param {number} scalar Scalar by which the matrix is multiplied by
    */
-  public multScalar (scalar: number): void {
+  multScalar (scalar: number): void {
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.columns; j++) {
         this.mArray[i][j] *= scalar
@@ -114,7 +123,7 @@ export default class Matrix {
   /**
    * Transposes this matrix.
    */
-  public transpose (): void {
+  transpose (): void {
     let array = []
     for (let i = 0; i < this.columns; i++) {
       array[i] = []
@@ -128,7 +137,7 @@ export default class Matrix {
     this.mArray = array
   }
 
-  public rotate (direction: number): void {
+  rotate (direction: number): void {
     this.transpose()
     if (direction > 0) {
       this.mArray.forEach(row => row.reverse())
@@ -143,7 +152,7 @@ export default class Matrix {
    * @param {Matrix} other Other Matrix
    * @returns {boolean} Returns true if the lengths match
    */
-  public equals (other: Matrix): boolean {
+  equals (other: Matrix): boolean {
     return other.rows === this.rows && other.columns === this.columns
   }
 
@@ -152,7 +161,7 @@ export default class Matrix {
    *
    * @returns {Matrix} A copy of this matrix
    */
-  public clone (): Matrix {
+  clone (): Matrix {
     let array = []
     this.mArray.forEach(arr => array.push(arr.slice(0)))
     return new Matrix(Array.from(array))

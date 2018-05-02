@@ -25,7 +25,7 @@ export default class Point {
    * @param {number} x x-axis value
    * @param {number} y y-axis value
    */
-  public set (x: number, y: number): void {
+  set (x: number, y: number): void {
     this.x = x
     this.y = y
   }
@@ -35,7 +35,7 @@ export default class Point {
    *
    * @param {Point} point Other point
    */
-  public setPoint (point: Point): void {
+  setPoint (point: Point): void {
     this.x = point.x
     this.y = point.y
   }
@@ -45,7 +45,7 @@ export default class Point {
    *
    * @returns {Point} A clone of this point
    */
-  public clone (): Point {
+  clone (): Point {
     return new Point(this.x, this.y)
   }
 }

@@ -5,12 +5,6 @@
  * @version 1.0
  */
 export default class QuadraticFunction {
-  /**
-   *
-   * @param {number} a
-   * @param {number} b
-   * @param {number} c
-   */
   getZeroPoint (a: number, b: number, c: number): void {
     const check = (b * b) - (4 * a * c)
 
@@ -23,11 +17,6 @@ export default class QuadraticFunction {
     }
   }
 
-  /**
-   *
-   * @param {number} check
-   * @returns {number}
-   */
   calculate (check: number): number {
     return 1
   }
