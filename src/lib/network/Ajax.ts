@@ -1,3 +1,9 @@
+/**
+ * Utility methods used to generate ajax requests.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class Ajax {
   private static defaults = {
     url: '',
@@ -19,7 +25,7 @@ export default class Ajax {
    * data = request body.
    * @param callback success callback function
    */
-  public static create (opts, callback): void {
+  static create (opts, callback): void {
     let xHttp = new XMLHttpRequest()
     xHttp.addEventListener('load', () => {
       callback(xHttp.response)

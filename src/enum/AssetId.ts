@@ -1,6 +1,3 @@
-/**
- *
- */
 export enum AssetId {
   BASE_VOID = 'base-void',
   TURRET_LASER = 'turret-laser',

@@ -28,11 +28,11 @@ export default class Entity implements JsonSerializable {
     this.settings = settings
   }
 
-  public init (): void {
+  init (): void {
     throw new Error('Implement in subclass.')
   }
 
-  public within (x: number, y: number): boolean {
+  within (x: number, y: number): boolean {
     return x >= this.position.x
       && x <= this.position.x + this.dimension.width
       && y >= this.position.y
@@ -44,7 +44,7 @@ export default class Entity implements JsonSerializable {
    *
    * @returns {string} The JSoN string
    */
-  public toJSON (): string {
+  toJSON (): string {
     return JSON.stringify(this)
   }
 
@@ -53,7 +53,7 @@ export default class Entity implements JsonSerializable {
    *
    * @param json JSON string
    */
-  public fromJSON (json: any): void {
+  fromJSON (json: any): void {
     // Map parsed object to the attributes of this entity.
     Object.keys(json).forEach(key => {
       if (this.hasOwnProperty(key)) {

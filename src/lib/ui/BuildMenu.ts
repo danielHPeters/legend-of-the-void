@@ -1,7 +1,7 @@
-import GameState from '../lib/application/GameState'
-import Turret from '../model/Turret'
-import AssetManager from '../lib/application/AssetManager'
-import Tile from '../model/Tile'
+import GameState from '../application/GameState'
+import Turret from '../../model/Turret'
+import AssetManager from '../application/AssetManager'
+import Tile from '../../model/Tile'
 
 /**
  * Build menu for building Towers etc.

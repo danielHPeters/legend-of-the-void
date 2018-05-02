@@ -11,9 +11,6 @@ export default class InputManager extends Observable {
   inputMap
   touches
 
-  /**
-   *
-   */
   constructor (settings: Settings) {
     super()
     this.inputMap = settings.keyboard

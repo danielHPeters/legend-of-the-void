@@ -36,7 +36,7 @@ export default class Animation {
   /**
    * Update animation frames.
    */
-  public update (): void {
+  update (): void {
     if (this.counter === (this.speed - 1)) {
       this.currentFrame = (this.currentFrame + 1) % this.sequence.length
     }
@@ -51,7 +51,7 @@ export default class Animation {
    * @param {number} width display width
    * @param {number} height display height
    */
-  public render (ctx, x: number, y: number, width: number, height: number): void {
+  render (ctx, x: number, y: number, width: number, height: number): void {
     let row = Math.floor(this.sequence[this.currentFrame] / this.spriteSheet.framesPerRow)
     let col = Math.floor(this.sequence[this.currentFrame] % this.spriteSheet.framesPerRow)
     ctx.drawImage(

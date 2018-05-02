@@ -9,7 +9,7 @@ import Queue from './Queue'
  * @version 1.0
  */
 export default class SinglyList<T> implements List<T>, Queue<T> {
-  public size: number
+  size: number
   private head: SinglyNode<T>
   private errorMessages
 
@@ -106,7 +106,7 @@ export default class SinglyList<T> implements List<T>, Queue<T> {
       let current = this.head
       let i = 0
       // Go to node before index
-      while (i < index -1) {
+      while (i < index - 1) {
         current = current.next
         i += 1
       }

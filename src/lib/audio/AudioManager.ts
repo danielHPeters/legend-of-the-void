@@ -12,16 +12,10 @@ export default class AudioManager {
   private effectsGain: GainNode
   private ambientGain: GainNode
 
-  /**
-   *
-   */
   constructor () {
     this.initAudioContext()
   }
 
-  /**
-   *
-   */
   initAudioContext (): void {
     try {
       // Fix for browsers using prefixes
@@ -41,12 +35,6 @@ export default class AudioManager {
     }
   }
 
-  /**
-   *
-   * @param data
-   * @param id
-   * @param callback
-   */
   decodeAudio (data, id, callback): void {
     this.audioContext.decodeAudioData(data).then(
       buffer => callback(buffer),
@@ -54,36 +42,18 @@ export default class AudioManager {
     )
   }
 
-  /**
-   *
-   * @param {number} value
-   */
   adjustMasterVolume (value: number): void {
     this.masterGain.gain.value = value
   }
 
-  /**
-   *
-   * @param {number} value
-   */
   adjustAmbientVolume (value: number): void {
     this.ambientGain.gain.value = value
   }
 
-  /**
-   *
-   * @param {number} value
-   */
   adjustEffectsVolume (value: number): void {
     this.effectsGain.gain.value = value
   }
 
-  /**
-   *
-   * @param buffer
-   * @param {boolean} ambient
-   * @returns {Sound}
-   */
   createSound (buffer, ambient: boolean): Sound {
     return new Sound(this.audioContext, ambient ? this.ambientGain : this.effectsGain, buffer)
   }

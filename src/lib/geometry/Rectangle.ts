@@ -49,7 +49,7 @@ export default class Rectangle {
    * @param other
    * @returns {boolean}
    */
-  public within (other): boolean {
+  within (other: Rectangle): boolean {
     return (other.left <= this.left &&
       other.right >= this.right &&
       other.top <= this.top &&
@@ -61,7 +61,7 @@ export default class Rectangle {
    * @param other
    * @returns {boolean}
    */
-  public overlaps (other): boolean {
+  overlaps (other: Rectangle): boolean {
     return (this.left < other.right &&
       other.left < this.right &&
       this.top < other.bottom &&

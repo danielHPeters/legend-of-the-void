@@ -5,10 +5,10 @@
  * @version 1.0
  */
 export default class SpriteSheet {
-  public image: HTMLImageElement
-  public frameWidth: number
-  public frameHeight: number
-  public framesPerRow: number
+  image: HTMLImageElement
+  frameWidth: number
+  frameHeight: number
+  framesPerRow: number
 
   /**
    * Constructor. Sets frame dimensions and calculates number of frames.

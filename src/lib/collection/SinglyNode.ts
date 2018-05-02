@@ -5,8 +5,8 @@
  * @version 1.0
  */
 export default class SinglyNode<T> {
-  public data: T
-  public next: SinglyNode<T>
+  data: T
+  next: SinglyNode<T>
 
   constructor (data: T) {
     this.data = data

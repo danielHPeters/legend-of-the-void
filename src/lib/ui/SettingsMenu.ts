@@ -1,8 +1,8 @@
-import Settings from '../config/Settings'
-import AssetManager from '../lib/application/AssetManager'
-import EventAssigner from '../lib/util/EventAssigner'
-import AudioManager from '../lib/audio/AudioManager'
-import { Actions } from '../enum/Actions'
+import Settings from '../../config/Settings'
+import AssetManager from '../application/AssetManager'
+import EventAssigner from '../util/EventAssigner'
+import AudioManager from '../audio/AudioManager'
+import { Actions } from '../../enum/Actions'
 
 /**
  * Simple settings menu.

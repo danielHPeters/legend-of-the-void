@@ -1,3 +1,3 @@
 export enum EntityType {
-  TOWER, ENEMY, MAP
+  TOWER, ENEMY, MAP, PLAYER, BOX
 }

@@ -12,12 +12,6 @@ export default class Sound {
   buffer
   playing: boolean
 
-  /**
-   *
-   * @param audioContext
-   * @param {GainNode} masterGain
-   * @param buffer
-   */
   constructor (audioContext, masterGain: GainNode, buffer) {
     this.audioContext = audioContext
     this.masterGain = masterGain
@@ -28,10 +22,6 @@ export default class Sound {
     this.playing = false
   }
 
-  /**
-   *
-   * @param {boolean} loop
-   */
   play (loop = false): void {
     this.source = this.audioContext.createBufferSource()
     this.source.buffer = this.buffer
@@ -40,9 +30,6 @@ export default class Sound {
     this.source.start(0)
   }
 
-  /**
-   *
-   */
   stop (): void {
     if (this.source) {
       this.source.stop(0)

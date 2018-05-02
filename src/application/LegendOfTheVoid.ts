@@ -12,7 +12,7 @@ import * as mapData from '../../public/definitions/maps.json'
 import * as turretData from '../../public/definitions/turrets.json'
 import Tile from '../model/Tile'
 import { AssetId } from '../enum/AssetId'
-import BuildMenu from '../ui/BuildMenu'
+import BuildMenu from '../lib/ui/BuildMenu'
 
 /**
  * Main game Class.
@@ -85,12 +85,12 @@ export default class LegendOfTheVoid implements Game {
     })
   }
 
-  initBuildMenu() {
+  initBuildMenu () {
     document.addEventListener('contextmenu', ev => {
       ev.preventDefault()
       let position = this.buildMenu.getPosition(ev)
       let tile = this.state.map.filter(tile => tile.within(position.x, position.y))[0]
-      if(tile.buildable) {
+      if (tile.buildable) {
         this.buildMenu.show(tile)
         this.buildMenu.positionMenu(position)
       } else {
@@ -109,7 +109,7 @@ export default class LegendOfTheVoid implements Game {
     this.initBuildMenu()
     this.assetManager.downloadAll(() => {
       this.state.renderables
-        .filter(element => {return element.assetId !== AssetId.NONE })
+        .filter(element => { return element.assetId !== AssetId.NONE })
         .forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
       this.state.reset()
       this.buildMenu.init()

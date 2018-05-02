@@ -1,8 +1,8 @@
 import Dimension from '../lib/geometry/Dimension'
 import { Actions } from '../enum/Actions'
-import Player from '../model/Player'
+
 /**
- * Pong game settings.
+ * Legend of the void game settings.
  *
  * @author Daniel Peters
  * @version 1.0

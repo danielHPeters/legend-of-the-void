@@ -1,4 +1,5 @@
 import Vector from './Vector'
+import Cloneable from '../util/Cloneable'
 
 /**
  * 2D vector implementation.
@@ -6,9 +7,9 @@ import Vector from './Vector'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Vector2 implements Vector {
-  public x: number
-  public y: number
+export default class Vector2 implements Vector, Cloneable {
+  x: number
+  y: number
 
   /**
    * Default constructor. Sets x and y values.

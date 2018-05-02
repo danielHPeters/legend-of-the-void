@@ -17,18 +17,9 @@ export default interface Game {
   collisionManager: SimpleCollisionManager
   state: GameState
 
-  /**
-   *
-   */
   init (): void
 
-  /**
-   *
-   */
   clear (): void
 
-  /**
-   *
-   */
   render (): void
 }

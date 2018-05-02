@@ -9,7 +9,7 @@ import DoublyNode from './DoublyNode'
  * @version 1.0
  */
 export default class DoublyList<T> implements List<T>, Queue<T> {
-  public size: number
+  size: number
   private head: DoublyNode<T>
   private tail: DoublyNode<T>
   private errorMessages

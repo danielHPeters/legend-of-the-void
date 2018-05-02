@@ -1,3 +1,9 @@
+/**
+ * Detect collision of matrices.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class MatrixCollisionManager {
   static detectCollision (arena, player): boolean {
     const arenaMatrix = arena.matrix.mArray

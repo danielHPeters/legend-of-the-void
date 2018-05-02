@@ -5,9 +5,9 @@
  * @version 1.0
  */
 export default class DoublyNode<T> {
-  public data: T
-  public previous: DoublyNode<T>
-  public next: DoublyNode<T>
+  data: T
+  previous: DoublyNode<T>
+  next: DoublyNode<T>
 
   constructor (data: T) {
     this.data = data

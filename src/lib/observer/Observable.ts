@@ -23,7 +23,7 @@ export default class Observable {
   register (observer: Observer): void {
     this.observers.push(observer)
   }
-d
+
   /**
    * Remove an observer from this observables observers list.
    *

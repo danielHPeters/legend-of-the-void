@@ -1,5 +1,6 @@
 import Vector2 from '../math/Vector2'
-import Collidable, { EntityType } from './Collidable'
+import Collidable from './Collidable'
+import { EntityType } from '../../enum/EntityType'
 
 /**
  * Hitbox used for defining collision boundaries.
