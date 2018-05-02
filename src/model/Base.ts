@@ -49,7 +49,9 @@ export default class Base extends Entity implements Renderable {
    * @param ctx Rendering context
    */
   render (ctx: CanvasRenderingContext2D): void {
-    ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    if (this.asset) {
+      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    }
   }
 
   /**

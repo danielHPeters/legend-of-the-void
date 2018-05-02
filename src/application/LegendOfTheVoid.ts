@@ -8,11 +8,13 @@ import Settings from '../config/Settings'
 import LegendState from './LegendState'
 import AudioManager from '../lib/audio/AudioManager'
 import SimpleCollisionManager from '../lib/collision/SimpleCollisionManager'
-import * as mapData from '../../public/definitions/maps.json'
-import * as turretData from '../../public/definitions/turrets.json'
 import Tile from '../model/Tile'
 import { AssetId } from '../enum/AssetId'
 import BuildMenu from '../lib/ui/BuildMenu'
+import * as mapData from '../../public/definitions/maps.json'
+import * as turretData from '../../public/definitions/turrets.json'
+import * as baseData from '../../public/definitions/bases.json'
+import Base from '../model/Base'
 
 /**
  * Main game Class.
@@ -63,17 +65,24 @@ export default class LegendOfTheVoid implements Game {
         switch (col) {
           case 0:
             tile.blocked = true
-            tile.color = '#000000'
+            tile.assetId = AssetId.WALL
             break
           case 1:
             tile.buildable = true
-            tile.color = '#ff00ff'
+            tile.assetId = AssetId.TURRET_SOCKET
+            break
+          case 2:
+            tile.assetId = AssetId.PATH
             break
           case 3:
-            tile.color = '#00ff00'
+            tile.assetId = AssetId.END
             break
           case 4:
-            tile.color = '#ff0000'
+            const base = new Base(x, y, width, height)
+            base.fromJSON(baseData[0])
+            this.state.entities.push(base)
+            this.state.renderables.push(base)
+            tile.assetId = AssetId.END
             break
         }
         this.state.entities.push(tile)
@@ -86,25 +95,30 @@ export default class LegendOfTheVoid implements Game {
   }
 
   initBuildMenu () {
-    document.addEventListener('contextmenu', ev => {
+    document.addEventListener('click', ev => {
       ev.preventDefault()
       let position = this.buildMenu.getPosition(ev)
       let tile = this.state.map.filter(tile => tile.within(position.x, position.y))[0]
-      if (tile.buildable) {
+      if (tile && tile.buildable && !this.buildMenu.open) {
         this.buildMenu.show(tile)
         this.buildMenu.positionMenu(position)
       } else {
         this.buildMenu.hide()
       }
     })
-    document.addEventListener('click', () => this.buildMenu.hide())
   }
 
   /**
    * Initialize the game.
    */
   init (): void {
-    this.assetManager.queueDownload(AssetId.TURRET_LASER, AssetType.SPRITE)
+    this.assetManager.queueDownload(AssetId.BASE_VOID)
+    this.assetManager.queueDownload(AssetId.TURRET_LASER)
+    this.assetManager.queueDownload(AssetId.TURRET_SOCKET)
+    this.assetManager.queueDownload(AssetId.PATH)
+    this.assetManager.queueDownload(AssetId.WALL)
+    this.assetManager.queueDownload(AssetId.END)
+    this.assetManager.queueDownload(AssetId.CREEP_VOID_LEECHER)
     this.initMap()
     this.initBuildMenu()
     this.assetManager.downloadAll(() => {

@@ -17,14 +17,14 @@ import HitBox from '../lib/collision/HitBox'
  * @version 1.0
  */
 export default class LegendState extends Observable implements GameState {
-  public running: boolean
-  public paused: boolean
-  public quadTree: QuadTree
-  public entities: Entity[]
-  public collideables: Collidable[]
-  public movables: Changeable[]
-  public renderables: Renderable[]
-  public map: Tile[]
+  running: boolean
+  paused: boolean
+  quadTree: QuadTree
+  entities: Entity[]
+  collideables: Collidable[]
+  movables: Changeable[]
+  renderables: Renderable[]
+  map: Tile[]
 
   /**
    * Constructor.
@@ -48,15 +48,15 @@ export default class LegendState extends Observable implements GameState {
     }
   }
 
-  public update (dt: number): void {
+  update (dt: number): void {
     this.movables.forEach(movable => movable.change(dt))
   }
 
-  public reset (): void {
+  reset (): void {
     this.entities.forEach(entity => entity.init())
   }
 
-  public scorePoints (points: number): void {
+  scorePoints (points: number): void {
     this.state.cash += points
     this.state.kills++
     this.notify()

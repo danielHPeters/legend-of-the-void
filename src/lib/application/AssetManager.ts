@@ -14,8 +14,8 @@ export enum AssetType {
  * @version 1.0
  */
 export default class AssetManager {
-  private cache
-  private assetsDir: string
+  private readonly cache
+  private readonly assetsDir: string
   private queue
   private downloadCount: number
   private audioManager: AudioManager
@@ -47,7 +47,7 @@ export default class AssetManager {
    * @param {AssetType} type
    * @param opts
    */
-  queueDownload (id: AssetId, type: AssetType, opts = null): void {
+  queueDownload (id: AssetId, type: AssetType = AssetType.SPRITE, opts = null): void {
     this.queue.push({ id: id, path: this.assetsDir + type + '/' + id + '.png', type: type, opts: opts })
   }
 

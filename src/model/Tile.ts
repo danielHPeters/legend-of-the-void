@@ -39,12 +39,13 @@ export default class Tile extends Entity implements Renderable {
   }
 
   init (): void {
-
+    // Not implemented
   }
 
   render (ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = this.color
-    ctx.fillRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    if (this.asset) {
+      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    }
   }
 
   clear (ctx: CanvasRenderingContext2D): void {
