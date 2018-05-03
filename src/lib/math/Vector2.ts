@@ -71,6 +71,30 @@ export default class Vector2 implements Vector, Cloneable {
   }
 
   /**
+   * Calculate distance between two vectors.
+   *
+   * @param {Vector2} start
+   * @param {Vector2} destination
+   * @returns {number}
+   */
+  static distance (start: Vector2, destination: Vector2): number {
+    return Math.sqrt(Math.pow(destination.x - start.x, 2) + Math.pow(destination.y - start.y, 2))
+  }
+
+  /**
+   * Calculate linear interpolation between to vectors
+   * @param {Vector2} start
+   * @param {Vector2} destination
+   * @param {number} n
+   */
+  static lerp (start: Vector2, destination: Vector2, n: number): Vector2 {
+    return new Vector2(
+      (1 - n) * start.x + n * destination.x,
+      (1 - n) * start.y + n * destination.y
+    )
+  }
+
+  /**
    * Set vector with both x and y values.
    *
    * @param {number} x new x value
@@ -217,9 +241,36 @@ export default class Vector2 implements Vector, Cloneable {
     return this.x * vector.x + this.y * vector.y
   }
 
-  floor (): void {
+  floor (): Vector2 {
     this.x = Math.floor(this.x)
-    this.x = Math.floor(this.x)
+    this.y = Math.floor(this.y)
+    return this
+  }
+
+  ceil (): void {
+    this.x = Math.ceil(this.x)
+    this.y = Math.ceil(this.y)
+  }
+
+  round (): Vector2 {
+    this.x = Math.round(this.x)
+    this.y = Math.round(this.y)
+    return this
+  }
+
+  /**
+   * Linear interpolation method
+   *
+   * @param {Vector2} vector destination vector.
+   * @param {number} n Normal value
+   */
+  lerp (vector: Vector2, n: number): void {
+    this.x = (1 - n) * this.x + n * vector.x
+    this.y = (1 - n) * this.y + n * vector.y
+  }
+
+  equals (vector: Vector2): boolean {
+    return this.x === vector.x && this.y === vector.y
   }
 
   /**

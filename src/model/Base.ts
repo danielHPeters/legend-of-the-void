@@ -40,7 +40,7 @@ export default class Base extends Entity implements Renderable {
   }
 
   init (): void {
-
+    // Not implemented
   }
 
   /**

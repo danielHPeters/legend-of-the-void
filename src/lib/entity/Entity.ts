@@ -56,9 +56,7 @@ export default class Entity implements JsonSerializable {
   fromJSON (json: any): void {
     // Map parsed object to the attributes of this entity.
     Object.keys(json).forEach(key => {
-      if (this.hasOwnProperty(key)) {
-        this[key] = json[key]
-      }
+      this[key] = json[key]
     })
   }
 }

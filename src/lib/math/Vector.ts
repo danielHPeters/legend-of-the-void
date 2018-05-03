@@ -76,5 +76,9 @@ export default interface Vector {
    */
   dot (vector: Vector): number
 
-  floor (): void
+  floor (): Vector
+
+  ceil (): void
+
+  lerp (vector: Vector, n: number): void
 }

@@ -11,10 +11,13 @@ import SimpleCollisionManager from '../lib/collision/SimpleCollisionManager'
 import Tile from '../model/Tile'
 import { AssetId } from '../enum/AssetId'
 import BuildMenu from '../lib/ui/BuildMenu'
+import Base from '../model/Base'
+import Creep from '../model/Creep'
 import * as mapData from '../../public/definitions/maps.json'
 import * as turretData from '../../public/definitions/turrets.json'
 import * as baseData from '../../public/definitions/bases.json'
-import Base from '../model/Base'
+import * as creepData from '../../public/definitions/creeps.json'
+import Vector2 from '../lib/math/Vector2'
 
 /**
  * Main game Class.
@@ -55,6 +58,7 @@ export default class LegendOfTheVoid implements Game {
   }
 
   initMap (): void {
+    let creep
     let y = 0
     mapData[0].tiles.forEach(row => {
       let width = this.TILE_SIZE
@@ -75,6 +79,26 @@ export default class LegendOfTheVoid implements Game {
             tile.assetId = AssetId.PATH
             break
           case 3:
+            creep = new Creep(x, y, width, height)
+            const waypoints = []
+            waypoints.push(tile.position)
+            waypoints.push(new Vector2(60, 180))
+            waypoints.push(new Vector2(60, 120))
+            waypoints.push(new Vector2(540, 120))
+            waypoints.push(new Vector2(540, 240))
+            waypoints.push(new Vector2(180, 240))
+            waypoints.push(new Vector2(180, 300))
+            waypoints.push(new Vector2(60, 300))
+            waypoints.push(new Vector2(60, 420))
+            waypoints.push(new Vector2(300, 420))
+            waypoints.push(new Vector2(300, 360))
+            waypoints.push(new Vector2(540, 360))
+            waypoints.push(new Vector2(540, 480))
+            waypoints.push(new Vector2(420, 480))
+            waypoints.push(new Vector2(420, 540))
+            waypoints.push(new Vector2(0, 460))
+            creep.fromJSON(creepData[0])
+            creep.waypoints = waypoints
             tile.assetId = AssetId.END
             break
           case 4:
@@ -92,6 +116,10 @@ export default class LegendOfTheVoid implements Game {
       })
       y += height
     })
+    creep.alive = true
+    this.state.entities.push(creep)
+    this.state.renderables.push(creep)
+    this.state.changeables.push(creep)
   }
 
   initBuildMenu () {

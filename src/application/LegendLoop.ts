@@ -62,9 +62,10 @@ export default class LegendLoop implements GameLoop {
   loop (time: number): void {
     if (this.game.state.running) {
       if (!this.game.state.paused) {
+        this.game.clear()
         if (this.lastTime !== null) {
           const diff = time - this.lastTime
-          this.game.state.update(diff / 1000)
+          this.game.state.update(diff / 1000, time / 1000)
         }
         this.lastTime = time
         this.game.render()

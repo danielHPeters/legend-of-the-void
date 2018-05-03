@@ -16,12 +16,12 @@ export default interface GameState {
   paused: boolean
   quadTree: QuadTree
   entities: Entity[]
-  movables: Changeable[]
+  changeables: Changeable[]
   renderables: Renderable[]
   collideables: Collidable[]
   map: Tile[]
 
-  update (dt: number): void
+  update (dt: number, time: number): void
 
   reset (): void
 

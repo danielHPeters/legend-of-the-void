@@ -10,6 +10,7 @@ export default interface Changeable {
    * Move entity.
    *
    * @param {number} dt Delta Time
+   * @param {number} time current elapsed time
    */
-  change (dt: number): void
+  change (dt: number, time: number): void
 }

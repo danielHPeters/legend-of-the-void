@@ -22,7 +22,7 @@ export default class LegendState extends Observable implements GameState {
   quadTree: QuadTree
   entities: Entity[]
   collideables: Collidable[]
-  movables: Changeable[]
+  changeables: Changeable[]
   renderables: Renderable[]
   map: Tile[]
 
@@ -39,7 +39,7 @@ export default class LegendState extends Observable implements GameState {
     this.entities = []
     this.quadTree = new QuadTree(new HitBox(0, 0, settings.gameSize.width, settings.gameSize.height))
     this.collideables = []
-    this.movables = []
+    this.changeables = []
     this.renderables = []
     this.map = []
     this.state = {
@@ -48,8 +48,8 @@ export default class LegendState extends Observable implements GameState {
     }
   }
 
-  update (dt: number): void {
-    this.movables.forEach(movable => movable.change(dt))
+  update (dt: number, time: number): void {
+    this.changeables.forEach(movable => movable.change(dt, time))
   }
 
   reset (): void {
