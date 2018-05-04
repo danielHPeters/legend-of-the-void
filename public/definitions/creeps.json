@@ -1,7 +1,7 @@
 [
   {
     "name": "Void Leecher",
-    "speed": 10,
+    "speed": 20,
     "attack": 10,
     "health": 80,
     "level": 1,

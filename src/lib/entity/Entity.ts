@@ -2,6 +2,12 @@ import Vector2 from '../math/Vector2'
 import Settings from '../../config/Settings'
 import Dimension from '../geometry/Dimension'
 import JsonSerializable from '../util/JsonSerializable'
+import Changeable from './Changeable'
+import Renderable from './Renderable'
+import Collidable from '../collision/Collidable'
+import { AssetId } from '../../enum/AssetId'
+import { EntityType } from '../../enum/EntityType'
+import { ContextId } from '../../enum/ContextId'
 
 /**
  * Base entity class.
@@ -9,11 +15,18 @@ import JsonSerializable from '../util/JsonSerializable'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Entity implements JsonSerializable {
+export default class Entity implements JsonSerializable, Changeable, Renderable, Collidable {
   id: string
   dimension: Dimension
   settings: Settings
   position: Vector2
+  alive: boolean
+  asset
+  assetId: AssetId
+  collidesWith: EntityType[]
+  colliding: boolean
+  contextId: ContextId
+  type: EntityType
 
   /**
    * Constructor. Sets position and dimension of entity.
@@ -26,6 +39,8 @@ export default class Entity implements JsonSerializable {
     this.position = position
     this.dimension = dimension
     this.settings = settings
+    this.alive = true
+    this.collidesWith = []
   }
 
   init (): void {
@@ -58,5 +73,30 @@ export default class Entity implements JsonSerializable {
     Object.keys(json).forEach(key => {
       this[key] = json[key]
     })
+  }
+
+  change (dt: number, time: number): void {
+  }
+
+  /**
+   *
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  render (ctx: CanvasRenderingContext2D) {
+    if (this.asset && this.alive) {
+      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    }
+  }
+
+  /**
+   *
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  clear (ctx: CanvasRenderingContext2D) {
+    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+  }
+
+  isCollideAbleWith (other: Collidable): boolean {
+    return this.collidesWith.includes(other.type)
   }
 }

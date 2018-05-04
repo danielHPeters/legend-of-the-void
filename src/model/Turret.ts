@@ -2,11 +2,12 @@ import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Settings from '../config/Settings'
-import Renderable from '../lib/entity/Renderable'
-import Changeable from '../lib/entity/Changeable'
 import { ContextId } from '../enum/ContextId'
 import { TurretType } from '../enum/TurretType'
 import { AssetId } from '../enum/AssetId'
+import CollisionHelpers from '../lib/collision/CollisionHelpers'
+import Creep from './Creep'
+import { EntityType } from '../enum/EntityType'
 
 /**
  * Turret class.
@@ -14,8 +15,8 @@ import { AssetId } from '../enum/AssetId'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Turret extends Entity implements Renderable, Changeable {
-  type: TurretType
+export default class Turret extends Entity {
+  turretType: TurretType
   description: string
   assetId: AssetId
   damage: number
@@ -23,6 +24,10 @@ export default class Turret extends Entity implements Renderable, Changeable {
   range: number
   asset
   contextId: ContextId
+  projectileSpeed: number
+  addProjectileCallback: (position: Vector2, speed: number, target: Creep) => void
+  private creeps: Creep[]
+  private delayCounter: number
 
   /**
    * Constructor.
@@ -39,44 +44,49 @@ export default class Turret extends Entity implements Renderable, Changeable {
   constructor (x?: number, y?: number, width?: number, height?: number,
                damage?: number, settings?: Settings, type?: TurretType, assetId: AssetId = AssetId.TURRET_LASER) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
-    this.type = type
+    this.turretType = type
     this.damage = damage
     this.contextId = ContextId.PLAYER
     this.assetId = assetId
+    this.delayCounter = 0
+    this.creeps = []
+    this.type = EntityType.TURRET
   }
 
   init (): void {
-    // Currently no init/reset method intended
-  }
-
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  render (ctx: CanvasRenderingContext2D) {
-    ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
-  }
-
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  clear (ctx: CanvasRenderingContext2D) {
-    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+    this.delayCounter = 0
   }
 
   /**
    *
    * @param {number} dt
+   * @param time
    */
-  change (dt: number) {
-    // TODO: implement state update mechanism
+  change (dt: number, time: number) {
+    this.delayCounter += 1
+    if (this.delayCounter >= this.rate) {
+      let firstInRange = this.creeps.filter(creep => {
+        return CollisionHelpers.circleSquareCollision(
+          { x: this.position.x, y: this.position.y, r: this.range },
+          { x: creep.position.x, y: creep.position.y, width: creep.dimension.width, height: creep.dimension.height }
+        )
+      })[0]
+      if (firstInRange != null) {
+        this.shootAt(dt, time, firstInRange)
+      }
+    }
   }
 
   /**
    *
    */
-  shoot (): void {
-    // TODO: implement shooting
+  shootAt (dt: number, time: number, target: Creep): void {
+    this.addProjectileCallback(
+      new Vector2(
+        this.position.x + this.dimension.width / 2,
+        this.position.y + this.dimension.height / 2
+        ),
+      this.projectileSpeed,
+      target)
   }
 }

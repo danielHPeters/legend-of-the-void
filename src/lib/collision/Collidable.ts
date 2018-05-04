@@ -1,11 +1,11 @@
+import { EntityType } from '../../enum/EntityType'
+
 /**
  * Interface for collideable entities.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-import { EntityType } from '../../enum/EntityType'
-
 export default interface Collidable {
   collidesWith: EntityType[]
   colliding: boolean

@@ -1,14 +1,12 @@
 import GameState from '../lib/application/GameState'
 import QuadTree from '../lib/collision/QuadTree'
 import Entity from '../lib/entity/Entity'
-import Collidable from '../lib/collision/Collidable'
 import Settings from '../config/Settings'
 import InputManager from '../lib/input/InputManager'
-import Renderable from '../lib/entity/Renderable'
-import Changeable from '../lib/entity/Changeable'
 import Tile from '../model/Tile'
 import Observable from '../lib/observer/Observable'
 import HitBox from '../lib/collision/HitBox'
+import Creep from '../model/Creep'
 
 /**
  * Legend of the void game state class.
@@ -21,9 +19,7 @@ export default class LegendState extends Observable implements GameState {
   paused: boolean
   quadTree: QuadTree
   entities: Entity[]
-  collideables: Collidable[]
-  changeables: Changeable[]
-  renderables: Renderable[]
+  creeps: Creep[]
   map: Tile[]
 
   /**
@@ -37,10 +33,8 @@ export default class LegendState extends Observable implements GameState {
     this.running = false
     this.paused = false
     this.entities = []
+    this.creeps = []
     this.quadTree = new QuadTree(new HitBox(0, 0, settings.gameSize.width, settings.gameSize.height))
-    this.collideables = []
-    this.changeables = []
-    this.renderables = []
     this.map = []
     this.state = {
       kills: 0,
@@ -49,7 +43,8 @@ export default class LegendState extends Observable implements GameState {
   }
 
   update (dt: number, time: number): void {
-    this.changeables.forEach(movable => movable.change(dt, time))
+    this.entities.forEach(movable => movable.change(dt, time))
+    this.entities = this.entities.filter(entity => { return entity.alive })
   }
 
   reset (): void {

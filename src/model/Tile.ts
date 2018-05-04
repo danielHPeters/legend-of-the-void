@@ -3,9 +3,9 @@ import Settings from '../config/Settings'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Turret from './Turret'
-import Renderable from '../lib/entity/Renderable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
+import { EntityType } from '../enum/EntityType'
 
 /**
  * 2D Tower defense tile class.
@@ -13,7 +13,7 @@ import { AssetId } from '../enum/AssetId'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Tile extends Entity implements Renderable {
+export default class Tile extends Entity {
   contextId: ContextId
   assetId: AssetId
   asset
@@ -36,19 +36,10 @@ export default class Tile extends Entity implements Renderable {
     this.color = '#ffffff'
     this.contextId = ContextId.BACKGROUND
     this.assetId = AssetId.NONE
+    this.type = EntityType.TILE
   }
 
   init (): void {
     // Not implemented
-  }
-
-  render (ctx: CanvasRenderingContext2D): void {
-    if (this.asset) {
-      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
-    }
-  }
-
-  clear (ctx: CanvasRenderingContext2D): void {
-    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 }

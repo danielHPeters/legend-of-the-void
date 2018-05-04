@@ -22,7 +22,7 @@ export default class Player implements Observer {
     this.kills = 0
   }
 
-  public update (state: any): void {
+  update (state: any): void {
     if (state.cash) {
       this.cash = state.cash
     }

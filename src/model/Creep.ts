@@ -2,11 +2,9 @@ import Settings from '../config/Settings'
 import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
-import Renderable from '../lib/entity/Renderable'
-import Changeable from '../lib/entity/Changeable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
-import Spawnable from '../lib/entity/Spawnable'
+import { EntityType } from '../enum/EntityType'
 
 /**
  * Enemy creep class.
@@ -14,7 +12,7 @@ import Spawnable from '../lib/entity/Spawnable'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Creep extends Entity implements Renderable, Changeable, Spawnable {
+export default class Creep extends Entity {
   contextId: ContextId
   assetId: AssetId
   asset
@@ -27,7 +25,6 @@ export default class Creep extends Entity implements Renderable, Changeable, Spa
   waypoints: Vector2[]
   currentWaypoint: number
   lastTime: number
-  alive: boolean
 
   /**
    * Constructor.
@@ -41,38 +38,21 @@ export default class Creep extends Entity implements Renderable, Changeable, Spa
    * @param {Settings} settings
    * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, settings?: Settings, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
+  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number,
+               settings?: Settings, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
     super(new Vector2(x, y), new Dimension(width, height), settings)
     this.contextId = ContextId.CREEPS
     this.level = level
     this.cash = cash
     this.assetId = assetId
-    this.alive = false
     this.waypoints = []
     this.currentWaypoint = 0
     this.lastTime = 0
+    this.type = EntityType.CREEP
   }
 
   init (): void {
     //
-  }
-
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  render (ctx: CanvasRenderingContext2D) {
-    if (this.asset) {
-      ctx.drawImage(this.asset, Math.floor(this.position.x), Math.floor(this.position.y), this.dimension.width, this.dimension.height)
-    }
-  }
-
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  clear (ctx: CanvasRenderingContext2D) {
-    ctx.clearRect(Math.floor(this.position.x), Math.floor(this.position.y), this.dimension.width, this.dimension.height)
   }
 
   change (dt: number, time: number) {
@@ -95,11 +75,5 @@ export default class Creep extends Entity implements Renderable, Changeable, Spa
         }
       }
     }
-  }
-
-  spawn (x: number, y: number, speed: number): void {
-    this.position.set(x, y)
-    this.speed = speed
-    this.alive = true
   }
 }

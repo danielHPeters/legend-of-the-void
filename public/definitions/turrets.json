@@ -1,12 +1,13 @@
 [
   {
-    "type": "laser",
-    "description": "A laser Turret",
-    "assetId": "turret-laser",
+    "turretType": "bomb",
+    "description": "A Bomb Turret",
+    "assetId": "turret-bomb",
     "contextId": "player",
     "damage": 15,
-    "rate": 50,
-    "range": 60,
+    "rate": 400,
+    "range": 80,
+    "projectileSpeed": 7,
     "upgrades": [
       {
         "damage": 20,

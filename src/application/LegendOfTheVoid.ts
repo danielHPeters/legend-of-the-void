@@ -2,7 +2,7 @@ import GameState from '../lib/application/GameState'
 import Game from '../lib/application/Game'
 import CollisionManager from '../lib/collision/CollisionManager'
 import InputManager from '../lib/input/InputManager'
-import AssetManager, { AssetType } from '../lib/application/AssetManager'
+import AssetManager from '../lib/application/AssetManager'
 import { ContextId } from '../enum/ContextId'
 import Settings from '../config/Settings'
 import LegendState from './LegendState'
@@ -18,6 +18,8 @@ import * as turretData from '../../public/definitions/turrets.json'
 import * as baseData from '../../public/definitions/bases.json'
 import * as creepData from '../../public/definitions/creeps.json'
 import Vector2 from '../lib/math/Vector2'
+import Projectile from '../model/Projectile'
+import Dimension from '../lib/geometry/Dimension'
 
 /**
  * Main game Class.
@@ -52,8 +54,19 @@ export default class LegendOfTheVoid implements Game {
     this.settings = settings
     this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {
       turret.asset = this.assetManager.get(turret.assetId)
+      turret.creeps = this.state.creeps
+      turret.addProjectileCallback = (position, speed, target) => {
+        const projectile = new Projectile(
+          position,
+          new Dimension(this.TILE_SIZE, this.TILE_SIZE),
+          this.settings,
+          target,
+          speed
+        )
+        projectile.asset = this.assetManager.get(projectile.assetId)
+        this.state.entities.push(projectile)
+      }
       this.state.entities.push(turret)
-      this.state.renderables.push(turret)
     })
   }
 
@@ -96,7 +109,7 @@ export default class LegendOfTheVoid implements Game {
             waypoints.push(new Vector2(540, 480))
             waypoints.push(new Vector2(420, 480))
             waypoints.push(new Vector2(420, 540))
-            waypoints.push(new Vector2(0, 460))
+            waypoints.push(new Vector2(0, 540))
             creep.fromJSON(creepData[0])
             creep.waypoints = waypoints
             tile.assetId = AssetId.END
@@ -105,21 +118,18 @@ export default class LegendOfTheVoid implements Game {
             const base = new Base(x, y, width, height)
             base.fromJSON(baseData[0])
             this.state.entities.push(base)
-            this.state.renderables.push(base)
             tile.assetId = AssetId.END
             break
         }
         this.state.entities.push(tile)
-        this.state.renderables.push(tile)
         this.state.map.push(tile)
         x += width
       })
       y += height
     })
     creep.alive = true
+    this.state.creeps.push(creep)
     this.state.entities.push(creep)
-    this.state.renderables.push(creep)
-    this.state.changeables.push(creep)
   }
 
   initBuildMenu () {
@@ -147,12 +157,11 @@ export default class LegendOfTheVoid implements Game {
     this.assetManager.queueDownload(AssetId.WALL)
     this.assetManager.queueDownload(AssetId.END)
     this.assetManager.queueDownload(AssetId.CREEP_VOID_LEECHER)
+    this.assetManager.queueDownload(AssetId.PROJECTILE)
     this.initMap()
     this.initBuildMenu()
     this.assetManager.downloadAll(() => {
-      this.state.renderables
-        .filter(element => { return element.assetId !== AssetId.NONE })
-        .forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
+      this.state.entities.forEach(renderable => renderable.asset = this.assetManager.get(renderable.assetId))
       this.state.reset()
       this.buildMenu.init()
     })
@@ -162,13 +171,13 @@ export default class LegendOfTheVoid implements Game {
    * Render current state.
    */
   render (): void {
-    this.state.renderables.forEach(renderable => renderable.render(this.contexts.get(renderable.contextId)))
+    this.state.entities.forEach(renderable => renderable.render(this.contexts.get(renderable.contextId)))
   }
 
   /**
    *
    */
   clear (): void {
-    this.state.renderables.forEach(renderable => renderable.clear(this.contexts.get(renderable.contextId)))
+    this.state.entities.forEach(renderable => renderable.clear(this.contexts.get(renderable.contextId)))
   }
 }

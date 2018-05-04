@@ -2,7 +2,6 @@ import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
 import Settings from '../config/Settings'
-import Renderable from '../lib/entity/Renderable'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 
@@ -12,7 +11,7 @@ import { AssetId } from '../enum/AssetId'
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Base extends Entity implements Renderable {
+export default class Base extends Entity {
   contextId: ContextId
   assetId: AssetId
   asset
@@ -41,24 +40,5 @@ export default class Base extends Entity implements Renderable {
 
   init (): void {
     // Not implemented
-  }
-
-  /**
-   *  Render the base.
-   *
-   * @param ctx Rendering context
-   */
-  render (ctx: CanvasRenderingContext2D): void {
-    if (this.asset) {
-      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
-    }
-  }
-
-  /**
-   * Clear the frame
-   * @param ctx Rendering context
-   */
-  clear (ctx: CanvasRenderingContext2D): void {
-    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }
 }
