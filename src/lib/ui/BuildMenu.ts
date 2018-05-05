@@ -106,7 +106,7 @@ export default class BuildMenu {
     }
   }
 
-  hide() {
+  hide () {
     this.open = false
     this.element.style.display = 'none'
     this.tile = null

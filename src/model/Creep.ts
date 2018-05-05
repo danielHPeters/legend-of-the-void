@@ -47,7 +47,6 @@ export default class Creep extends Entity {
     this.assetId = assetId
     this.waypoints = []
     this.currentWaypoint = 0
-    this.lastTime = 0
     this.type = EntityType.CREEP
   }
 
@@ -56,6 +55,9 @@ export default class Creep extends Entity {
   }
 
   change (dt: number, time: number) {
+    if (!this.lastTime) {
+      this.lastTime = time
+    }
     if (this.alive) {
       const startPosition = this.waypoints[this.currentWaypoint]
       const endPosition = this.waypoints[this.currentWaypoint + 1]

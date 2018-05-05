@@ -23,8 +23,7 @@ export default class Projectile extends Entity {
     this.target = target
     this.startPosition = position.clone().round()
     this.endPosition = target.position.clone().round()
-    this.distance =  Vector2.distance(this.startPosition, this.endPosition)
-    this.lastTime = 0
+    this.distance = Vector2.distance(this.startPosition, this.endPosition)
     this.speed = speed
     this.assetId = AssetId.PROJECTILE
     this.type = EntityType.PROJECTILE
@@ -36,6 +35,9 @@ export default class Projectile extends Entity {
   }
 
   change (dt: number, time: number): void {
+    if (!this.lastTime) {
+      this.lastTime = time
+    }
     if (this.alive) {
       const totalTimeForPath = this.distance / this.speed
       const currentTimeOnPath = time - this.lastTime

@@ -5,9 +5,9 @@
     "assetId": "turret-bomb",
     "contextId": "player",
     "damage": 15,
-    "rate": 400,
+    "rate": 40,
     "range": 80,
-    "projectileSpeed": 7,
+    "projectileSpeed": 35,
     "upgrades": [
       {
         "damage": 20,

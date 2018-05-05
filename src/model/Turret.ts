@@ -59,19 +59,47 @@ export default class Turret extends Entity {
 
   /**
    *
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  render (ctx: CanvasRenderingContext2D) {
+    if (this.asset) {
+      ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+      ctx.beginPath()
+      ctx.arc(
+        this.position.x + this.dimension.width / 2,
+        this.position.y + this.dimension.height / 2,
+        this.range
+        , 0,
+        2 * Math.PI
+      )
+      ctx.stroke()
+    }
+  }
+
+  /**
+   *
+   * @param {CanvasRenderingContext2D} ctx
+   */
+  clear (ctx: CanvasRenderingContext2D) {
+    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+  }
+
+  /**
+   *
    * @param {number} dt
    * @param time
    */
   change (dt: number, time: number) {
     this.delayCounter += 1
     if (this.delayCounter >= this.rate) {
+      this.delayCounter = 0
       let firstInRange = this.creeps.filter(creep => {
         return CollisionHelpers.circleSquareCollision(
           { x: this.position.x, y: this.position.y, r: this.range },
           { x: creep.position.x, y: creep.position.y, width: creep.dimension.width, height: creep.dimension.height }
         )
       })[0]
-      if (firstInRange != null) {
+      if (firstInRange != null && firstInRange.alive) {
         this.shootAt(dt, time, firstInRange)
       }
     }
@@ -82,10 +110,7 @@ export default class Turret extends Entity {
    */
   shootAt (dt: number, time: number, target: Creep): void {
     this.addProjectileCallback(
-      new Vector2(
-        this.position.x + this.dimension.width / 2,
-        this.position.y + this.dimension.height / 2
-        ),
+      this.position.clone(),
       this.projectileSpeed,
       target)
   }
