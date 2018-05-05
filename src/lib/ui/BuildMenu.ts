@@ -54,7 +54,7 @@ export default class BuildMenu {
       turretBox.appendChild(toolTipText)
       turretBox.addEventListener('click', () => {
         if (this.tile) {
-          let turr = new Turret()
+          let turr = new Turret(this.tile.position, this.tile.dimension)
           turr.fromJSON(turret)
           turr.position = this.tile.position
           turr.dimension = this.tile.dimension

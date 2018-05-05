@@ -7,7 +7,7 @@
     "damage": 15,
     "rate": 40,
     "range": 80,
-    "projectileSpeed": 35,
+    "projectileSpeed": 40,
     "upgrades": [
       {
         "damage": 20,

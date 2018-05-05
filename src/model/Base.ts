@@ -30,8 +30,8 @@ export default class Base extends Entity {
    * @param {Settings} settings
    * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, settings?: Settings, assetId: AssetId = AssetId.BASE_VOID) {
-    super(new Vector2(x, y), new Dimension(width, height), settings)
+  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, assetId: AssetId = AssetId.BASE_VOID) {
+    super(new Vector2(x, y), new Dimension(width, height))
     this.name = name
     this.health = health
     this.contextId = ContextId.PLAYER

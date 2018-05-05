@@ -12,14 +12,13 @@ import Tile from '../model/Tile'
 import { AssetId } from '../enum/AssetId'
 import BuildMenu from '../lib/ui/BuildMenu'
 import Base from '../model/Base'
-import Creep from '../model/Creep'
 import * as mapData from '../../public/definitions/maps.json'
 import * as turretData from '../../public/definitions/turrets.json'
 import * as baseData from '../../public/definitions/bases.json'
-import * as creepData from '../../public/definitions/creeps.json'
 import Vector2 from '../lib/math/Vector2'
 import Projectile from '../model/Projectile'
 import Dimension from '../lib/geometry/Dimension'
+import SpawnPoint from '../model/SpawnPoint'
 
 /**
  * Main game Class.
@@ -54,12 +53,11 @@ export default class LegendOfTheVoid implements Game {
     this.settings = settings
     this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {
       turret.asset = this.assetManager.get(turret.assetId)
-      turret.creeps = this.state.creeps
+      turret.state = this.state
       turret.addProjectileCallback = (position, speed, target) => {
         const projectile = new Projectile(
           position,
           new Dimension(this.TILE_SIZE, this.TILE_SIZE),
-          this.settings,
           target,
           speed
         )
@@ -71,14 +69,13 @@ export default class LegendOfTheVoid implements Game {
   }
 
   initMap (): void {
-    let creep
     let y = 0
     mapData[0].tiles.forEach(row => {
       let width = this.TILE_SIZE
       let height = this.TILE_SIZE
       let x = 0
       row.forEach(col => {
-        const tile = new Tile(x, y, width, height, this.settings)
+        const tile = new Tile(x, y, width, height)
         switch (col) {
           case 0:
             tile.blocked = true
@@ -92,7 +89,6 @@ export default class LegendOfTheVoid implements Game {
             tile.assetId = AssetId.PATH
             break
           case 3:
-            creep = new Creep(x, y, width, height)
             const waypoints = []
             waypoints.push(tile.position)
             waypoints.push(new Vector2(60, 180))
@@ -110,8 +106,11 @@ export default class LegendOfTheVoid implements Game {
             waypoints.push(new Vector2(420, 480))
             waypoints.push(new Vector2(420, 540))
             waypoints.push(new Vector2(0, 540))
-            creep.fromJSON(creepData[0])
-            creep.waypoints = waypoints
+            const spawnPoint = new SpawnPoint(x, y, width, height, this.assetManager, waypoints, (creep => {
+              this.state.entities.push(creep)
+              this.state.creeps.push(creep)
+            }))
+            this.state.entities.push(spawnPoint)
             tile.assetId = AssetId.END
             break
           case 4:
@@ -127,9 +126,6 @@ export default class LegendOfTheVoid implements Game {
       })
       y += height
     })
-    creep.alive = true
-    this.state.creeps.push(creep)
-    this.state.entities.push(creep)
   }
 
   initBuildMenu () {

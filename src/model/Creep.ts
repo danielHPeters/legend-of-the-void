@@ -1,4 +1,3 @@
-import Settings from '../config/Settings'
 import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
@@ -38,9 +37,8 @@ export default class Creep extends Entity {
    * @param {Settings} settings
    * @param {AssetId} assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number,
-               settings?: Settings, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
-    super(new Vector2(x, y), new Dimension(width, height), settings)
+  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
+    super(new Vector2(x, y), new Dimension(width, height))
     this.contextId = ContextId.CREEPS
     this.level = level
     this.cash = cash

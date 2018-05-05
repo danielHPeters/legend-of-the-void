@@ -8,6 +8,7 @@ import { AssetId } from '../enum/AssetId'
 import CollisionHelpers from '../lib/collision/CollisionHelpers'
 import Creep from './Creep'
 import { EntityType } from '../enum/EntityType'
+import LegendState from '../application/LegendState'
 
 /**
  * Turret class.
@@ -16,7 +17,6 @@ import { EntityType } from '../enum/EntityType'
  * @version 1.0
  */
 export default class Turret extends Entity {
-  turretType: TurretType
   description: string
   assetId: AssetId
   damage: number
@@ -26,30 +26,14 @@ export default class Turret extends Entity {
   contextId: ContextId
   projectileSpeed: number
   addProjectileCallback: (position: Vector2, speed: number, target: Creep) => void
-  private creeps: Creep[]
+  state: LegendState
   private delayCounter: number
 
-  /**
-   * Constructor.
-   *
-   * @param {number} x Starting position on x axis
-   * @param {number} y Starting position on y axis
-   * @param {number} width Turret width
-   * @param {number} height Turret height
-   * @param {number} damage Turret attack
-   * @param {Settings} settings Game settings.
-   * @param {TurretType} type
-   * @param {AssetId} assetId
-   */
-  constructor (x?: number, y?: number, width?: number, height?: number,
-               damage?: number, settings?: Settings, type?: TurretType, assetId: AssetId = AssetId.TURRET_LASER) {
-    super(new Vector2(x, y), new Dimension(width, height), settings)
-    this.turretType = type
-    this.damage = damage
+  constructor (position: Vector2, dimension: Dimension, assetId: AssetId = AssetId.TURRET_LASER) {
+    super(position, dimension)
     this.contextId = ContextId.PLAYER
     this.assetId = assetId
     this.delayCounter = 0
-    this.creeps = []
     this.type = EntityType.TURRET
   }
 
@@ -78,14 +62,6 @@ export default class Turret extends Entity {
 
   /**
    *
-   * @param {CanvasRenderingContext2D} ctx
-   */
-  clear (ctx: CanvasRenderingContext2D) {
-    ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
-  }
-
-  /**
-   *
    * @param {number} dt
    * @param time
    */
@@ -93,7 +69,7 @@ export default class Turret extends Entity {
     this.delayCounter += 1
     if (this.delayCounter >= this.rate) {
       this.delayCounter = 0
-      let firstInRange = this.creeps.filter(creep => {
+      let firstInRange = this.state.creeps.filter(creep => {
         return CollisionHelpers.circleSquareCollision(
           { x: this.position.x, y: this.position.y, r: this.range },
           { x: creep.position.x, y: creep.position.y, width: creep.dimension.width, height: creep.dimension.height }

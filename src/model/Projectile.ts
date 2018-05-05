@@ -2,7 +2,6 @@ import Entity from '../lib/entity/Entity'
 import { AssetId } from '../enum/AssetId'
 import { ContextId } from '../enum/ContextId'
 import Vector2 from '../lib/math/Vector2'
-import Settings from '../config/Settings'
 import Dimension from '../lib/geometry/Dimension'
 import Creep from './Creep'
 import { EntityType } from '../enum/EntityType'
@@ -18,8 +17,8 @@ export default class Projectile extends Entity {
   speed: number
   lastTime: number
 
-  constructor (position: Vector2, dimension: Dimension, settings: Settings, target: Creep, speed: number) {
-    super(position, dimension, settings)
+  constructor (position: Vector2, dimension: Dimension, target: Creep, speed: number) {
+    super(position, dimension)
     this.target = target
     this.startPosition = position.clone().round()
     this.endPosition = target.position.clone().round()
