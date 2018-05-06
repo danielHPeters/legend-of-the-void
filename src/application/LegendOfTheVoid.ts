@@ -151,7 +151,8 @@ export default class LegendOfTheVoid implements Game {
    */
   init (): void {
     this.assetManager.queueDownload(AssetId.BASE_VOID)
-    this.assetManager.queueDownload(AssetId.TURRET_LASER)
+    this.assetManager.queueDownload(AssetId.TURRET_BOMB)
+    this.assetManager.queueDownload(AssetId.TURRET_ORB)
     this.assetManager.queueDownload(AssetId.TURRET_SOCKET)
     this.assetManager.queueDownload(AssetId.PATH)
     this.assetManager.queueDownload(AssetId.WALL)

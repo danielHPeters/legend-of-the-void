@@ -15,5 +15,22 @@
         "range": 65
       }
     ]
+  },
+  {
+    "turretType": "orb",
+    "description": "An Orb Turret",
+    "assetId": "turret-orb",
+    "contextId": "player",
+    "damage": 30,
+    "rate": 60,
+    "range": 100,
+    "projectileSpeed": 60,
+    "upgrades": [
+      {
+        "damage": 35,
+        "rate": 63,
+        "range": 110
+      }
+    ]
   }
 ]

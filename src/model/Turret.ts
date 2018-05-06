@@ -29,7 +29,7 @@ export default class Turret extends Entity {
   state: LegendState
   private delayCounter: number
 
-  constructor (position: Vector2, dimension: Dimension, assetId: AssetId = AssetId.TURRET_LASER) {
+  constructor (position: Vector2, dimension: Dimension, assetId: AssetId = AssetId.TURRET_BOMB) {
     super(position, dimension)
     this.contextId = ContextId.PLAYER
     this.assetId = assetId
