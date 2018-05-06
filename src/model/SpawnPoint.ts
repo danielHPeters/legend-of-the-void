@@ -1,7 +1,6 @@
 import Entity from '../lib/entity/Entity'
 import Dimension from '../lib/geometry/Dimension'
 import Vector2 from '../lib/math/Vector2'
-import Settings from '../config/Settings'
 import Creep from './Creep'
 import * as creepData from '../../public/definitions/creeps.json'
 import AssetManager from '../lib/application/AssetManager'

@@ -2,9 +2,6 @@
 
 Tower Defense Game (School Project)
 
-# crm
-CRM tool made with node js.
-
 ## Setup
 ### Prerequisites
 1. Make sure you have the latest nodejs version installed [download Link](https://nodejs.org)

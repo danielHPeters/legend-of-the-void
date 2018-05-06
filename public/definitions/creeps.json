@@ -3,7 +3,7 @@
     "name": "Void Leecher",
     "speed": 20,
     "attack": 10,
-    "health": 80,
+    "health": 30,
     "level": 1,
     "assetId": "creep-void-leecher"
   }

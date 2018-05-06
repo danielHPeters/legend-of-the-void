@@ -25,7 +25,7 @@ export default class Turret extends Entity {
   asset
   contextId: ContextId
   projectileSpeed: number
-  addProjectileCallback: (position: Vector2, speed: number, target: Creep) => void
+  addProjectileCallback: (position: Vector2, speed: number, damage: number, target: Creep) => void
   state: LegendState
   private delayCounter: number
 
@@ -88,6 +88,7 @@ export default class Turret extends Entity {
     this.addProjectileCallback(
       this.position.clone(),
       this.projectileSpeed,
+      this.damage,
       target)
   }
 }

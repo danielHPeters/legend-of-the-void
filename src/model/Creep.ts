@@ -4,6 +4,7 @@ import Dimension from '../lib/geometry/Dimension'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 import { EntityType } from '../enum/EntityType'
+import Base from './Base'
 
 /**
  * Enemy creep class.
@@ -24,19 +25,8 @@ export default class Creep extends Entity {
   waypoints: Vector2[]
   currentWaypoint: number
   lastTime: number
+  base: Base
 
-  /**
-   * Constructor.
-   *
-   * @param {number} x
-   * @param {number} y
-   * @param {number} width
-   * @param {number} height
-   * @param {number} level
-   * @param {number} cash
-   * @param {Settings} settings
-   * @param {AssetId} assetId
-   */
   constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
     super(new Vector2(x, y), new Dimension(width, height))
     this.contextId = ContextId.CREEPS
@@ -46,6 +36,13 @@ export default class Creep extends Entity {
     this.waypoints = []
     this.currentWaypoint = 0
     this.type = EntityType.CREEP
+  }
+
+  takeDamage (damage: number): void {
+    this.health -= damage
+    if (this.health <= 0) {
+      this.alive = false
+    }
   }
 
   init (): void {
@@ -71,7 +68,7 @@ export default class Creep extends Entity {
         } else {
           // 3.b
           this.alive = false
-          // TODO: deduct health
+          this.base.takeDamage(this.attack)
         }
       }
     }

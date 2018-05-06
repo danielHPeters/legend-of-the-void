@@ -19,6 +19,7 @@ import Vector2 from '../lib/math/Vector2'
 import Projectile from '../model/Projectile'
 import Dimension from '../lib/geometry/Dimension'
 import SpawnPoint from '../model/SpawnPoint'
+import { EntityType } from '../enum/EntityType'
 
 /**
  * Main game Class.
@@ -54,12 +55,13 @@ export default class LegendOfTheVoid implements Game {
     this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {
       turret.asset = this.assetManager.get(turret.assetId)
       turret.state = this.state
-      turret.addProjectileCallback = (position, speed, target) => {
+      turret.addProjectileCallback = (position, speed, damage, target) => {
         const projectile = new Projectile(
           position,
           new Dimension(this.TILE_SIZE, this.TILE_SIZE),
           target,
-          speed
+          speed,
+          damage
         )
         projectile.asset = this.assetManager.get(projectile.assetId)
         this.state.entities.push(projectile)
@@ -107,6 +109,7 @@ export default class LegendOfTheVoid implements Game {
             waypoints.push(new Vector2(420, 540))
             waypoints.push(new Vector2(0, 540))
             const spawnPoint = new SpawnPoint(x, y, width, height, this.assetManager, waypoints, (creep => {
+              creep.base = this.state.base
               this.state.entities.push(creep)
               this.state.creeps.push(creep)
             }))
@@ -116,6 +119,7 @@ export default class LegendOfTheVoid implements Game {
           case 4:
             const base = new Base(x, y, width, height)
             base.fromJSON(baseData[0])
+            this.state.base = base
             this.state.entities.push(base)
             tile.assetId = AssetId.END
             break

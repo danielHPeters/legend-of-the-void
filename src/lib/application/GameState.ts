@@ -5,6 +5,7 @@ import Renderable from '../entity/Renderable'
 import Changeable from '../entity/Changeable'
 import Tile from '../../model/Tile'
 import Creep from '../../model/Creep'
+import Base from '../../model/Base'
 
 /**
  * Game state interface.
@@ -18,6 +19,7 @@ export default interface GameState {
   quadTree: QuadTree
   entities: Entity[]
   creeps: Creep[]
+  base: Base
   map: Tile[]
 
   update (dt: number, time: number): void

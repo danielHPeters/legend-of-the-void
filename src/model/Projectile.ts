@@ -15,9 +15,10 @@ export default class Projectile extends Entity {
   endPosition: Vector2
   distance: number
   speed: number
+  damage: number
   lastTime: number
 
-  constructor (position: Vector2, dimension: Dimension, target: Creep, speed: number) {
+  constructor (position: Vector2, dimension: Dimension, target: Creep, speed: number, damage: number) {
     super(position, dimension)
     this.target = target
     this.startPosition = position.clone().round()
@@ -27,6 +28,7 @@ export default class Projectile extends Entity {
     this.assetId = AssetId.PROJECTILE
     this.type = EntityType.PROJECTILE
     this.contextId = ContextId.PLAYER
+    this.damage = damage
   }
 
   init () {
@@ -46,7 +48,7 @@ export default class Projectile extends Entity {
       if (currentPosition.equals(this.endPosition)) {
         this.alive = false
         if (this.target.within(currentPosition.x, currentPosition.y)) {
-          this.target.alive = false
+          this.target.takeDamage(this.damage)
         }
       }
     }

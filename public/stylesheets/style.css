@@ -57,6 +57,14 @@ canvas {
       border: 5px solid transparent;
       border-top-color: #555; }
 
+.settings {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: #FF7F00;
+  font-family: Helvetica, sans-serif;
+  cursor: pointer; }
+
 #settings-menu {
   width: 600px;
   padding: 10px;
@@ -111,12 +119,9 @@ body {
 a {
   color: #00B7FF; }
 
-.settings {
+#playerHealth {
   position: absolute;
-  top: 5px;
-  left: 5px;
-  color: #FF7F00;
-  font-family: Helvetica, sans-serif;
-  cursor: pointer; }
+  top: 0;
+  left: 660px; }
 
 /*# sourceMappingURL=style.css.map */

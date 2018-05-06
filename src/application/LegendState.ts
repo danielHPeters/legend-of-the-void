@@ -7,6 +7,7 @@ import Tile from '../model/Tile'
 import Observable from '../lib/observer/Observable'
 import HitBox from '../lib/collision/HitBox'
 import Creep from '../model/Creep'
+import Base from '../model/Base'
 
 /**
  * Legend of the void game state class.
@@ -20,6 +21,7 @@ export default class LegendState extends Observable implements GameState {
   quadTree: QuadTree
   entities: Entity[]
   creeps: Creep[]
+  base: Base
   map: Tile[]
 
   /**
@@ -46,6 +48,9 @@ export default class LegendState extends Observable implements GameState {
     this.entities.forEach(movable => movable.change(dt, time))
     this.entities = this.entities.filter(entity => { return entity.alive })
     this.creeps = this.creeps.filter(entity => { return entity.alive })
+    if (this.base.health <= 0) {
+      this.running = false
+    }
   }
 
   reset (): void {
