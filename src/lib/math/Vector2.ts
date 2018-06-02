@@ -14,8 +14,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Default constructor. Sets x and y values.
    *
-   * @param {number} x initial x value
-   * @param {number} y initial y value
+   * @param x Initial x value
+   * @param y Initial y value
    */
   constructor (x: number, y: number) {
     this.x = x
@@ -25,9 +25,9 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Static addVector method to combine two vectors into a new one.
    *
-   * @param {Vector2} v1 first vector
-   * @param {Vector2} v2 second vector
-   * @returns {Vector2} combined vector
+   * @param v1 First vector
+   * @param v2 Second vector
+   * @returns Combined vector
    */
   static addVector (v1: Vector2, v2: Vector2): Vector2 {
     return new Vector2(v1.x + v2.x, v1.y + v2.y)
@@ -36,9 +36,9 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Subtract two vector from each other and put the result into a new vector.
    *
-   * @param {Vector2} v1 first vector
-   * @param {Vector2} v2 second vector
-   * @returns {Vector2} resulting vector
+   * @param v1 First vector
+   * @param v2 Second vector
+   * @returns Resulting vector
    */
   static subtractVector (v1: Vector2, v2: Vector2): Vector2 {
     return new Vector2(v1.x - v2.x, v1.y - v2.y)
@@ -47,9 +47,9 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Multiplies a vector with a scalar and returns the resulting vector.
    *
-   * @param {Vector2} vector initial vector
-   * @param {number} scalar scalar to scale the vector
-   * @returns {Vector2} the resulting vector
+   * @param vector Initial vector
+   * @param scalar Scalar to scale the vector
+   * @returns The resulting vector
    */
   static multiply (vector: Vector2, scalar: number): Vector2 {
     return new Vector2(vector.x * scalar, vector.y * scalar)
@@ -59,9 +59,9 @@ export default class Vector2 implements Vector, Cloneable {
    * Divides a vector by a scalar and returns the result in a new vector.
    * Throws error if trying to divide by zero.
    *
-   * @param {Vector2} vector vector to divide
-   * @param {number} scalar scalar used to divide vector
-   * @returns {Vector2} resulting vector
+   * @param vector Vector to divide
+   * @param scalar Scalar used to divide vector
+   * @returns Resulting vector
    */
   static divide (vector: Vector2, scalar: number): Vector2 {
     if (scalar === 0) {
@@ -73,19 +73,20 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Calculate distance between two vectors.
    *
-   * @param {Vector2} start
-   * @param {Vector2} destination
-   * @returns {number}
+   * @param start
+   * @param destination
+   * @returns
    */
   static distance (start: Vector2, destination: Vector2): number {
     return Math.sqrt(Math.pow(destination.x - start.x, 2) + Math.pow(destination.y - start.y, 2))
   }
 
   /**
-   * Calculate linear interpolation between to vectors
-   * @param {Vector2} start
-   * @param {Vector2} destination
-   * @param {number} n
+   * Calculate linear interpolation between to vectors.
+   *
+   * @param start
+   * @param destination
+   * @param n
    */
   static lerp (start: Vector2, destination: Vector2, n: number): Vector2 {
     return new Vector2(
@@ -97,8 +98,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Set vector with both x and y values.
    *
-   * @param {number} x new x value
-   * @param {number} y new y value
+   * @param x New x value
+   * @param y New y value
    */
   set (x: number, y: number): void {
     this.x = x
@@ -108,7 +109,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Set vector location to another vector.
    *
-   * @param {Vector2} vector other vector
+   * @param vector Other vector
    */
   setVector (vector: Vector2): void {
     this.x = vector.x
@@ -118,8 +119,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Add x and y to this vector.
    *
-   * @param {number} x x value
-   * @param {number} y y value
+   * @param x X value
+   * @param y Y value
    */
   add (x: number, y: number): void {
     this.x += x
@@ -129,7 +130,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Add vector to this vector.
    *
-   * @param {Vector2} vector other vector
+   * @param vector Other vector
    */
   addVector (vector: Vector2): void {
     this.x += vector.x
@@ -139,8 +140,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Subtraxt x and y from this vector.
    *
-   * @param {number} x x value
-   * @param {number} y y value
+   * @param x X value
+   * @param y Y value
    */
   subtract (x: number, y: number): void {
     this.x -= x
@@ -150,7 +151,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Subtract a vector from this vector.
    *
-   * @param {Vector2} vector other vector
+   * @param vector Other vector
    */
   subtractVector (vector: Vector2): void {
     this.x -= vector.x
@@ -160,7 +161,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Multiply this vector by scalar.
    *
-   * @param scalar scalar to multiply the vector
+   * @param scalar Scalar to multiply the vector
    */
   multiply (scalar: number): void {
     this.x *= scalar
@@ -171,7 +172,7 @@ export default class Vector2 implements Vector, Cloneable {
    * Divides this vector by a scalar.
    * Throws error when trying to divide by zero.
    *
-   * @param {number} scalar scalar used to divide this vector
+   * @param scalar Scalar used to divide this vector
    */
   divide (scalar: number): void {
     if (scalar === 0) {
@@ -184,7 +185,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Get the magnitude / elementsCount of this vector.
    *
-   * @returns {number} magnitude / elementsCount of this vector
+   * @returns Magnitude / elementsCount of this vector
    */
   mag (): number {
     return Math.sqrt(this.x * this.x + this.y * this.y)
@@ -193,7 +194,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Negate the x and y values of this vector and return the result as a new Vector2 object.
    *
-   * @returns {Vector2}
+   * @returns
    */
   negative (): Vector2 {
     return new Vector2(-this.x, -this.y)
@@ -210,9 +211,9 @@ export default class Vector2 implements Vector, Cloneable {
   }
 
   /**
-   * Limit the vector to a maximum elementsCount.
+   * Limit the vector to a maximum size.
    *
-   * @param {number} max maximum elementsCount
+   * @param max Maximum size
    */
   limit (max: number): void {
     if (Math.floor(this.mag()) > max) {
@@ -224,8 +225,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Get the distance of this vector to another vector.
    *
-   * @param {Vector2} vector other vector
-   * @returns {number} calculated distance
+   * @param vector Other vector
+   * @returns Calculated distance
    */
   distanceTo (vector: Vector2): number {
     return Math.sqrt(Math.pow(vector.x - this.x, 2) + Math.pow(vector.y - this.y, 2))
@@ -234,8 +235,8 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Get the dot product between this vector and another vector.
    *
-   * @param {Vector2} vector
-   * @returns {number} the dot product of this vector and the one passed as param.
+   * @param vector
+   * @returns The dot product of this vector and the one passed as param
    */
   dot (vector: Vector2): number {
     return this.x * vector.x + this.y * vector.y
@@ -259,9 +260,9 @@ export default class Vector2 implements Vector, Cloneable {
   }
 
   /**
-   * Linear interpolation method
+   * Linear interpolation method.
    *
-   * @param {Vector2} vector destination vector.
+   * @param {Vector2} vector Destination vector.
    * @param {number} n Normal value
    */
   lerp (vector: Vector2, n: number): void {
@@ -276,7 +277,7 @@ export default class Vector2 implements Vector, Cloneable {
   /**
    * Create a clone of this vector.
    *
-   * @returns {Vector2} cloned vector
+   * @returns Cloned vector
    */
   clone (): Vector2 {
     return new Vector2(this.x, this.y)

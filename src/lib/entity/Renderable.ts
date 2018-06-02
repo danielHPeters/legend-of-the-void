@@ -25,13 +25,13 @@ export default interface Renderable {
   /**
    * Render the entity.
    *
-   * @param {CanvasRenderingContext2D} ctx Rendering Context
+   * @param ctx Rendering Context
    */
   render (ctx: CanvasRenderingContext2D): void
 
   /**
    *
-   * @param {CanvasRenderingContext2D} ctx
+   * @param ctx
    */
   clear (ctx: CanvasRenderingContext2D): void
 }

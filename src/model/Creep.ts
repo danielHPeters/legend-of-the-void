@@ -46,10 +46,10 @@ export default class Creep extends Entity {
   }
 
   init (): void {
-    //
+    // Not implemented.
   }
 
-  change (dt: number, time: number) {
+  change (dt: number, time: number): void {
     if (!this.lastTime) {
       this.lastTime = time
     }

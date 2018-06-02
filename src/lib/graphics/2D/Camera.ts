@@ -26,7 +26,7 @@ export default class Camera {
   viewportRect: Rectangle
   worldRect: Rectangle
 
-  constructor (x, y, viewWidth, viewHeight, worldWidth, worldHeight) {
+  constructor (x: number, y: number, viewWidth: number, viewHeight: number, worldWidth: number, worldHeight: number) {
     // position of camera (left-top coordinate)
     this.position = new Vector2(x, y)
     this.previousPosition = new Vector2(x, y)
@@ -52,11 +52,11 @@ export default class Camera {
   /**
    * Object needs to have "x" and "y" properties (as world(or room) position)
    *
-   * @param {Drawable} following
+   * @param following
    * @param xDeadZone
    * @param yDeadZone
    */
-  follow (following: Drawable, xDeadZone, yDeadZone): void {
+  follow (following: Drawable, xDeadZone: number, yDeadZone: number): void {
     this.following = following
     this.deadZone.set(xDeadZone, yDeadZone)
   }

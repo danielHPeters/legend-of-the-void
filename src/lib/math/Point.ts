@@ -1,18 +1,20 @@
+import Cloneable from '../util/Cloneable'
+
 /**
  * Class Representing a Coordinate (x|y) on the canvas.
  *
  * @author Daniel Peters
  * @version 1.0
  */
-export default class Point {
+export default class Point implements Cloneable {
   x: number
   y: number
 
   /**
    * Default constructor.
    *
-   * @param {number} x initializes x value of this point
-   * @param {number} y initializes y value of this point
+   * @param x initializes x value of this point
+   * @param y initializes y value of this point
    */
   constructor (x: number, y: number) {
     this.x = x
@@ -22,8 +24,8 @@ export default class Point {
   /**
    * Set both x and y values.
    *
-   * @param {number} x x-axis value
-   * @param {number} y y-axis value
+   * @param x x-axis value
+   * @param y y-axis value
    */
   set (x: number, y: number): void {
     this.x = x
@@ -33,7 +35,7 @@ export default class Point {
   /**
    * Set the x and y values of this point to the values of another point.
    *
-   * @param {Point} point Other point
+   * @param point Other point
    */
   setPoint (point: Point): void {
     this.x = point.x
@@ -43,7 +45,7 @@ export default class Point {
   /**
    * Create a another Point object with the same value as this Point.
    *
-   * @returns {Point} A clone of this point
+   * @returns A clone of this point
    */
   clone (): Point {
     return new Point(this.x, this.y)

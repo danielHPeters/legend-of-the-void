@@ -10,7 +10,7 @@ export default class MenuBar {
   /**
    * Constructor.
    *
-   * @param {HTMLElement} element
+   * @param element
    */
   constructor (element: HTMLElement) {
     this.element = element

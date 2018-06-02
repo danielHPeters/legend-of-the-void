@@ -23,14 +23,14 @@ export default class Base extends Entity {
   /**
    * Constructor.
    *
-   * @param {number} x
-   * @param {number} y
-   * @param {number} width
-   * @param {number} height
-   * @param {number} health
-   * @param {string} name
-   * @param {Settings} settings
-   * @param {AssetId} assetId
+   * @param x
+   * @param y
+   * @param width
+   * @param height
+   * @param health
+   * @param name
+   * @param settings
+   * @param assetId
    */
   constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, assetId: AssetId = AssetId.BASE_VOID) {
     super(new Vector2(x, y), new Dimension(width, height))
@@ -44,7 +44,7 @@ export default class Base extends Entity {
     document.body.appendChild(this.healthDisplay)
   }
 
-  displayHealth () {
+  displayHealth (): void {
     if (this.health > 0) {
       this.healthDisplay.textContent = 'Player Health: ' + this.health.toString()
     } else {
@@ -67,7 +67,7 @@ export default class Base extends Entity {
 
   /**
    * Base takes damage by amount of param.
-   * @param {number} damage
+   * @param damage
    */
   takeDamage (damage: number): void {
     this.health -= damage

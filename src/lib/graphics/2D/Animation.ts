@@ -16,10 +16,10 @@ export default class Animation {
   /**
    * Constructor Sets all animation data.
    *
-   * @param {SpriteSheet} spriteSheet corresponding sprite sheet
-   * @param {number} speed animation speed
-   * @param {number} start animation start frame
-   * @param {number} end animation end frame
+   * @param spriteSheet corresponding sprite sheet
+   * @param speed animation speed
+   * @param start animation start frame
+   * @param end animation end frame
    */
   constructor (spriteSheet: SpriteSheet, speed: number, start: number, end: number) {
     this.spriteSheet = spriteSheet
@@ -45,13 +45,14 @@ export default class Animation {
 
   /**
    * Draw current frame
+   *
    * @param ctx canvas context
-   * @param {number} x location x
-   * @param {number} y location y
-   * @param {number} width display width
-   * @param {number} height display height
+   * @param x location x
+   * @param y location y
+   * @param width display width
+   * @param height display height
    */
-  render (ctx, x: number, y: number, width: number, height: number): void {
+  render (ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): void {
     let row = Math.floor(this.sequence[this.currentFrame] / this.spriteSheet.framesPerRow)
     let col = Math.floor(this.sequence[this.currentFrame] % this.spriteSheet.framesPerRow)
     ctx.drawImage(

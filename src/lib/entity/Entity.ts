@@ -29,8 +29,8 @@ export default class Entity implements JsonSerializable, Changeable, Renderable,
   /**
    * Constructor. Sets position and dimension of entity.
    *
-   * @param {Vector2} position Initial position
-   * @param {Dimension} dimension Initial dimension
+   * @param position Initial position
+   * @param dimension Initial dimension
    */
   constructor (position?: Vector2, dimension?: Dimension) {
     this.position = position
@@ -72,22 +72,15 @@ export default class Entity implements JsonSerializable, Changeable, Renderable,
   }
 
   change (dt: number, time: number): void {
+    // Not implemented.
   }
 
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
   render (ctx: CanvasRenderingContext2D) {
     if (this.asset && this.alive) {
       ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
     }
   }
 
-  /**
-   *
-   * @param {CanvasRenderingContext2D} ctx
-   */
   clear (ctx: CanvasRenderingContext2D) {
     ctx.clearRect(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
   }

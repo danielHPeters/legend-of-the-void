@@ -14,7 +14,7 @@ export default class Player implements Observer {
   /**
    * Constructor.
    *
-   * @param {string} name Player nam
+   * @param name Player name
    */
   constructor (name: string) {
     this.name = name

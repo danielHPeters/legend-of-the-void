@@ -12,7 +12,7 @@ export default class Area {
   /**
    * Constructor.
    *
-   * @param {TileSetMap} map
+   * @param map
    */
   constructor (map: TileSetMap) {
     this.map = map

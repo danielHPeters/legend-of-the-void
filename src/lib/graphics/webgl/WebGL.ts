@@ -8,8 +8,8 @@ export default class WebGL {
   /**
    * Initialize the WebGL context.
    *
-   * @param {HTMLCanvasElement} canvasElement Canvas element on which the scenes will be drawn.
-   * @returns {WebGLRenderingContext} WebGL Context
+   * @param canvasElement Canvas element on which the scenes will be drawn.
+   * @returns WebGL Context
    */
   static initContext (canvasElement: HTMLCanvasElement): WebGLRenderingContext {
     let gl = null
@@ -26,7 +26,7 @@ export default class WebGL {
   /**
    * Initialize vertex and fragment shaders.
    *
-   * @param {WebGLRenderingContext} gl WebGL context
+   * @param gl WebGL context
    */
   static initShaders (gl: WebGLRenderingContext): void {
     const fragmentShader = WebGL.getShader(gl, 'shader-fs')
@@ -51,9 +51,9 @@ export default class WebGL {
   /**
    * Get a shader from a script by script tag id.
    *
-   * @param {WebGLRenderingContext} gl WebGL context
-   * @param {string} id Script tag id
-   * @returns {WebGLShader} Shader instance
+   * @param gl WebGL context
+   * @param id Script tag id
+   * @returns Shader instance
    */
   static getShader (gl: WebGLRenderingContext, id: string): WebGLShader {
     const shaderScript = document.getElementById(id) as HTMLScriptElement

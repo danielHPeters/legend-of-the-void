@@ -18,7 +18,7 @@ export default class Observable {
   /**
    * Register an observer on this observable.
    *
-   * @param {Observer} observer Object implementing the Observer interface
+   * @param observer Object implementing the Observer interface
    */
   register (observer: Observer): void {
     this.observers.push(observer)
@@ -27,10 +27,10 @@ export default class Observable {
   /**
    * Remove an observer from this observables observers list.
    *
-   * @param {Observer} observer Object implementing the Observer interface
+   * @param observer Object implementing the Observer interface
    */
   unRegister (observer: Observer): void {
-    this.observers = this.observers.filter(obs => {return obs !== observer})
+    this.observers = this.observers.filter(obs => { return obs !== observer })
   }
 
   /**

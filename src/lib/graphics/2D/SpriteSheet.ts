@@ -17,7 +17,7 @@ export default class SpriteSheet {
    * @param frameWidth
    * @param frameHeight
    */
-  constructor (image: HTMLImageElement, frameWidth, frameHeight) {
+  constructor (image: HTMLImageElement, frameWidth: number, frameHeight: number) {
     this.image = image
     this.frameWidth = frameWidth
     this.frameHeight = frameHeight

@@ -11,7 +11,7 @@ export default class QuadraticFunction {
     if (check > 0) {
       this.calculate(check)
     } else if (check === 0) {
-
+      // Not implemented.
     } else {
       return
     }

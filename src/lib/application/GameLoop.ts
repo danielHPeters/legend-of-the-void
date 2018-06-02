@@ -34,7 +34,7 @@ export default interface GameLoop {
   /**
    * Main Loop.
    *
-   * @param {number} time
+   * @param time
    */
   loop (time: number): void
 }

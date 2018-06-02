@@ -1,5 +1,5 @@
 export default class AStar {
-  constructor() {
-
+  constructor () {
+    // Not Implemented.
   }
 }

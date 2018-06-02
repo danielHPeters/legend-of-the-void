@@ -41,8 +41,8 @@ export default class LegendOfTheVoid implements Game {
   /**
    * Constructor.
    *
-   * @param {Map<ContextId, CanvasRenderingContext2D>} contexts
-   * @param {Settings} settings
+   * @param contexts
+   * @param settings
    */
   constructor (contexts: Map<ContextId, CanvasRenderingContext2D>, settings: Settings) {
     this.audioManager = new AudioManager()
@@ -132,7 +132,7 @@ export default class LegendOfTheVoid implements Game {
     })
   }
 
-  initBuildMenu () {
+  initBuildMenu (): void {
     document.addEventListener('click', ev => {
       ev.preventDefault()
       let position = this.buildMenu.getPosition(ev)

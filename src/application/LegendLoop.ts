@@ -15,7 +15,7 @@ export default class LegendLoop implements GameLoop {
   /**
    * Constructor.
    *
-   * @param {Game} game Game instance
+   * @param game Game instance
    */
   constructor (game: Game) {
     this.game = game

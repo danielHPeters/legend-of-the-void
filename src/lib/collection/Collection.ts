@@ -8,14 +8,14 @@ export default interface Collection<T> {
   /**
    * Get the size of this collection.
    *
-   * @returns {number}
+   * @returns
    */
   size: number
 
   /**
    * Check if collection is empty.
    *
-   * @returns {boolean}
+   * @returns
    */
   isEmpty (): boolean
 
@@ -23,7 +23,7 @@ export default interface Collection<T> {
    * Check if this collection contains this object.
    *
    * @param object
-   * @returns {boolean}
+   * @returns
    */
   contains (object: T): boolean
 
@@ -57,5 +57,5 @@ export default interface Collection<T> {
    * Returns an array with all elements of this collection and in the correct order.
    * @returns Array of type <T>
    */
-  toArray(): T[]
+  toArray (): T[]
 }

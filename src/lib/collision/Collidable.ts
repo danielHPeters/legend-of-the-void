@@ -13,8 +13,8 @@ export default interface Collidable {
 
   /**
    *
-   * @param {Collidable} other
-   * @returns {boolean}
+   * @param other
+   * @returns
    */
   isCollideAbleWith (other: Collidable): boolean
 }

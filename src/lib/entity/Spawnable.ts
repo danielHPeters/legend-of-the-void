@@ -10,9 +10,9 @@ export default interface Spawnable {
   /**
    * Spawning function.
    *
-   * @param {number} x
-   * @param {number} y
-   * @param {number} speed
+   * @param x
+   * @param y
+   * @param speed
    */
   spawn (x: number, y: number, speed: number): void
 }

@@ -18,10 +18,10 @@ export default interface Drawable {
 
   /**
    *
-   * @param {number} xView
-   * @param {number} yView
-   * @param {number} prevXView
-   * @param {number} prevYView
+   * @param xView
+   * @param yView
+   * @param prevXView
+   * @param prevYView
    */
   draw (xView?: number, yView?: number, prevXView?: number, prevYView?: number): void
 }

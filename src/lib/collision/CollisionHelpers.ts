@@ -13,6 +13,12 @@ export interface Square {
   height: number
 }
 
+/**
+ * Class with a collection of collision helper methods.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default abstract class CollisionHelpers {
   static circleSquareCollision (circle: Circle, rect: Square): boolean {
     const distance = new Vector2(Math.abs(circle.x - rect.x), Math.abs(circle.y - rect.y))

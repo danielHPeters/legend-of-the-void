@@ -29,10 +29,10 @@ export default class SpawnPoint extends Entity {
   }
 
   init () {
-    // Not implemented
+    // Not implemented.
   }
 
-  change (dt: number, time: number) {
+  change (dt: number, time: number): void {
     this.counter += 1
 
     if (this.counter >= this.spawnRate) {
@@ -46,11 +46,11 @@ export default class SpawnPoint extends Entity {
     }
   }
 
-  render (ctx: CanvasRenderingContext2D) {
+  render (ctx: CanvasRenderingContext2D): void {
     // Do nothing
   }
 
-  clear (ctx: CanvasRenderingContext2D) {
+  clear (ctx: CanvasRenderingContext2D): void {
     // Do nothing
   }
 }

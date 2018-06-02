@@ -30,6 +30,6 @@ export default class Tile extends Entity {
   }
 
   init (): void {
-    // Not implemented
+    // Not implemented.
   }
 }

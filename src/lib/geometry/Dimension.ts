@@ -11,8 +11,8 @@ export default class Dimension {
   /**
    * Constructor.
    *
-   * @param {number} width Width
-   * @param {number} height Height
+   * @param width Width
+   * @param height Height
    */
   constructor (width: number, height: number) {
     this.width = width
@@ -22,7 +22,7 @@ export default class Dimension {
   /**
    * Scale the dimension.
    *
-   * @param {number} factor
+   * @param factor
    */
   scale (factor: number) {
     this.width *= factor

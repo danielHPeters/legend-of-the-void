@@ -18,12 +18,12 @@ export default class HitBox implements Collidable {
 
   /**
    * Initializes position and dimension.
-   * @param {number} x position x
-   * @param {number} y position y
-   * @param {number} width dimension width
-   * @param {number} height dimension height
+   * @param x position x
+   * @param y position y
+   * @param width dimension width
+   * @param height dimension height
    */
-  constructor (x, y, width, height) {
+  constructor (x: number, y: number, width: number, height: number) {
     this.position = new Vector2(x, y)
     this.width = width
     this.height = height
@@ -35,8 +35,8 @@ export default class HitBox implements Collidable {
 
   /**
    *
-   * @param {Collidable} other
-   * @returns {boolean}
+   * @param other
+   * @returns
    */
   isCollideAbleWith (other: Collidable): boolean {
     return this.collidesWith.includes(other.type.toString())

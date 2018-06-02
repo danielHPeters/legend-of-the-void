@@ -18,10 +18,10 @@ export default class QuadTree {
   /**
    * Constructor.
    *
-   * @param {HitBox} hitBox
-   * @param {number} level
+   * @param hitBox
+   * @param level
    */
-  constructor (hitBox = new HitBox(0, 0, 0, 0), level = 0) {
+  constructor (hitBox: HitBox = new HitBox(0, 0, 0, 0), level: number = 0) {
     this.level = level
     this.maxObjects = 10
     this.maxLevels = 5

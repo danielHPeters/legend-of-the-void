@@ -16,7 +16,7 @@ export default class Settings {
   /**
    * Constructor.
    *
-   * @param {HTMLCanvasElement} canvas
+   * @param canvas
    */
   constructor (canvas: HTMLCanvasElement) {
     this.gameSize = new Dimension(canvas.width, canvas.height)
@@ -34,7 +34,7 @@ export default class Settings {
   /**
    *
    * @param value
-   * @returns {string}
+   * @returns
    */
   findKey (value): string {
     return Object.keys(this.keyboard).filter(key => this.keyboard[key] === value)[0]
@@ -43,7 +43,7 @@ export default class Settings {
   /**
    *
    * @param newKey
-   * @param {Actions} action
+   * @param action
    */
   setKey (newKey, action: Actions): void {
     let oldKey = this.findKey(action)

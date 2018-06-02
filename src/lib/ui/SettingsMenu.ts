@@ -11,14 +11,14 @@ import { Actions } from '../../enum/Actions'
  * @version 1.0
  */
 export default class SettingsMenu {
-  element: HTMLDivElement
+  element: HTMLElement
   mainMenu: HTMLDivElement
   settings: Settings
   assetManager: AssetManager
   audioManager: AudioManager
   showing: boolean
 
-  constructor (element, settings: Settings, assetManager: AssetManager, audioManager: AudioManager) {
+  constructor (element: HTMLElement, settings: Settings, assetManager: AssetManager, audioManager: AudioManager) {
     this.element = element
     this.settings = settings
     this.assetManager = assetManager
@@ -204,7 +204,7 @@ export default class SettingsMenu {
     this.init()
   }
 
-  addPlayerSettingEntry (setting, element): void {
+  addPlayerSettingEntry (setting, element: HTMLElement): void {
     let label = document.createElement('label')
     let input = document.createElement('input')
     let row = document.createElement('div')
@@ -220,7 +220,7 @@ export default class SettingsMenu {
     element.appendChild(row)
   }
 
-  addEntry (setting, element): void {
+  addEntry (setting, element: HTMLElement): void {
     let row = document.createElement('div')
     let label = document.createElement('label')
     let input = document.createElement('input')

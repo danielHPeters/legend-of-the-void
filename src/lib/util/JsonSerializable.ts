@@ -8,14 +8,14 @@ export default interface JsonSerializable {
   /**
    * Convert object to JSON string.
    *
-   * @returns {string} The generated json string.
+   * @returns The generated json string.
    */
   toJSON (): string
 
   /**
    * Initialize object from JSON string.
    *
-   * @param {string} json The json string
+   * @param json The json string
    */
   fromJSON (json: string): void
 }

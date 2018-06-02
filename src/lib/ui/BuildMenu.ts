@@ -21,8 +21,8 @@ export default class BuildMenu {
   /**
    * Constructor.
    *
-   * @param {string} elementId
-   * @param {Turret[]} turretList
+   * @param elementId
+   * @param turretList
    * @param assetManager
    * @param addTurretCallback
    */
@@ -90,7 +90,7 @@ export default class BuildMenu {
     }
   }
 
-  positionMenu (menuPosition) {
+  positionMenu (menuPosition): void {
     let menuPositionX = menuPosition.x + 'px'
     let menuPositionY = menuPosition.y + 'px'
 
@@ -98,7 +98,7 @@ export default class BuildMenu {
     this.element.style.top = menuPositionY
   }
 
-  show (tile: Tile) {
+  show (tile: Tile): void {
     if (!this.open) {
       this.open = true
       this.element.style.display = 'block'
@@ -106,7 +106,7 @@ export default class BuildMenu {
     }
   }
 
-  hide () {
+  hide (): void {
     this.open = false
     this.element.style.display = 'none'
     this.tile = null

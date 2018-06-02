@@ -43,7 +43,7 @@ export default class Turret extends Entity {
 
   /**
    *
-   * @param {CanvasRenderingContext2D} ctx
+   * @param ctx
    */
   render (ctx: CanvasRenderingContext2D) {
     if (this.asset) {
@@ -62,10 +62,10 @@ export default class Turret extends Entity {
 
   /**
    *
-   * @param {number} dt
+   * @param dt
    * @param time
    */
-  change (dt: number, time: number) {
+  change (dt: number, time: number): void {
     this.delayCounter += 1
     if (this.delayCounter >= this.rate) {
       this.delayCounter = 0
@@ -83,6 +83,9 @@ export default class Turret extends Entity {
 
   /**
    *
+   * @param dt
+   * @param time
+   * @param target
    */
   shootAt (dt: number, time: number, target: Creep): void {
     this.addProjectileCallback(

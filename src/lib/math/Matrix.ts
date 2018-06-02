@@ -14,7 +14,7 @@ export default class Matrix implements Cloneable {
   /**
    * Default constructor.
    *
-   * @param {number[][]} array Matrix array
+   * @param array Matrix array
    */
   constructor (array: number[][]) {
     if (!this.arrayIsValidMatrix(array)) {
@@ -29,7 +29,7 @@ export default class Matrix implements Cloneable {
    * Check if all arrays contained in the two dimensional array are of the same length.
    * All arrays should be same length as the first array.
    *
-   * @param {number[][]} array
+   * @param array
    */
   arrayIsValidMatrix (array: number[][]): boolean {
     const length = array[0].length
@@ -38,7 +38,7 @@ export default class Matrix implements Cloneable {
 
   /**
    * Set the matrix from an array.
-   * @param {number[][]} array
+   * @param array
    */
   set (array: number[][]): void {
     if (!this.arrayIsValidMatrix(array)) {
@@ -54,7 +54,7 @@ export default class Matrix implements Cloneable {
    * Add another matrix to this matrix.
    * The dimension of the other matrix must be equal to this.
    *
-   * @param {Matrix} matrix
+   * @param matrix
    */
   add (matrix: Matrix): void {
     if (this.equals(matrix)) {
@@ -70,7 +70,7 @@ export default class Matrix implements Cloneable {
    * Subtract another matrix from this matrix.
    * The dimension of the other matrix must be equal to this.
    *
-   * @param {Matrix} matrix
+   * @param matrix
    */
   subtract (matrix: Matrix): void {
     if (this.equals(matrix)) {
@@ -85,8 +85,8 @@ export default class Matrix implements Cloneable {
   /**
    * Matrix multiplication algorithm.
    *
-   * @param {Matrix} matrix Another matrix
-   * @returns {Matrix} Resulting matrix
+   * @param matrix Another matrix
+   * @returns Resulting matrix
    */
   multiply (matrix: Matrix): Matrix {
     let newArray = []
@@ -110,7 +110,7 @@ export default class Matrix implements Cloneable {
   /**
    * Multiply this matrix by a scalar.
    *
-   * @param {number} scalar Scalar by which the matrix is multiplied by
+   * @param scalar Scalar by which the matrix is multiplied by
    */
   multScalar (scalar: number): void {
     for (let i = 0; i < this.rows; i++) {
@@ -149,8 +149,8 @@ export default class Matrix implements Cloneable {
   /**
    * Check if the row and column length are equal to another matrix's.
    *
-   * @param {Matrix} other Other Matrix
-   * @returns {boolean} Returns true if the lengths match
+   * @param other Other Matrix
+   * @returns Returns true if the lengths match
    */
   equals (other: Matrix): boolean {
     return other.rows === this.rows && other.columns === this.columns
@@ -159,7 +159,7 @@ export default class Matrix implements Cloneable {
   /**
    * Generate an exact copy of this matrix.
    *
-   * @returns {Matrix} A copy of this matrix
+   * @returns A copy of this matrix
    */
   clone (): Matrix {
     let array = []

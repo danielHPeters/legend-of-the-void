@@ -35,7 +35,7 @@ export default class AssetManager {
 
   /**
    *
-   * @returns {boolean}
+   * @returns
    */
   done (): boolean {
     return this.downloadCount === this.queue.length
@@ -43,8 +43,8 @@ export default class AssetManager {
 
   /**
    *
-   * @param {AssetId} id
-   * @param {AssetType} type
+   * @param id
+   * @param type
    * @param opts
    */
   queueDownload (id: AssetId, type: AssetType = AssetType.SPRITE, opts = null): void {
@@ -57,9 +57,8 @@ export default class AssetManager {
    * @param item object with name of file and path to file
    * @param callback function to execute on done
    */
-  loadAudio (item, callback): void {
+  loadAudio (item, callback: () => void): void {
     Ajax.create({
-      method: 'GET',
       url: item.path,
       responseType: 'arraybuffer'
     }, response => {
@@ -128,8 +127,8 @@ export default class AssetManager {
    * Create an audio buffer source node from cached buffer.
    * Send it to the destination of the audio context and play it.
    *
-   * @param {AssetId} id File id
-   * @param {AssetType} type
+   * @param id File id
+   * @param type
    */
   get (id: AssetId, type: AssetType = AssetType.SPRITE): any {
     if (type === AssetType.AUDIO || type === AssetType.AUDIO_AMB) {

@@ -95,7 +95,7 @@ export default class SinglyList<T> implements List<T>, Queue<T> {
   }
 
   removeAt (index: number): void {
-    if (this.size == 0 || index < 0 || index >= this.size) {
+    if (this.size === 0 || index < 0 || index >= this.size) {
       throw new Error(this.errorMessages.indexOutOfBounds)
     }
 

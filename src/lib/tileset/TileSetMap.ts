@@ -22,14 +22,14 @@ export default class TileSetMap {
   /**
    *
    * @param image
-   * @param {number[][]} mapLayers
-   * @param {CanvasRenderingContext2D} context
-   * @param {number} tileSize
-   * @param {number} tilesPerRow
-   * @param {number} tilesPerColumn
-   * @param {number} imageTilesPerRow
+   * @param mapLayers
+   * @param context
+   * @param tileSize
+   * @param tilesPerRow
+   * @param tilesPerColumn
+   * @param imageTilesPerRow
    */
-  constructor (image, mapLayers: number[][], context: CanvasRenderingContext2D, tileSize: number, tilesPerRow: number, tilesPerColumn: number, imageTilesPerRow: number) {
+  constructor (image: HTMLImageElement, mapLayers: number[][], context: CanvasRenderingContext2D, tileSize: number, tilesPerRow: number, tilesPerColumn: number, imageTilesPerRow: number) {
     this.tileSetImage = image
     this.width = tilesPerRow * tileSize
     this.height = tilesPerColumn * tileSize
@@ -65,8 +65,8 @@ export default class TileSetMap {
   /**
    * Draw the map adjusted to camera.
    *
-   * @param {number} xView Camera X
-   * @param {number} yView Camera Y
+   * @param xView Camera X
+   * @param yView Camera Y
    */
   draw (xView: number, yView: number): void {
     this.context.drawImage(this.image, 0, 0, this.image.width, this.image.height, -xView, -yView, this.image.width, this.image.height)
@@ -77,8 +77,8 @@ export default class TileSetMap {
    * Currently also adds hitboxes.
    * TODO: Decouple Hitbox generation.
    *
-   * @param {CanvasRenderingContext2D} ctx Rendering context.
-   * @param {number[]} layer Layer definition array.
+   * @param ctx Rendering context.
+   * @param layer Layer definition array.
    */
   private generateLayer (ctx: CanvasRenderingContext2D, layer: number[]): void {
     for (let row = 0; row < this.tilesPerColumn; row++) {

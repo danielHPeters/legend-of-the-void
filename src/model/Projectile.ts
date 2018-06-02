@@ -32,7 +32,7 @@ export default class Projectile extends Entity {
   }
 
   init () {
-    // Not implemented
+    // Not implemented.
   }
 
   change (dt: number, time: number): void {

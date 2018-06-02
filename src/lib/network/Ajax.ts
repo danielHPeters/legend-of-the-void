@@ -1,3 +1,16 @@
+export enum HttpMethod {
+  GET = 'GET', POST = 'POST'
+}
+
+export interface AjaxOptions {
+  url: string
+  method: HttpMethod
+  contentType: string
+  responseType: XMLHttpRequestResponseType
+  async: boolean
+  data: any
+}
+
 /**
  * Utility methods used to generate ajax requests.
  *
@@ -7,7 +20,7 @@
 export default class Ajax {
   private static defaults = {
     url: '',
-    method: 'GET',
+    method: HttpMethod.GET,
     contentType: 'text/html',
     async: true,
     data: null
@@ -25,7 +38,7 @@ export default class Ajax {
    * data = request body.
    * @param callback success callback function
    */
-  static create (opts, callback): void {
+  static create (opts: Partial<AjaxOptions>, callback: (response: any) => void): void {
     let xHttp = new XMLHttpRequest()
     xHttp.addEventListener('load', () => {
       callback(xHttp.response)

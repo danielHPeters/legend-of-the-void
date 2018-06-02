@@ -27,8 +27,8 @@ export default class LegendState extends Observable implements GameState {
   /**
    * Constructor.
    *
-   * @param {Settings} settings
-   * @param {InputManager} inputManager
+   * @param settings
+   * @param inputManager
    */
   constructor (settings: Settings, inputManager: InputManager) {
     super()

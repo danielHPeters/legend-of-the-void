@@ -8,5 +8,5 @@ export default interface Cloneable {
   /**
    * Clone object.
    */
-  clone (): object
+  clone (): Cloneable
 }
