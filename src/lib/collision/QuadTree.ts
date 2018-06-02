@@ -112,7 +112,7 @@ export default class QuadTree {
    * Get the index of an object from the QuadTree.
    *
    * @param object
-   * @returns {number}
+   * @returns
    */
   getIndex (object): number {
     let index = -1
