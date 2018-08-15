@@ -75,7 +75,7 @@ export default class Entity implements JsonSerializable, Changeable, Renderable,
     // Not implemented.
   }
 
-  render (ctx: CanvasRenderingContext2D) {
+  render (ctx: CanvasRenderingContext2D): void {
     if (this.asset && this.alive) {
       ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
     }

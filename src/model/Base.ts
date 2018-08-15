@@ -1,7 +1,6 @@
 import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
-import Settings from '../config/Settings'
 import { ContextId } from '../enum/ContextId'
 import { AssetId } from '../enum/AssetId'
 import { EntityType } from '../enum/EntityType'
@@ -29,7 +28,6 @@ export default class Base extends Entity {
    * @param height
    * @param health
    * @param name
-   * @param settings
    * @param assetId
    */
   constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, assetId: AssetId = AssetId.BASE_VOID) {

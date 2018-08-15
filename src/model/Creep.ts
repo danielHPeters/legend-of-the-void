@@ -22,7 +22,7 @@ export default class Creep extends Entity {
   health: number
   level: number
   cash: number
-  waypoints: Vector2[]
+  wayPoints: Vector2[]
   currentWaypoint: number
   lastTime: number
   base: Base
@@ -33,7 +33,7 @@ export default class Creep extends Entity {
     this.level = level
     this.cash = cash
     this.assetId = assetId
-    this.waypoints = []
+    this.wayPoints = []
     this.currentWaypoint = 0
     this.type = EntityType.CREEP
   }
@@ -54,14 +54,14 @@ export default class Creep extends Entity {
       this.lastTime = time
     }
     if (this.alive) {
-      const startPosition = this.waypoints[this.currentWaypoint]
-      const endPosition = this.waypoints[this.currentWaypoint + 1]
+      const startPosition = this.wayPoints[this.currentWaypoint]
+      const endPosition = this.wayPoints[this.currentWaypoint + 1]
       const pathLength = Vector2.distance(startPosition, endPosition)
       const totalTimeForPath = pathLength / this.speed
       const currentTimeOnPath = time - this.lastTime
       this.position = Vector2.lerp(startPosition, endPosition, currentTimeOnPath / totalTimeForPath)
       if (this.position.clone().round().equals(endPosition)) {
-        if (this.currentWaypoint < this.waypoints.length - 2) {
+        if (this.currentWaypoint < this.wayPoints.length - 2) {
           this.currentWaypoint += 1
           this.lastTime = time
           // TODO: Rotate into move direction

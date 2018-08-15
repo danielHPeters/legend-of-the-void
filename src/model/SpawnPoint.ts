@@ -15,15 +15,14 @@ export default class SpawnPoint extends Entity {
   spawnRate: number
   counter: number
   assetManager: AssetManager
-  waypoints: Vector2[]
+  wayPoints: Vector2[]
   spawnCallback: (creep: Creep) => void
 
-  constructor (x: number, y: number, width: number, height: number,
-               assetManager: AssetManager, waypoints: Vector2[], spawnCallback: (creep: Creep) => void) {
+  constructor (x: number, y: number, width: number, height: number, assetManager: AssetManager, wayPoints: Vector2[], spawnCallback: (creep: Creep) => void) {
     super(new Vector2(x, y), new Dimension(width, height))
     this.counter = 0
     this.assetManager = assetManager
-    this.waypoints = waypoints
+    this.wayPoints = wayPoints
     this.spawnCallback = spawnCallback
     this.spawnRate = 200
   }
@@ -39,7 +38,7 @@ export default class SpawnPoint extends Entity {
       this.counter = 0
       const creep = new Creep(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
       creep.fromJSON(creepData[0])
-      creep.waypoints = this.waypoints
+      creep.wayPoints = this.wayPoints
       creep.asset = this.assetManager.get(creep.assetId)
       creep.alive = true
       this.spawnCallback(creep)

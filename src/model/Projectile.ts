@@ -6,6 +6,12 @@ import Dimension from '../lib/geometry/Dimension'
 import Creep from './Creep'
 import { EntityType } from '../enum/EntityType'
 
+/**
+ * Tower projectile class.
+ *
+ * @author Daniel Peters
+ * @version 1.0
+ */
 export default class Projectile extends Entity {
   asset
   assetId: AssetId
@@ -35,6 +41,12 @@ export default class Projectile extends Entity {
     // Not implemented.
   }
 
+  /**
+   * Called when the game uses update method.
+   *
+   * @param dt
+   * @param time
+   */
   change (dt: number, time: number): void {
     if (!this.lastTime) {
       this.lastTime = time

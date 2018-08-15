@@ -23,7 +23,7 @@ export default class AssetManager {
   /**
    * Constructor.
    *
-   * @param {AudioManager} audioManager
+   * @param audioManager
    */
   constructor (audioManager: AudioManager) {
     this.cache = []

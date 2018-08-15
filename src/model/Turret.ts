@@ -1,9 +1,7 @@
 import Entity from '../lib/entity/Entity'
 import Vector2 from '../lib/math/Vector2'
 import Dimension from '../lib/geometry/Dimension'
-import Settings from '../config/Settings'
 import { ContextId } from '../enum/ContextId'
-import { TurretType } from '../enum/TurretType'
 import { AssetId } from '../enum/AssetId'
 import CollisionHelpers from '../lib/collision/CollisionHelpers'
 import Creep from './Creep'
@@ -45,7 +43,7 @@ export default class Turret extends Entity {
    *
    * @param ctx
    */
-  render (ctx: CanvasRenderingContext2D) {
+  render (ctx: CanvasRenderingContext2D): void {
     if (this.asset) {
       ctx.drawImage(this.asset, this.position.x, this.position.y, this.dimension.width, this.dimension.height)
       ctx.beginPath()

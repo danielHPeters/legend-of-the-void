@@ -2,6 +2,7 @@ import GameState from '../application/GameState'
 import Turret from '../../model/Turret'
 import AssetManager from '../application/AssetManager'
 import Tile from '../../model/Tile'
+import Point from '../math/Point'
 
 /**
  * Build menu for building Towers etc.
@@ -66,7 +67,7 @@ export default class BuildMenu {
     document.body.appendChild(this.element)
   }
 
-  getPosition (e) {
+  getPosition (e): Point {
     let posx = 0
     let posy = 0
 
@@ -84,13 +85,10 @@ export default class BuildMenu {
         document.documentElement.scrollTop
     }
 
-    return {
-      x: posx,
-      y: posy
-    }
+    return new Point(posx, posy)
   }
 
-  positionMenu (menuPosition): void {
+  positionMenu (menuPosition: Point): void {
     let menuPositionX = menuPosition.x + 'px'
     let menuPositionY = menuPosition.y + 'px'
 
