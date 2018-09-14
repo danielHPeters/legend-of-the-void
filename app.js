@@ -10,7 +10,6 @@ const webpackMiddleWare = require('webpack-dev-middleware')
 const compiler = webPack(config)
 
 const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
 
 const app = express()
 
@@ -35,7 +34,6 @@ app.use(webpackMiddleWare(compiler, {
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)))
