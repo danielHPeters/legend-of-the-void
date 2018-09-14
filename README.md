@@ -1,3 +1,5 @@
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![CodeFactor](https://www.codefactor.io/repository/github/danielhpeters/legend-of-the-void/badge/master)](https://www.codefactor.io/repository/github/danielhpeters/legend-of-the-void/overview/master)
 # legend-of-the-void
 
 Tower Defense Game (School Project)

@@ -46,8 +46,8 @@ export default class LegendState extends Observable implements GameState {
 
   update (dt: number, time: number): void {
     this.entities.forEach(movable => movable.change(dt, time))
-    this.entities = this.entities.filter(entity => { return entity.alive })
-    this.creeps = this.creeps.filter(entity => { return entity.alive })
+    this.entities = this.entities.filter(entity => entity.alive)
+    this.creeps = this.creeps.filter(entity => entity.alive)
     if (this.base.health <= 0) {
       this.running = false
     }

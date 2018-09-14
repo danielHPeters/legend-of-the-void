@@ -30,7 +30,7 @@ export default class Observable {
    * @param observer Object implementing the Observer interface
    */
   unRegister (observer: Observer): void {
-    this.observers = this.observers.filter(obs => { return obs !== observer })
+    this.observers = this.observers.filter(obs => obs !== observer)
   }
 
   /**

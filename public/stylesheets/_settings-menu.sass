@@ -25,7 +25,10 @@
     background-color: inherit
     float: left
     border: none
-    outline: none
+    &:focus
+      outline: none
+    &::-moz-focus-inner
+      border: 0
     cursor: pointer
     padding: 14px 16px
     transition: 0.3s
