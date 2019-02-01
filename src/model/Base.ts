@@ -78,7 +78,6 @@ export default class Base extends Entity {
    */
   takeDamage (damage: number): void {
     this.health -= damage
-    this.displayHealth()
 
     if (this.health <= 0) {
       this.alive = false
