@@ -6,7 +6,9 @@ import { AssetId } from '../enum/AssetId'
 import CollisionHelpers from '../lib/collision/CollisionHelpers'
 import Creep from './Creep'
 import { EntityType } from '../enum/EntityType'
-import LegendState from '../application/LegendState'
+import GameState from '../lib/application/GameState'
+
+export type AddProjectileCallback = (position: Vector2, speed: number, damage: number, target: Creep) => void
 
 /**
  * Turret class.
@@ -20,11 +22,11 @@ export default class Turret extends Entity {
   damage: number
   rate: number
   range: number
-  asset
+  asset: HTMLImageElement
   contextId: ContextId
   projectileSpeed: number
-  addProjectileCallback: (position: Vector2, speed: number, damage: number, target: Creep) => void
-  state: LegendState
+  addProjectileCallback: AddProjectileCallback
+  state: GameState
   private delayCounter: number
 
   constructor (position: Vector2, dimension: Dimension, assetId: AssetId = AssetId.TURRET_BOMB) {

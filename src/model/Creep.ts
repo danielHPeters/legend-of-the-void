@@ -15,7 +15,7 @@ import Base from './Base'
 export default class Creep extends Entity {
   contextId: ContextId
   assetId: AssetId
-  asset
+  asset: HTMLImageElement
   name: string
   speed: number
   attack: number
@@ -27,7 +27,7 @@ export default class Creep extends Entity {
   lastTime: number
   base: Base
 
-  constructor (x?: number, y?: number, width?: number, height?: number, level?: number, cash?: number, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
+  constructor (x: number, y: number, width: number, height: number, level: number, cash: number, assetId: AssetId = AssetId.CREEP_VOID_LEECHER) {
     super(new Vector2(x, y), new Dimension(width, height))
     this.contextId = ContextId.CREEPS
     this.level = level

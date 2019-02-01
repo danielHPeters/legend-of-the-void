@@ -1,53 +1,62 @@
+$settings-menu-background-color: #fff
+$settings-menu-text-color: #ff7f00
+$tab-background-color: #f1f1f1
+$tab-border-color: #ccc
+$tab-button-hover-color: #ddd
+$tab-button-active-color: #ccc
+
 .settings
+  color: $settings-menu-text-color
+  cursor: pointer
+  font-family: Helvetica, sans-serif
+  left: 5px
   position: absolute
   top: 5px
-  left: 5px
-  color: #FF7F00
-  font-family: Helvetica, sans-serif
-  cursor: pointer
 
-#settings-menu
-  width: 600px
+.settings-menu
+  background-color: $settings-menu-text-color
+  color: $settings-menu-background-color
+  display: none
   padding: 10px
   position: absolute
-  background-color: #FF7F00
-  color: #fff
-  display: none
+  width: 600px
   z-index: 10
-  /* Style the tab */
-  .tab
-    overflow: hidden
-    border: 1px solid #ccc
-    background-color: #f1f1f1
 
-  /* Style the buttons inside the tab */
-  .tab button
+.tab
+  background-color: $tab-background-color
+  border: 1px solid $tab-border-color
+  overflow: hidden
+
+  button
     background-color: inherit
+    border: 0
+    cursor: pointer
     float: left
-    border: none
+    font-size: 17px
+    padding: 14px 16px
+    transition: .3s
+
     &:focus
       outline: none
+
     &::-moz-focus-inner
       border: 0
-    cursor: pointer
-    padding: 14px 16px
-    transition: 0.3s
-    font-size: 17px
-  /* Change background color of buttons on hover */
-  .tab button:hover
-    background-color: #ddd
-  /* Create an active/current tabLink class */
-  .tab button.active
-    background-color: #ccc
-  /* Style the tab content */
-  .tabContent
-    height: 350px
-    display: none
-    padding: 6px 12px
-    animation: fadeEffect 1s
 
-@keyframes fadeEffect
+    &:hover
+      background-color: $tab-button-hover-color
+
+    .active
+      background-color: $tab-button-active-color
+
+.tab-content
+  animation: fade-effect 1s
+  display: none
+  height: 350px
+  padding: 6px 12px
+
+@keyframes fade-effect
   from
     opacity: 0
+
   to
     opacity: 1

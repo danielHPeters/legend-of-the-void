@@ -4,6 +4,8 @@ import AssetManager from '../application/AssetManager'
 import Tile from '../../model/Tile'
 import Point from '../math/Point'
 
+export type TurretCallback = (turret: Turret) => void
+
 /**
  * Build menu for building Towers etc.
  *
@@ -16,8 +18,8 @@ export default class BuildMenu {
   turretList: Turret[]
   assetManager: AssetManager
   open: boolean
-  tile: Tile
-  callback
+  tile: Tile | undefined
+  callback: TurretCallback
 
   /**
    * Constructor.
@@ -27,7 +29,7 @@ export default class BuildMenu {
    * @param assetManager
    * @param addTurretCallback
    */
-  constructor (elementId: string, turretList, assetManager: AssetManager, addTurretCallback) {
+  constructor (elementId: string, turretList: Turret[], assetManager: AssetManager, addTurretCallback: TurretCallback) {
     this.element = document.createElement('div')
     this.turretList = turretList
     this.assetManager = assetManager
@@ -43,11 +45,12 @@ export default class BuildMenu {
     const title = document.createElement('h4')
     title.textContent = 'Build Turret'
     this.element.appendChild(title)
+    this.element.classList.add('build-menu')
     this.turretList.forEach(turret => {
       const turretBox = document.createElement('div')
       const image = this.assetManager.get(turret.assetId)
       const toolTipText = document.createElement('span')
-      toolTipText.classList.add('tooltiptext')
+      toolTipText.classList.add('tooltip-text')
       toolTipText.textContent = turret.description
       turretBox.classList.add('build-box')
       turretBox.classList.add('tooltip')
@@ -67,13 +70,9 @@ export default class BuildMenu {
     document.body.appendChild(this.element)
   }
 
-  getPosition (e): Point {
+  getPosition (e: MouseEvent): Point {
     let posx = 0
     let posy = 0
-
-    if (!e) {
-      e = window.event
-    }
 
     if (e.pageX || e.pageY) {
       posx = e.pageX
@@ -107,6 +106,6 @@ export default class BuildMenu {
   hide (): void {
     this.open = false
     this.element.style.display = 'none'
-    this.tile = null
+    this.tile = undefined
   }
 }

@@ -8,8 +8,8 @@ module.exports = {
   },
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, './public/javascripts'),
-    publicPath: '/javascripts/',
+    path: path.join(__dirname, './public/js'),
+    publicPath: '/js/',
     filename: '[name].js'
   },
   resolve: {

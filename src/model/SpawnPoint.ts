@@ -36,7 +36,15 @@ export default class SpawnPoint extends Entity {
 
     if (this.counter >= this.spawnRate) {
       this.counter = 0
-      const creep = new Creep(this.position.x, this.position.y, this.dimension.width, this.dimension.height)
+      const creep = new Creep(
+        this.position.x,
+        this.position.y,
+        this.dimension.width,
+        this.dimension.height,
+        creepData[0].level,
+        creepData[0].cash,
+        creepData[0].assetId
+      )
       creep.fromJSON(creepData[0])
       creep.wayPoints = this.wayPoints
       creep.asset = this.assetManager.get(creep.assetId)

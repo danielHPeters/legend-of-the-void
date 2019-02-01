@@ -54,7 +54,7 @@ export default class Ajax {
         opts.contentType ? opts.contentType : Ajax.defaults.contentType
       )
     }
-    if (opts.hasOwnProperty('responseType')) {
+    if (opts.responseType) {
       xHttp.responseType = opts.responseType
     }
     if (opts.hasOwnProperty('data') && typeof opts.data === 'object') {

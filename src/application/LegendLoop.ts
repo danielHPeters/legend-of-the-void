@@ -9,7 +9,7 @@ import Game from '../lib/application/Game'
  */
 export default class LegendLoop implements GameLoop {
   game: Game
-  lastTime: number
+  lastTime: number | undefined
   frameId: number
 
   /**
@@ -19,7 +19,7 @@ export default class LegendLoop implements GameLoop {
    */
   constructor (game: Game) {
     this.game = game
-    this.lastTime = null
+    this.lastTime = undefined
   }
 
   /**
@@ -63,7 +63,7 @@ export default class LegendLoop implements GameLoop {
     if (this.game.state.running) {
       if (!this.game.state.paused) {
         this.game.clear()
-        if (this.lastTime !== null) {
+        if (this.lastTime !== undefined) {
           const diff = time - this.lastTime
           this.game.state.update(diff / 1000, time / 1000)
         }

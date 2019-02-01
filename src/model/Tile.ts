@@ -15,7 +15,7 @@ import { EntityType } from '../enum/EntityType'
 export default class Tile extends Entity {
   contextId: ContextId
   assetId: AssetId
-  asset
+  asset: HTMLImageElement
   blocked: boolean
   buildable: boolean
   turret: Turret

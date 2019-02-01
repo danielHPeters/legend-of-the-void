@@ -48,18 +48,18 @@ export default class TileSetMap {
    */
   generate (): void {
     // Create a temporary canvas rendering context.
-    let ctx = document.createElement('canvas').getContext('2d')
-    ctx.canvas.width = this.width
-    ctx.canvas.height = this.height
+    let context = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D
 
-    this.mapLayers.forEach(layer => this.generateLayer(ctx, layer))
+    if (context) {
+      context.canvas.width = this.width
+      context.canvas.height = this.height
 
-    // Store the generate map as this tileSetImage texture.
-    this.image = new Image()
-    this.image.src = ctx.canvas.toDataURL('image/png')
+      this.mapLayers.forEach(layer => this.generateLayer(context, layer))
 
-    // Clear context.
-    ctx = null
+      // Store the generate map as this tileSetImage texture.
+      this.image = new Image()
+      this.image.src = context.canvas.toDataURL('image/png')
+    }
   }
 
   /**

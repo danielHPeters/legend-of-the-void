@@ -21,7 +21,7 @@ export default class Camera {
   viewWidth: number
   viewHeight: number
   axis: AXIS
-  following: Drawable
+  following: Drawable | undefined
   deadZone: Vector2
   viewportRect: Rectangle
   worldRect: Rectangle
@@ -40,7 +40,7 @@ export default class Camera {
     this.axis = AXIS.BOTH
 
     // object that should be followed
-    this.following = null
+    this.following = undefined
 
     // rectangle that represents the viewport
     this.viewportRect = new Rectangle(this.position.x, this.position.y, this.viewWidth, this.viewHeight)
@@ -64,7 +64,7 @@ export default class Camera {
   update (): void {
     this.previousPosition.setVector(this.position)
     // keep following the player (or other desired object)
-    if (this.following != null) {
+    if (this.following !== undefined) {
       if (this.axis === AXIS.HORIZONTAL || this.axis === AXIS.BOTH) {
         // moves camera on horizontal axis based on followed object position
         if (this.following.position.x - this.position.x + this.deadZone.x > this.viewWidth) {

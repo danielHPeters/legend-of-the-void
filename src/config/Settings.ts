@@ -10,8 +10,8 @@ import { Actions } from '../enum/Actions'
 export default class Settings {
   gameSize: Dimension
   canvas: HTMLCanvasElement
-  keyboard
-  player
+  keyboard: any
+  player: any
 
   /**
    * Constructor.
@@ -36,7 +36,7 @@ export default class Settings {
    * @param value
    * @returns
    */
-  findKey (value): string {
+  findKey (value: string): string {
     return Object.keys(this.keyboard).filter(key => this.keyboard[key] === value)[0]
   }
 
@@ -45,8 +45,9 @@ export default class Settings {
    * @param newKey
    * @param action
    */
-  setKey (newKey, action: Actions): void {
+  setKey (newKey: string, action: Actions): void {
     let oldKey = this.findKey(action)
+
     if (newKey !== oldKey) {
       console.log('old:' + oldKey, ' new: ' + newKey + ' value: ' + action)
       this.keyboard[newKey] = this.keyboard[oldKey]

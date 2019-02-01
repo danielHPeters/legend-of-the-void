@@ -19,7 +19,7 @@ export default class Entity implements JsonSerializable, Changeable, Renderable,
   dimension: Dimension
   position: Vector2
   alive: boolean
-  asset
+  asset: HTMLImageElement
   assetId: AssetId
   collidesWith: EntityType[]
   colliding: boolean
@@ -32,7 +32,7 @@ export default class Entity implements JsonSerializable, Changeable, Renderable,
    * @param position Initial position
    * @param dimension Initial dimension
    */
-  constructor (position?: Vector2, dimension?: Dimension) {
+  constructor (position: Vector2, dimension: Dimension) {
     this.position = position
     this.dimension = dimension
     this.alive = true

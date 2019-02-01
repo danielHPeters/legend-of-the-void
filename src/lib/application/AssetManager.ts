@@ -7,6 +7,16 @@ export enum AssetType {
   SPRITE = 'sprite', SPRITE_SHEET = 'sprite-sheet', AUDIO = 'audio', AUDIO_AMB = 'audio-amb'
 }
 
+export interface Asset {
+  id: AssetId
+  path: string
+  type: AssetType
+  opts?: {
+    frameWidth: number
+    frameHeight: number
+  }
+}
+
 /**
  * Asset manager Class.
  *
@@ -14,9 +24,9 @@ export enum AssetType {
  * @version 1.0
  */
 export default class AssetManager {
-  private readonly cache
+  private readonly cache: Asset[]
   private readonly assetsDir: string
-  private queue
+  private queue: Asset[]
   private downloadCount: number
   private audioManager: AudioManager
 
@@ -47,7 +57,7 @@ export default class AssetManager {
    * @param type
    * @param opts
    */
-  queueDownload (id: AssetId, type: AssetType = AssetType.SPRITE, opts = null): void {
+  queueDownload (id: AssetId, type: AssetType = AssetType.SPRITE, opts = undefined): void {
     this.queue.push({ id: id, path: this.assetsDir + type + '/' + id + '.png', type: type, opts: opts })
   }
 
@@ -57,7 +67,7 @@ export default class AssetManager {
    * @param item object with name of file and path to file
    * @param callback function to execute on done
    */
-  loadAudio (item, callback: () => void): void {
+  loadAudio (item: Asset, callback: () => void): void {
     Ajax.create({
       url: item.path,
       responseType: 'arraybuffer'
@@ -77,7 +87,7 @@ export default class AssetManager {
    * @param item
    * @param callback
    */
-  loadSprite (item, callback): void {
+  loadSprite (item: Asset, callback: () => void): void {
     let sprite = new Image()
     sprite.addEventListener('load', () => {
       this.downloadCount++
@@ -95,10 +105,14 @@ export default class AssetManager {
    * @param item sprite sheet info
    * @param callback called upon downloading all
    */
-  loadSpriteSheet (item, callback): void {
+  loadSpriteSheet (item: Asset, callback: () => void): void {
     let spriteSheet = new Image()
     spriteSheet.addEventListener('load', () => {
-      this.cache[item.id] = new SpriteSheet(spriteSheet, item.opts.frameWidth || 0, item.opts.frameHeight || 0)
+      this.cache[item.id] = new SpriteSheet(
+        spriteSheet,
+        item.opts ? item.opts.frameWidth : 0,
+        item.opts ? item.opts.frameHeight : 0
+      )
       this.downloadCount += 1
       if (this.done()) {
         callback()
@@ -111,7 +125,7 @@ export default class AssetManager {
    *
    * @param callback
    */
-  downloadAll (callback): void {
+  downloadAll (callback: () => void): void {
     this.queue.forEach(item => {
       if (item.type === AssetType.AUDIO) {
         this.loadAudio(item, callback)

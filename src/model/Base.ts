@@ -14,7 +14,7 @@ import { EntityType } from '../enum/EntityType'
 export default class Base extends Entity {
   contextId: ContextId
   assetId: AssetId
-  asset
+  asset: HTMLImageElement
   name: string
   health: number
   healthDisplay: HTMLElement
@@ -30,7 +30,15 @@ export default class Base extends Entity {
    * @param name
    * @param assetId
    */
-  constructor (x?: number, y?: number, width?: number, height?: number, health?: number, name?: string, assetId: AssetId = AssetId.BASE_VOID) {
+  constructor (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    health: number,
+    name: string,
+    assetId: AssetId = AssetId.BASE_VOID
+  ) {
     super(new Vector2(x, y), new Dimension(width, height))
     this.name = name
     this.health = health
@@ -38,13 +46,14 @@ export default class Base extends Entity {
     this.assetId = assetId
     this.healthDisplay = document.createElement('p')
     this.healthDisplay.id = 'playerHealth'
+    this.healthDisplay.classList.add('player-health')
     this.type = EntityType.BASE
     document.body.appendChild(this.healthDisplay)
   }
 
   displayHealth (): void {
     if (this.health > 0) {
-      this.healthDisplay.textContent = 'Player Health: ' + this.health.toString()
+      this.healthDisplay.textContent = `Player Health: ${this.health}`
     } else {
       this.healthDisplay.textContent = 'Game Over!'
     }
@@ -74,6 +83,11 @@ export default class Base extends Entity {
     if (this.health <= 0) {
       this.alive = false
     }
+  }
+
+  render (ctx: CanvasRenderingContext2D): void {
+    super.render(ctx)
+    this.displayHealth()
   }
 
   init (): void {

@@ -5,6 +5,7 @@
     "attack": 10,
     "health": 30,
     "level": 1,
+    "cash": 10,
     "assetId": "creep-void-leecher"
   }
 ]

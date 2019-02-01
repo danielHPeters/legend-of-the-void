@@ -20,6 +20,7 @@ export default class SettingsMenu {
 
   constructor (element: HTMLElement, settings: Settings, assetManager: AssetManager, audioManager: AudioManager) {
     this.element = element
+    this.element.classList.add('settings-menu')
     this.settings = settings
     this.assetManager = assetManager
     this.audioManager = audioManager
@@ -32,19 +33,29 @@ export default class SettingsMenu {
     this.element.appendChild(this.mainMenu)
   }
 
-  openTab (event, tabId: string): void {
+  openTab (event: Event, tabId: string): void {
     let tabContent
     let tabLink
-    tabContent = document.getElementsByClassName('tabContent')
+    tabContent = document.getElementsByClassName('tab-content')
+
     for (let i = 0; i < tabContent.length; i++) {
-      tabContent[i].style.display = 'none'
+      (tabContent[i] as HTMLElement).style.display = 'none'
     }
-    tabLink = document.getElementsByClassName('tabLink')
+    tabLink = document.getElementsByClassName('tab-link')
     for (let i = 0; i < tabLink.length; i++) {
       tabLink[i].className = tabLink[i].className.replace(' active', '')
     }
-    document.getElementById(tabId).style.display = 'block'
-    event.currentTarget.className += ' active'
+    const tab = document.getElementById(tabId)
+
+    if (tab) {
+      tab.style.display = 'block'
+    }
+
+    const target = event.currentTarget as HTMLElement
+
+    if (target) {
+      target.classList.add(' active')
+    }
   }
 
   createKeyboardMenu (): void {
@@ -60,10 +71,10 @@ export default class SettingsMenu {
       event => this.openTab(event, keyboardMenuId)
     )
     keyboardLink.appendChild(document.createTextNode('Keyboard'))
-    keyboardLink.classList.add('tabLink')
+    keyboardLink.classList.add('tab-link')
     this.mainMenu.appendChild(keyboardLink)
     keyboardDiv.setAttribute('id', keyboardMenuId)
-    keyboardDiv.classList.add('tabContent')
+    keyboardDiv.classList.add('tab-content')
     title.appendChild(document.createTextNode('Keyboard'))
     form.setAttribute('id', 'keyboardSettings')
     form.setAttribute('method', 'post')
@@ -102,7 +113,7 @@ export default class SettingsMenu {
     playerLink.classList.add('tabLink')
     this.mainMenu.appendChild(playerLink)
     playerDiv.setAttribute('id', playerMenuId)
-    playerDiv.classList.add('tabContent')
+    playerDiv.classList.add('tab-content')
     playerTitle.appendChild(document.createTextNode('Player Settings'))
     playerForm.setAttribute('id', 'playerSettings')
     playerForm.setAttribute('method', 'post')
@@ -204,7 +215,7 @@ export default class SettingsMenu {
     this.init()
   }
 
-  addPlayerSettingEntry (setting, element: HTMLElement): void {
+  addPlayerSettingEntry (setting: any, element: HTMLElement): void {
     let label = document.createElement('label')
     let input = document.createElement('input')
     let row = document.createElement('div')
@@ -220,7 +231,7 @@ export default class SettingsMenu {
     element.appendChild(row)
   }
 
-  addEntry (setting, element: HTMLElement): void {
+  addEntry (setting: any, element: HTMLElement): void {
     let row = document.createElement('div')
     let label = document.createElement('label')
     let input = document.createElement('input')

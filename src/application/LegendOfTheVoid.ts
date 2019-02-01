@@ -19,7 +19,7 @@ import Vector2 from '../lib/math/Vector2'
 import Projectile from '../model/Projectile'
 import Dimension from '../lib/geometry/Dimension'
 import SpawnPoint from '../model/SpawnPoint'
-import { EntityType } from '../enum/EntityType'
+import Turret from '../model/Turret'
 
 /**
  * Main game Class.
@@ -52,7 +52,8 @@ export default class LegendOfTheVoid implements Game {
     this.collisionManager = new SimpleCollisionManager(this.state.quadTree)
     this.contexts = contexts
     this.settings = settings
-    this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, turret => {
+    // @ts-ignore
+    this.buildMenu = new BuildMenu('build-menu', turretData, this.assetManager, (turret: Turret) => {
       turret.asset = this.assetManager.get(turret.assetId)
       turret.state = this.state
       turret.addProjectileCallback = (position, speed, damage, target) => {
@@ -72,7 +73,7 @@ export default class LegendOfTheVoid implements Game {
 
   initMap (): void {
     let y = 0
-    mapData[0].tiles.forEach(row => {
+    mapData[0].tiles.forEach((row: number[]) => {
       let width = this.TILE_SIZE
       let height = this.TILE_SIZE
       let x = 0
@@ -117,8 +118,8 @@ export default class LegendOfTheVoid implements Game {
             tile.assetId = AssetId.END
             break
           case 4:
-            const base = new Base(x, y, width, height)
-            base.fromJSON(baseData[0])
+            const base = new Base(x, y, width, height, baseData[0].health, baseData[0].name, baseData[0].assetId)
+
             this.state.base = base
             this.state.entities.push(base)
             tile.assetId = AssetId.END
@@ -172,13 +173,25 @@ export default class LegendOfTheVoid implements Game {
    * Render current state.
    */
   render (): void {
-    this.state.entities.forEach(renderable => renderable.render(this.contexts.get(renderable.contextId)))
+    this.state.entities.forEach(renderable => {
+      const ctx = this.contexts.get(renderable.contextId)
+
+      if (ctx) {
+        renderable.render(ctx)
+      }
+    })
   }
 
   /**
    *
    */
   clear (): void {
-    this.state.entities.forEach(renderable => renderable.clear(this.contexts.get(renderable.contextId)))
+    this.state.entities.forEach(renderable => {
+      const ctx = this.contexts.get(renderable.contextId)
+
+      if (ctx) {
+        renderable.clear(ctx)
+      }
+    })
   }
 }

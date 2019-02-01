@@ -13,7 +13,7 @@ import { EntityType } from '../enum/EntityType'
  * @version 1.0
  */
 export default class Projectile extends Entity {
-  asset
+  asset: HTMLImageElement
   assetId: AssetId
   contextId: ContextId
   target: Creep

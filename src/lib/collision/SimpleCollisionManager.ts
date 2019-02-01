@@ -23,10 +23,10 @@ export default class SimpleCollisionManager implements CollisionManager {
    * Collision detection algorithm.
    */
   detectCollision (): void {
-    let objects = []
+    let objects: any[] = []
     this.quadTree.getAllObjects(objects)
     for (let i = 0; i < objects.length; i++) {
-      let obj = []
+      let obj: any[] = []
       this.quadTree.findObjects(obj, objects[i])
 
       for (let j = 0; j < obj.length; j++) {
@@ -35,7 +35,7 @@ export default class SimpleCollisionManager implements CollisionManager {
             Math.floor(objects[i].position.x) + objects[i].dimension.width > Math.floor(obj[j].position.x) &&
             Math.floor(objects[i].position.y) < Math.floor(obj[j].position.y) + obj[j].dimension.height &&
             Math.floor(objects[i].position.y) + objects[i].dimension.height > Math.floor(obj[j].position.y))
-        && objects[i].alive && obj[j].alive) {
+          && objects[i].alive && obj[j].alive) {
           console.log(objects[i])
           objects[i].colliding = true
           obj[j].colliding = true

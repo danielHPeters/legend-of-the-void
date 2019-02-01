@@ -20,7 +20,7 @@ export default interface Renderable {
   /**
    * Asset object. Usually an image.
    */
-  asset
+  asset: HTMLImageElement
 
   /**
    * Render the entity.

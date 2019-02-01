@@ -8,7 +8,7 @@ import Game from './Game'
  */
 export default interface GameLoop {
   game: Game
-  lastTime: number
+  lastTime: number | undefined
   frameId: number
 
   /**

@@ -44,7 +44,7 @@ export default class QuadTree {
    * @param returnedObjects
    * @returns
    */
-  getAllObjects (returnedObjects) {
+  getAllObjects (returnedObjects: any) {
     this.nodes.forEach(node => node.getAllObjects(returnedObjects))
     this.objects.forEach(object => returnedObjects.push(object))
     return returnedObjects
@@ -56,7 +56,7 @@ export default class QuadTree {
    * @param object
    * @returns
    */
-  findObjects (returnedObjects, object) {
+  findObjects (returnedObjects: any, object: any) {
     if (typeof object === 'undefined') {
       console.log('UNDEFINED OBJECT')
       return
@@ -74,7 +74,7 @@ export default class QuadTree {
    *
    * @param object
    */
-  insert (object): void {
+  insert (object: any): void {
     if (typeof object === 'undefined') {
       return
     }
@@ -114,7 +114,7 @@ export default class QuadTree {
    * @param object
    * @returns
    */
-  getIndex (object): number {
+  getIndex (object: any): number {
     let index = -1
     let verticalMidpoint = this.hitBox.position.x + this.hitBox.width / 2
     let horizontalMidpoint = this.hitBox.position.y + this.hitBox.height / 2

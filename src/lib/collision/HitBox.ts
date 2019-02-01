@@ -10,7 +10,7 @@ import { EntityType } from '../../enum/EntityType'
  */
 export default class HitBox implements Collidable {
   type: EntityType
-  collidesWith
+  collidesWith: EntityType[]
   colliding: boolean
   position: Vector2
   width: number
@@ -39,6 +39,6 @@ export default class HitBox implements Collidable {
    * @returns
    */
   isCollideAbleWith (other: Collidable): boolean {
-    return this.collidesWith.includes(other.type.toString())
+    return this.collidesWith.includes(other.type)
   }
 }

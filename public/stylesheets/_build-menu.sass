@@ -1,44 +1,52 @@
-#build-menu
-  display: none
-  position: absolute
-  color: #FF7F00
-  background-color: beige
-  font-family: Helvetica, sans-serif
-  z-index: 10
+$build-menu-background-color: #f5f5dc
+$build-menu-text-color: #ff7f00
+$tooltip-text-color: #fff
+$tooltip-background-color: #fff
+
+.build-menu
+  background-color: $build-menu-background-color
   clear: both
+  color: $build-menu-text-color
+  display: none
+  font-family: Helvetica, sans-serif
   padding: 5px
+  position: absolute
+  z-index: 10
 
 .active
   display: block
 
 .tooltip
+  display: inline-block
   float: left
   position: relative
-  display: inline-block
+
   &:hover
-    .tooltiptext
-      visibility: visible
+    .tooltip-text
       opacity: 1
-  .tooltiptext
-    visibility: hidden
-    width: 200px
-    background-color: #555
-    color: #fff
-    text-align: center
+      visibility: visible
+
+  .tooltip-text
+    background-color: $tooltip-background-color
     border-radius: 6px
-    padding: 5px 0
-    position: absolute
-    z-index: 11
     bottom: 45%
+    color: $tooltip-text-color
     left: 50%
     margin-left: -100px
     opacity: 0
-    transition: opacity 0.3s
+    padding: 5px 0
+    position: absolute
+    text-align: center
+    transition: opacity .3s
+    visibility: hidden
+    width: 200px
+    z-index: 11
+
     &::after
+      border: 5px solid transparent
+      border-top-color: $tooltip-background-color
       content: ''
-      position: absolute
-      top: 100%
       left: 50%
       margin-left: -5px
-      border: 5px solid transparent
-      border-top-color: #555
+      position: absolute
+      top: 100%
