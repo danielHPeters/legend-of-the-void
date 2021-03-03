@@ -13,7 +13,7 @@
     "http-errors": "latest",
     "morgan": "~1.9.1",
     "node-sass-middleware": "^0.11.0",
-    "pug": "^2.0.4"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.1",
